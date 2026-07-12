@@ -12,15 +12,13 @@
 
 <div align="center">
 
-<video src="https://github.com/nickthelegend/IndiaCodex-2026/releases/download/0x0D-submission/hydra-minecraft-demo.mp4" poster="../media/poster.png" controls width="90%"></video>
-
 <a href="https://github.com/nickthelegend/IndiaCodex-2026/releases/download/0x0D-submission/hydra-minecraft-demo.mp4">
-  <img src="../media/poster.png" width="90%" alt="▶ Watch the demo"/>
+  <img src="../media/demo.gif" width="90%" alt="Hydra Minecraft demo — click to watch the full video with sound"/>
 </a>
 
 </div>
 
-▶ **[Watch the demo](https://github.com/nickthelegend/IndiaCodex-2026/releases/download/0x0D-submission/hydra-minecraft-demo.mp4)** &nbsp;·&nbsp; 💾 **[Download (committed copy)](./demo.mp4)** &nbsp;·&nbsp; 📊 **[Pitch deck (PPTX)](./0x0D-hydra-minecraft-pitch.pptx)**
+▶ **[Watch the full demo with sound](https://github.com/nickthelegend/IndiaCodex-2026/releases/download/0x0D-submission/hydra-minecraft-demo.mp4)** &nbsp;·&nbsp; 💾 **[Download (committed copy)](./demo.mp4)** &nbsp;·&nbsp; 📊 **[Pitch deck (PPTX)](./0x0D-hydra-minecraft-pitch.pptx)**
 
 ---
 
