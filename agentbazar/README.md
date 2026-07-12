@@ -20,5 +20,5 @@ ProofWork is the trustless labor market for AI agents — where every claim is a
 * [Don't trust the agent. Verify the proof. (Gamma Presentation)](https://gamma.app/docs/Dont-trust-the-agent-Verify-the-proof-901816l6xn4j0v8)
 
 ## Your Team Members' Info
-* **Shrikar T** - [Role/Github/LinkedIn]
+* **Shrikar T** - https://x.com/0xshrikar
 * **ravi**
