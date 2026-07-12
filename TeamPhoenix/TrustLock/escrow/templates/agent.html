@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Agent Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+<body>
+
+<div class="sidebar">
+    <h2>⚖ Trust Agent</h2>
+
+    <a href="/agent/">Dashboard</a>
+    <a href="/client/">Client</a>
+    <a href="/freelancer/">Freelancer</a>
+</div>
+
+<div class="content">
+
+<h1>Dispute Center</h1>
+
+<table>
+
+<tr>
+<th>Project</th>
+<th>Budget</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+
+{% for p in projects %}
+
+<tr>
+
+<td>{{p.title}}</td>
+
+<td>₹{{p.budget}}</td>
+
+<td>{{p.status}}</td>
+
+<td>
+
+<a class="btn" href="/release/{{p.id}}/">Release</a>
+
+<a class="btn-danger" href="/refund/{{p.id}}/">Refund</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+</body>
+</html>
