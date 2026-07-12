@@ -16,15 +16,29 @@ No wallet. No popups. No fees. No delays. You just play — the chain records ev
 
 ---
 
-## 🎬 Demo
+## 🎬 Demos
+
+### 🕹️ Real gameplay (recorded live)
+
+<div align="center">
+
+<a href="https://github.com/nickthelegend/IndiaCodex-2026/releases/download/0x0D-submission/gameplay-demo.mp4">
+  <img src="media/gameplay.gif" width="90%" alt="Real gameplay — click to watch the full recording"/>
+</a>
+
+**▶ [Watch the full gameplay recording (MP4)](https://github.com/nickthelegend/IndiaCodex-2026/releases/download/0x0D-submission/gameplay-demo.mp4)**
+
+</div>
+
+### 🎞️ Launch video (with narration + sound)
 
 <div align="center">
 
 <a href="https://github.com/nickthelegend/IndiaCodex-2026/releases/download/0x0D-submission/hydra-minecraft-demo.mp4">
-  <img src="media/demo.gif" width="90%" alt="Hydra Minecraft demo — click to watch the full video with sound"/>
+  <img src="media/demo.gif" width="90%" alt="Launch video — click to watch the full video with sound"/>
 </a>
 
-**▶ [Click for the full 52-second demo with sound](https://github.com/nickthelegend/IndiaCodex-2026/releases/download/0x0D-submission/hydra-minecraft-demo.mp4)**
+**▶ [Watch the 52-second launch video with sound (MP4)](https://github.com/nickthelegend/IndiaCodex-2026/releases/download/0x0D-submission/hydra-minecraft-demo.mp4)**
 
 </div>
 

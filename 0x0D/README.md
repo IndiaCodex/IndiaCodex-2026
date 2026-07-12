@@ -8,17 +8,29 @@
 
 ---
 
-## 🎬 Demo video
+## 🎬 Demos
+
+**🕹️ Real gameplay (recorded live)**
 
 <div align="center">
 
-<a href="https://github.com/nickthelegend/IndiaCodex-2026/releases/download/0x0D-submission/hydra-minecraft-demo.mp4">
-  <img src="../media/demo.gif" width="90%" alt="Hydra Minecraft demo — click to watch the full video with sound"/>
+<a href="https://github.com/nickthelegend/IndiaCodex-2026/releases/download/0x0D-submission/gameplay-demo.mp4">
+  <img src="../media/gameplay.gif" width="90%" alt="Real gameplay — click to watch the full recording"/>
 </a>
 
 </div>
 
-▶ **[Watch the full demo with sound](https://github.com/nickthelegend/IndiaCodex-2026/releases/download/0x0D-submission/hydra-minecraft-demo.mp4)** &nbsp;·&nbsp; 💾 **[Download (committed copy)](./demo.mp4)** &nbsp;·&nbsp; 📊 **[Pitch deck (PPTX)](./0x0D-hydra-minecraft-pitch.pptx)**
+**🎞️ Launch video (with narration + sound)**
+
+<div align="center">
+
+<a href="https://github.com/nickthelegend/IndiaCodex-2026/releases/download/0x0D-submission/hydra-minecraft-demo.mp4">
+  <img src="../media/demo.gif" width="90%" alt="Launch video — click to watch the full video with sound"/>
+</a>
+
+</div>
+
+▶ **[Gameplay recording (MP4)](https://github.com/nickthelegend/IndiaCodex-2026/releases/download/0x0D-submission/gameplay-demo.mp4)** &nbsp;·&nbsp; **[Launch video with sound (MP4)](https://github.com/nickthelegend/IndiaCodex-2026/releases/download/0x0D-submission/hydra-minecraft-demo.mp4)** &nbsp;·&nbsp; 📊 **[Pitch deck (PPTX)](./0x0D-hydra-minecraft-pitch.pptx)**
 
 ---
 
