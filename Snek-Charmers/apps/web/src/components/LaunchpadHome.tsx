@@ -31,6 +31,9 @@ export default function LaunchpadHome() {
             <span className="text-gradient-2">SNEKPAD</span>
           </a>
           <div className="flex items-center gap-3">
+            <a href="/social" className="hidden font-mono text-xs text-muted transition hover:text-lime sm:inline">
+              Social farming
+            </a>
             <span className="hidden items-center gap-1.5 rounded-full border border-line bg-surface px-3 py-1.5 font-mono text-xs text-muted sm:inline-flex">
               <span className="h-1.5 w-1.5 rounded-full bg-lime" />
               Preprod

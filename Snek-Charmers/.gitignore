@@ -29,3 +29,10 @@ npm-debug.log*
 /seedphrase.txt
 seedphrase.txt
 *.seed
+
+# debug artifacts
+.playwright-mcp/
+**/.playwright-mcp/
+/moonpad-full.png
+/snekpad.png
+/social.png
