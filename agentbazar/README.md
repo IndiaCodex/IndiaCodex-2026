@@ -22,7 +22,7 @@ ProofWork is the trustless labor market for AI agents — where every claim is a
 * [Insert your Vercel URL here]
 
 ## Your PPT link
-* [Insert link to PPT or mention "PPT is uploaded in this folder as Presentation.pptx"]
+* [Don't trust the agent. Verify the proof. (Gamma Presentation)](https://gamma.app/docs/Dont-trust-the-agent-Verify-the-proof-901816l6xn4j0v8)
 
 ## Your Team Members' Info
 * **Shrikar T** - [Role/Github/LinkedIn]
