@@ -1,0 +1,150 @@
+{
+  "preamble": {
+    "title": "medichain/contracts",
+    "description": "Aiken contracts for project 'medichain/contracts'",
+    "version": "0.0.0",
+    "plutusVersion": "v3",
+    "compiler": {
+      "name": "Aiken",
+      "version": "v1.1.23+8949565"
+    },
+    "license": "Apache-2.0"
+  },
+  "validators": [
+    {
+      "title": "medical_record_nft.medical_record_nft.mint",
+      "redeemer": {
+        "title": "_redeemer",
+        "schema": {
+          "$ref": "#/definitions/Data"
+        }
+      },
+      "parameters": [
+        {
+          "title": "authorized_minter",
+          "schema": {
+            "$ref": "#/definitions/aiken~1crypto~1VerificationKeyHash"
+          }
+        }
+      ],
+      "compiledCode": "5897010100229800aba2aba1aab9faab9eaab9dab9a9bae002488888896600264646644b30013370e900018039baa00189991198008009bac300c300d300d300d300d300d300d300d300d300a3754601800c6eb8c028c020dd5000912cc00400629422b30013371e6eb8c03000401e2946266004004601a002804100b459006180400098041804800980400098021baa0088a4d13656400801",
+      "hash": "e066c6bda9520276cebc618decd6df908358a0bd9e33de43f71e9cc6"
+    },
+    {
+      "title": "medical_record_nft.medical_record_nft.else",
+      "redeemer": {
+        "schema": {}
+      },
+      "parameters": [
+        {
+          "title": "authorized_minter",
+          "schema": {
+            "$ref": "#/definitions/aiken~1crypto~1VerificationKeyHash"
+          }
+        }
+      ],
+      "compiledCode": "5897010100229800aba2aba1aab9faab9eaab9dab9a9bae002488888896600264646644b30013370e900018039baa00189991198008009bac300c300d300d300d300d300d300d300d300d300a3754601800c6eb8c028c020dd5000912cc00400629422b30013371e6eb8c03000401e2946266004004601a002804100b459006180400098041804800980400098021baa0088a4d13656400801",
+      "hash": "e066c6bda9520276cebc618decd6df908358a0bd9e33de43f71e9cc6"
+    },
+    {
+      "title": "prescription_escrow.prescription_escrow.spend",
+      "datum": {
+        "title": "datum",
+        "schema": {
+          "$ref": "#/definitions/prescription_escrow~1PrescriptionDatum"
+        }
+      },
+      "redeemer": {
+        "title": "redeemer",
+        "schema": {
+          "$ref": "#/definitions/prescription_escrow~1PrescriptionRedeemer"
+        }
+      },
+      "compiledCode": "59021401010029800aba2aba1aab9faab9eaab9dab9a48888896600264653001300700198039804000cdc3a400530070024888966002600460106ea800e26466453001159800980098059baa0028cc004c038c030dd500148c03cc0400064601e602060206020602060206020602060200032232330010010032259800800c528456600266e3cdd71809000801c528c4cc008008c04c00500e202298059baa00748888966002600c003159800998011bac3003301137540126eb8c04cc044dd5002c528c566002660046eb0c00cc044dd50049bae3013301430143011375400b1330023758600660226ea8024dd7180218089baa0058a50403c807a2b3001300a0018acc004cc008dd6180198089baa009375c600860226ea8016264b3001300b301137540031337126eb4c050c054c054c054c054c048dd50031bad30143012375400314a08080c04cc044dd5180998089baa301330143014301430143014301430143011375401314a0807a2b3001330023758600660226ea8024dd7180218089baa0058998011bac3003301137540126eb8c04cc044dd5002c528201e403c8079164029300b375400f300e003488966002600800515980098079baa00a801c590104566002601000515980098079baa00a801c59010456600266e1d20040028acc004c03cdd5005400e2c80822c806900d201a180618068009b8748000c024dd5001c590070c01c004c00cdd5003c52689b2b200201",
+      "hash": "6b3da7c9f8f6e9ff9d1e7f9e918c9f673228a24da04546601b5ac7f1"
+    },
+    {
+      "title": "prescription_escrow.prescription_escrow.else",
+      "redeemer": {
+        "schema": {}
+      },
+      "compiledCode": "59021401010029800aba2aba1aab9faab9eaab9dab9a48888896600264653001300700198039804000cdc3a400530070024888966002600460106ea800e26466453001159800980098059baa0028cc004c038c030dd500148c03cc0400064601e602060206020602060206020602060200032232330010010032259800800c528456600266e3cdd71809000801c528c4cc008008c04c00500e202298059baa00748888966002600c003159800998011bac3003301137540126eb8c04cc044dd5002c528c566002660046eb0c00cc044dd50049bae3013301430143011375400b1330023758600660226ea8024dd7180218089baa0058a50403c807a2b3001300a0018acc004cc008dd6180198089baa009375c600860226ea8016264b3001300b301137540031337126eb4c050c054c054c054c054c048dd50031bad30143012375400314a08080c04cc044dd5180998089baa301330143014301430143014301430143011375401314a0807a2b3001330023758600660226ea8024dd7180218089baa0058998011bac3003301137540126eb8c04cc044dd5002c528201e403c8079164029300b375400f300e003488966002600800515980098079baa00a801c590104566002601000515980098079baa00a801c59010456600266e1d20040028acc004c03cdd5005400e2c80822c806900d201a180618068009b8748000c024dd5001c590070c01c004c00cdd5003c52689b2b200201",
+      "hash": "6b3da7c9f8f6e9ff9d1e7f9e918c9f673228a24da04546601b5ac7f1"
+    }
+  ],
+  "definitions": {
+    "ByteArray": {
+      "dataType": "bytes"
+    },
+    "Data": {
+      "title": "Data",
+      "description": "Any Plutus data."
+    },
+    "Int": {
+      "dataType": "integer"
+    },
+    "aiken/crypto/VerificationKeyHash": {
+      "title": "VerificationKeyHash",
+      "dataType": "bytes"
+    },
+    "prescription_escrow/PrescriptionDatum": {
+      "title": "PrescriptionDatum",
+      "anyOf": [
+        {
+          "title": "PrescriptionDatum",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "title": "patient_pkh",
+              "$ref": "#/definitions/aiken~1crypto~1VerificationKeyHash"
+            },
+            {
+              "title": "doctor_pkh",
+              "$ref": "#/definitions/aiken~1crypto~1VerificationKeyHash"
+            },
+            {
+              "title": "pharmacist_pkh",
+              "$ref": "#/definitions/aiken~1crypto~1VerificationKeyHash"
+            },
+            {
+              "title": "prescription_hash",
+              "$ref": "#/definitions/ByteArray"
+            },
+            {
+              "title": "expiry_time",
+              "$ref": "#/definitions/Int"
+            },
+            {
+              "title": "prescription_id",
+              "$ref": "#/definitions/ByteArray"
+            }
+          ]
+        }
+      ]
+    },
+    "prescription_escrow/PrescriptionRedeemer": {
+      "title": "PrescriptionRedeemer",
+      "anyOf": [
+        {
+          "title": "Dispense",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": []
+        },
+        {
+          "title": "Refund",
+          "dataType": "constructor",
+          "index": 1,
+          "fields": []
+        },
+        {
+          "title": "Cancel",
+          "dataType": "constructor",
+          "index": 2,
+          "fields": []
+        }
+      ]
+    }
+  }
+}

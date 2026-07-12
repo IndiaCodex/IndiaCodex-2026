@@ -1,0 +1,158 @@
+spring:
+  application:
+    name: medichain-backend
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:default}
+  mvc:
+    servlet:
+      path: /api/v1
+
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/medichain}
+    username: ${SPRING_DATASOURCE_USERNAME:medichain}
+    password: ${SPRING_DATASOURCE_PASSWORD:changeme}
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5
+      connection-timeout: 30000
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    open-in-view: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+
+  data:
+    redis:
+      host: ${SPRING_DATA_REDIS_HOST:localhost}
+      port: ${SPRING_DATA_REDIS_PORT:6379}
+      password: ${SPRING_DATA_REDIS_PASSWORD:changeme}
+      timeout: 2000ms
+
+  kafka:
+    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    admin:
+      fail-fast: false      # Don't crash if Kafka unavailable at startup
+      properties:
+        request.timeout.ms: 2000
+        default.api.timeout.ms: 2000
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        max.block.ms: 2000
+    consumer:
+      group-id: medichain-backend
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "com.medichain.*"
+
+  mail:
+    host: ${SMTP_HOST:localhost}
+    port: ${SMTP_PORT:25}
+    username: ${SMTP_USERNAME:noreply@medichain.ai}
+    password: ${SMTP_PASSWORD:}
+    properties:
+      mail.smtp.auth: false
+      mail.smtp.starttls.enable: false
+      mail.smtp.connectiontimeout: 1000
+      mail.smtp.timeout: 1000
+
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.mail.MailHealthContributorAutoConfiguration
+
+server:
+  port: 8080
+  compression:
+    enabled: true
+  error:
+    include-message: never
+    include-binding-errors: never
+
+medichain:
+  jwt:
+    secret: ${JWT_SECRET:changeme_minimum_256_bit_secret_key_here_please}
+    expiry-ms: ${JWT_EXPIRY_MS:86400000}
+    refresh-expiry-ms: 604800000
+
+  cardano:
+    network: ${CARDANO_NETWORK:preprod}
+    blockfrost-url: ${CARDANO_BLOCKFROST_URL:https://cardano-preprod.blockfrost.io/api/v0}
+    blockfrost-api-key: ${CARDANO_BLOCKFROST_API_KEY}
+
+  midnight:
+    node-url: ${MIDNIGHT_NODE_URL:https://preprod-node.midnight.network}
+    network: ${MIDNIGHT_NETWORK:preprod}
+
+  azure-ai:
+    endpoint: ${AZURE_AI_ENDPOINT}
+    api-key: ${AZURE_AI_KEY}
+    deployment: ${AZURE_AI_DEPLOYMENT:gpt-4o}
+
+  masumi:
+    api-url: ${MASUMI_API_URL:https://api.masumi.network}
+    api-key: ${MASUMI_API_KEY}
+    wallet-address: ${MASUMI_WALLET_ADDRESS}
+
+  minio:
+    endpoint: ${MINIO_ENDPOINT:http://localhost:9000}
+    access-key: ${MINIO_ACCESS_KEY:minioadmin}
+    secret-key: ${MINIO_SECRET_KEY:changeme}
+    bucket: ${MINIO_BUCKET:medichain-files}
+
+  valkey:
+    ttl:
+      patient-records: 300
+      jwt-blacklist: 86400
+      rate-limit: 60
+      ai-response: 3600
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: when-authorized
+  health:
+    kafka:
+      enabled: false      # Kafka not required for core functionality
+    mail:
+      enabled: false      # SMTP not required for demo
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+    tags:
+      application: medichain-backend
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
+
+logging:
+  level:
+    com.medichain: INFO
+    org.springframework.security: WARN
+    org.hibernate.SQL: WARN
+    org.apache.kafka: ERROR
+    org.springframework.kafka: ERROR
+    kafka: ERROR
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level [traceId=%X{traceId}] %logger{36} - %msg%n"

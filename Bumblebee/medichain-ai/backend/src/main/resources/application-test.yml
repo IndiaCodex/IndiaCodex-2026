@@ -1,0 +1,56 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    database-platform: org.hibernate.dialect.H2Dialect
+  flyway:
+    enabled: false
+  data:
+    redis:
+      host: localhost
+      port: 6370
+  kafka:
+    bootstrap-servers: localhost:9093
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      group-id: test-group
+      auto-offset-reset: earliest
+
+medichain:
+  jwt:
+    secret: test_secret_key_that_is_at_least_256_bits_long_for_testing_purposes_only
+    expiry-ms: 86400000
+    refresh-expiry-ms: 604800000
+  cardano:
+    network: preprod
+    blockfrost-url: http://localhost:8099
+    blockfrost-api-key: test_key
+  midnight:
+    node-url: http://localhost:8098
+    network: preprod
+  azure-ai:
+    endpoint: http://localhost:8097
+    api-key: test_key
+    deployment: test-model
+  masumi:
+    api-url: http://localhost:8096
+    api-key: test_key
+    wallet-address: addr_test1_placeholder
+  minio:
+    endpoint: http://localhost:9000
+    access-key: test
+    secret-key: test
+    bucket: test-bucket
+  valkey:
+    ttl:
+      patient-records: 300
+      jwt-blacklist: 86400
+      rate-limit: 60
+      ai-response: 3600
