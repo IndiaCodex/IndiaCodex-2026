@@ -1,0 +1,25 @@
+# dependencies
+node_modules/
+
+# build output
+dist/
+*.tsbuildinfo
+
+# test coverage
+coverage/
+
+# logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# environment
+.env
+.env.local
+
+# editor / OS
+.DS_Store
+.idea/
+
+# local, machine-specific Claude Code settings (not shared team config)
+.claude/settings.local.json

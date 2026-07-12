@@ -1,0 +1,49 @@
+name: Feature request
+description: Propose a new capability, a new contract template, or a new adapter.
+labels: ["type: enhancement", "status: triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Before requesting a new contract template or adapter, a quick look at
+        `docs/PRD.md` and `docs/adr/` may save you a round-trip — some
+        directions (e.g. open-ended, non-template-constrained contract
+        generation) are deliberately out of scope by design, not by omission.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      description: What can't you do today that this would let you do?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed approach
+      description: If you have one in mind. Doesn't need to be final.
+    validations:
+      required: false
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Which area does this affect?
+      options:
+        - A new contract template
+        - A new adapter (new port implementation)
+        - The plugin API / a port signature (application layer)
+        - The CLI
+        - Documentation
+        - Something else
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I checked `docs/PRD.md` and `docs/adr/` and don't think this is already explicitly out of scope
+          required: true

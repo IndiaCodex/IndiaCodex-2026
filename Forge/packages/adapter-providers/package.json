@@ -1,0 +1,28 @@
+{
+  "name": "@forge/adapter-providers",
+  "version": "0.0.0",
+  "description": "Forge platform — real CIP-19 enterprise script address computation, a deployment-manifest store, and a stub tx builder (no real off-chain tx-building pipeline exists yet).",
+  "license": "Apache-2.0",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -b",
+    "clean": "tsc -b --clean"
+  },
+  "dependencies": {
+    "@forge/application": "workspace:*",
+    "@forge/domain": "workspace:*",
+    "@forge/plugin-api": "workspace:*",
+    "bech32": "^2.0.0"
+  }
+}
