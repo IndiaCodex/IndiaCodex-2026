@@ -1,0 +1,26 @@
+- generic [active] [ref=e2]:
+  - alert [ref=e1]
+  - main [ref=e3]:
+    - generic [ref=e4]:
+      - paragraph [ref=e5]: Cardano · Preprod
+      - heading "Meme Launchpad" [level=1] [ref=e6]
+      - paragraph [ref=e7]:
+        - text: Launch a token, trade it on a linear bonding curve (
+        - code [ref=e8]: price = m · supply + c
+        - text: ), and graduate to Minswap at 80% sold.
+    - generic [ref=e9]:
+      - generic [ref=e10]: Wallet
+      - button "Connect a wallet" [ref=e12] [cursor=pointer]
+    - generic [ref=e13]:
+      - generic [ref=e14]:
+        - generic [ref=e15]: Marketplace
+        - button "refresh" [ref=e16] [cursor=pointer]
+      - generic [ref=e18]:
+        - generic [ref=e19]:
+          - heading "$pepe" [level=3] [ref=e20]
+          - generic [ref=e21]: 0.001 ADA / token
+        - generic [ref=e22]: 0% to graduation · reserve 0 ADA · sold 0
+        - generic [ref=e25]:
+          - textbox "tokens" [ref=e26]: "1000"
+          - button "Buy" [disabled] [ref=e27]
+          - button "Sell" [disabled] [ref=e28]
