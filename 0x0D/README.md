@@ -10,9 +10,15 @@
 
 ## 🎬 Demo video
 
-https://github.com/nickthelegend/IndiaCodex-2026/releases/download/0x0D-submission/hydra-minecraft-demo.mp4
+<div align="center">
 
-<video src="https://github.com/nickthelegend/IndiaCodex-2026/releases/download/0x0D-submission/hydra-minecraft-demo.mp4" controls width="100%"></video>
+<video src="https://github.com/nickthelegend/IndiaCodex-2026/releases/download/0x0D-submission/hydra-minecraft-demo.mp4" poster="../media/poster.png" controls width="90%"></video>
+
+<a href="https://github.com/nickthelegend/IndiaCodex-2026/releases/download/0x0D-submission/hydra-minecraft-demo.mp4">
+  <img src="../media/poster.png" width="90%" alt="▶ Watch the demo"/>
+</a>
+
+</div>
 
 ▶ **[Watch the demo](https://github.com/nickthelegend/IndiaCodex-2026/releases/download/0x0D-submission/hydra-minecraft-demo.mp4)** &nbsp;·&nbsp; 💾 **[Download (committed copy)](./demo.mp4)** &nbsp;·&nbsp; 📊 **[Pitch deck (PPTX)](./0x0D-hydra-minecraft-pitch.pptx)**
 
