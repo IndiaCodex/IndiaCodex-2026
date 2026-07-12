@@ -66,6 +66,11 @@ Campus and community events still rely on:
 
 ## 5. Project Demo Photos & Videos
 
+### Demo video (Loom)
+
+**Watch the full walkthrough:**  
+[https://www.loom.com/share/24c98573cbe54675973c2c2cc9155db3](https://www.loom.com/share/24c98573cbe54675973c2c2cc9155db3)
+
 ### Screenshots (in-repo)
 
 | Asset | Path |
@@ -74,15 +79,13 @@ Campus and community events still rely on:
 | Product visuals | [`public/readme/prompt-to-event.png`](./public/readme/prompt-to-event.png), [`public/readme/proof-engine.png`](./public/readme/proof-engine.png) |
 | Pitch deck | [`OnChainIn_Pitch_RAGNAROK.pptx`](./OnChainIn_Pitch_RAGNAROK.pptx) |
 
-### Demo flow (video / live)
+### Demo flow (live)
 
 1. Open **[https://onchainin.vercel.app](https://onchainin.vercel.app)**  
 2. Sign up as **Organizer** → create event (manual or AI) → set free or Cardano mode  
 3. Sign up as **Participant** → apply → organizer approves  
 4. Connect CIP-30 wallet on **Preprod** → **Check in on-chain**  
-5. Organizer issues certificate → open **Verify** page (hash + Blockfrost)  
-
-> Record a short Loom/YouTube walkthrough if needed and paste the link here for judges.
+5. Organizer issues certificate → open **Verify** page (hash + Blockfrost)
 
 ### Local demo
 
