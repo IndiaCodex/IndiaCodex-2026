@@ -120,12 +120,12 @@ Upload/share the same deck via Google Drive or GitHub raw if judges prefer a clo
 
 ## 8. Team Members' Info
 
-**Team name:** RAGNAROK  
+**Team name:** RAGNAROK
 
-| Member | GitHub | Contact |
-|--------|--------|---------|
-| Anshul | [ANSHUL-REAL](https://github.com/ANSHUL-REAL) | [editzera07@gmail.com](mailto:editzera07@gmail.com) |
-| Sourab | [SOURABREDDY394](https://github.com/SOURABREDDY394) | — |
+| Name | GitHub | Email |
+|------|--------|-------|
+| Anshul Nautiyal | [ANSHUL-REAL](https://github.com/ANSHUL-REAL) | [anshulnautiyal0512@gmail.com](mailto:anshulnautiyal0512@gmail.com) |
+| Sourab Reddy | [SOURABREDDY394](https://github.com/SOURABREDDY394) | [sourabreddimalla@gmail.com](mailto:sourabreddimalla@gmail.com) |
 
 **Made with love ❤️ by team RAGNAROK**
 
