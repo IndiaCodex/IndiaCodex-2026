@@ -10,7 +10,15 @@ Privacy-preserving perpetual futures on **Cardano** + **Midnight**. Your order i
 
 `ADA · BTC · ETH · SOL · DOGE` · up to 20× · dUSD-margined · settled + audit-anchored on Cardano
 
+<br/>
+
+[![uniperp — 60s demo](./demo/uniperp-demo.gif)](https://github.com/Praharika267/IndiaCodex-2026/raw/main/Goose/demo/uniperp-launch.mp4)
+
+**▶️ [Watch the full 60-second launch film — HD, with sound](https://github.com/Praharika267/IndiaCodex-2026/raw/main/Goose/demo/uniperp-launch.mp4)**  ·  *(the GIF above is a silent preview — click it or the link for the real thing)*
+
 </div>
+
+> 🙌 **Inspiration & credit:** uniperp builds on and is inspired by Nucast's Catalyst research project **[Anti-Front-Running-ZKPerps-on-Cardano-w-MidnightZK](https://github.com/Nucastio/Anti-Front-Running-ZKPerps-on-Cardano-w-MidnightZK)** — the ZK order-commitment + Midnight↔Cardano settlement-anchor pipeline is derived from that work, which we then extended with drand-timelock operator-blindness, uniform-price batch auctions, and a non-custodial vault.
 
 ---
 
@@ -52,13 +60,25 @@ uniperp removes the operator from the trust equation for the two things that mat
 - **Backend** — Bun · Hono operator service · vAMM executor · margin/funding/liquidation keepers · uniform-price sealed-bid batch auction
 - **Auth** — CIP-8 wallet signatures (`cardano-verify-datasignature`)
 
-## 5. Demo — Video & Screenshots
+## 5. Demo — Video
 
-**▶️ 60-second launch film:** [`demo/uniperp-launch.mp4`](./demo/uniperp-launch.mp4)
+Three ways to watch (GitHub won't inline-play files over ~10 MB, so we ship all of them):
 
-<video src="https://github.com/Praharika267/IndiaCodex-2026/raw/main/Goose/demo/uniperp-launch.mp4" controls width="100%"></video>
+**① Inline GIF preview** (silent, always renders):
 
-> If the inline player doesn't load in your browser, **[click here to watch/download the demo video](https://github.com/Praharika267/IndiaCodex-2026/raw/main/Goose/demo/uniperp-launch.mp4)**.
+![uniperp demo](./demo/uniperp-demo.gif)
+
+**② Inline player** (compressed, with sound):
+
+<video src="https://github.com/Praharika267/IndiaCodex-2026/raw/main/Goose/demo/uniperp-demo-web.mp4" controls width="100%"></video>
+
+**③ Full-quality launch film (HD):** ▶️ **[Watch / download the 60-second video](https://github.com/Praharika267/IndiaCodex-2026/raw/main/Goose/demo/uniperp-launch.mp4)**
+
+| File | Format | Size |
+|---|---|---|
+| [`demo/uniperp-demo.gif`](./demo/uniperp-demo.gif) | GIF (inline preview) | ~3 MB |
+| [`demo/uniperp-demo-web.mp4`](./demo/uniperp-demo-web.mp4) | MP4 (inline player, sound) | ~1.6 MB |
+| [`demo/uniperp-launch.mp4`](./demo/uniperp-launch.mp4) | MP4 (full HD, sound) | ~11 MB |
 
 The premium trading terminal, the **Attack Lab** (a live MEV sandwich failing on uniperp), and the **Sealed** tab (the operator's decrypt refused live by drand) are all in the app — no wallet needed for the demos.
 
