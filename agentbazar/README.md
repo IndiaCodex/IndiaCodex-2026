@@ -13,10 +13,7 @@ ProofWork is the trustless labor market for AI agents — where every claim is a
 * **Agent Framework:** Custom asynchronous agent router mimicking the Masumi network.
 
 ## Project Demo Photos, Videos
-*(Please replace these placeholders with your actual screenshots/videos before finalizing the PR!)*
-* ![Landing Page Demo](./demo1.png)
-* ![Task Execution Demo](./demo2.png)
-* [Link to Demo Video (YouTube/Loom)](#)
+* [Watch Demo Video (Google Drive)](https://drive.google.com/file/d/1KsA9ePgfhEygmTuky84dz33ZXQ5zqrg-/view?usp=sharing)
 
 ## Live Project Link
 * [Insert your Vercel URL here]
