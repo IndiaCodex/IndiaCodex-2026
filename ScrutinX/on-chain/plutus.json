@@ -1,0 +1,159 @@
+{
+  "preamble": {
+    "title": "batcher/adaptive",
+    "description": "Adaptive Concurrency-Aware Batcher — batch settlement validator",
+    "version": "0.0.0",
+    "plutusVersion": "v3",
+    "compiler": {
+      "name": "Aiken",
+      "version": "v1.1.23+8949565"
+    },
+    "license": "Apache-2.0"
+  },
+  "validators": [
+    {
+      "title": "batch_settlement.batch_settlement.spend",
+      "datum": {
+        "title": "datum",
+        "schema": {
+          "$ref": "#/definitions/batcher~1types~1BatchDatum"
+        }
+      },
+      "redeemer": {
+        "title": "redeemer",
+        "schema": {
+          "$ref": "#/definitions/batcher~1types~1BatchRedeemer"
+        }
+      },
+      "compiledCode": "5903ca01010029800aba2aba1aba0aab9faab9eaab9dab9a488888896600264653001300800198041804800cdc3a400530080024888966002600460106ea800e2653001300d00198069807000cdc3a40009112cc004c004c030dd500444c9660026024003132330010013758602400444b30010018acc004c010c03cdd5002c4c96600266ebd300103d8798000300130113754602860226ea801a264b3001300b330013758602a60246ea80348cdd7980b18099baa0010098cc00488c8cc00400400c896600200314a31598009801980c800c4cc008008c0680062941014202e9180b180b800c88c8cc00400400c896600200314c103d87a80008992cc004c010006266e952000330190014bd7044cc00c00cc06c009015180c800a02e912cc0040062900044cdc02400466004004603000280aa6eb0c054c048dd5006a44444b300133005001230113300700223375e603860326ea8004c070c064dd500145660026600a00246464b3001300e301937540031325980099b8748010c068dd5000c4c8c966002602260386ea800a264653001375c604400330230019bae3022002488966002604c0051323259800980c000c56600260486ea800a011164095159800980e800c56600260486ea800a0111640951640888110c088dd500098128014590230c088004c074dd500145901b099baf4c0103d8798000300c301c3754002603c60366ea800629410191805180d1baa3007301a3754603a60346ea80062941018198029bac301c30193754022466ebcc074c068dd5000801180d980c1baa0018acc004cc0140048c8cc88cc008008004896600200314a115980099b8f375c603c00200714a3133002002301f001406480e0dd6180e180e980e980e980e980e980e980e980e980c9baa011375c600a60306ea8006264b3001300c301737540031323371266008008006660106eb0c024c064dd5008919baf301d301a3754002004603660306ea8c014c060dd5180d980c1baa0018b202c3300337586034602e6ea803c8cdd7980d980c1baa00100e8a50405514a080aa294101522941010111919800800801912cc0040062900044cc8966002600a0051337009001000c4005015180c00099801001180c800a02c8a50403c46028602a602a00316403913259800980298081baa00189919192cc004c06000a264b300130093014375400313232332259800980e801c4cc02c02cc07402a2c80d0dd6980d0009bae301a002301a0013015375400316404c602e0071640546eb8c058004c058004c044dd5000c5900f1809800a0228b201e300d375401116402c3009375400716401c300800130033754011149a26cac80081",
+      "hash": "dbbe34fae27f54d36803e3c37d082d7d5d9922611627c91f00a9a446"
+    },
+    {
+      "title": "batch_settlement.batch_settlement.else",
+      "redeemer": {
+        "schema": {}
+      },
+      "compiledCode": "5903ca01010029800aba2aba1aba0aab9faab9eaab9dab9a488888896600264653001300800198041804800cdc3a400530080024888966002600460106ea800e2653001300d00198069807000cdc3a40009112cc004c004c030dd500444c9660026024003132330010013758602400444b30010018acc004c010c03cdd5002c4c96600266ebd300103d8798000300130113754602860226ea801a264b3001300b330013758602a60246ea80348cdd7980b18099baa0010098cc00488c8cc00400400c896600200314a31598009801980c800c4cc008008c0680062941014202e9180b180b800c88c8cc00400400c896600200314c103d87a80008992cc004c010006266e952000330190014bd7044cc00c00cc06c009015180c800a02e912cc0040062900044cdc02400466004004603000280aa6eb0c054c048dd5006a44444b300133005001230113300700223375e603860326ea8004c070c064dd500145660026600a00246464b3001300e301937540031325980099b8748010c068dd5000c4c8c966002602260386ea800a264653001375c604400330230019bae3022002488966002604c0051323259800980c000c56600260486ea800a011164095159800980e800c56600260486ea800a0111640951640888110c088dd500098128014590230c088004c074dd500145901b099baf4c0103d8798000300c301c3754002603c60366ea800629410191805180d1baa3007301a3754603a60346ea80062941018198029bac301c30193754022466ebcc074c068dd5000801180d980c1baa0018acc004cc0140048c8cc88cc008008004896600200314a115980099b8f375c603c00200714a3133002002301f001406480e0dd6180e180e980e980e980e980e980e980e980e980c9baa011375c600a60306ea8006264b3001300c301737540031323371266008008006660106eb0c024c064dd5008919baf301d301a3754002004603660306ea8c014c060dd5180d980c1baa0018b202c3300337586034602e6ea803c8cdd7980d980c1baa00100e8a50405514a080aa294101522941010111919800800801912cc0040062900044cc8966002600a0051337009001000c4005015180c00099801001180c800a02c8a50403c46028602a602a00316403913259800980298081baa00189919192cc004c06000a264b300130093014375400313232332259800980e801c4cc02c02cc07402a2c80d0dd6980d0009bae301a002301a0013015375400316404c602e0071640546eb8c058004c058004c044dd5000c5900f1809800a0228b201e300d375401116402c3009375400716401c300800130033754011149a26cac80081",
+      "hash": "dbbe34fae27f54d36803e3c37d082d7d5d9922611627c91f00a9a446"
+    }
+  ],
+  "definitions": {
+    "ByteArray": {
+      "dataType": "bytes"
+    },
+    "Int": {
+      "dataType": "integer"
+    },
+    "List<batcher/types/ClaimEntry>": {
+      "dataType": "list",
+      "items": {
+        "$ref": "#/definitions/batcher~1types~1ClaimEntry"
+      }
+    },
+    "aiken/crypto/VerificationKeyHash": {
+      "title": "VerificationKeyHash",
+      "dataType": "bytes"
+    },
+    "batcher/types/BatchDatum": {
+      "title": "BatchDatum",
+      "description": "Datum on each ticket UTXO sitting at the script address.",
+      "anyOf": [
+        {
+          "title": "BatchDatum",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "title": "owner",
+              "$ref": "#/definitions/aiken~1crypto~1VerificationKeyHash"
+            },
+            {
+              "title": "item_id",
+              "$ref": "#/definitions/ByteArray"
+            },
+            {
+              "title": "status",
+              "$ref": "#/definitions/batcher~1types~1Status"
+            }
+          ]
+        }
+      ]
+    },
+    "batcher/types/BatchRedeemer": {
+      "title": "BatchRedeemer",
+      "description": "The redeemer carries the whole batch settled in this transaction.",
+      "anyOf": [
+        {
+          "title": "BatchRedeemer",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "title": "claims",
+              "$ref": "#/definitions/List<batcher~1types~1ClaimEntry>"
+            }
+          ]
+        }
+      ]
+    },
+    "batcher/types/ClaimEntry": {
+      "title": "ClaimEntry",
+      "description": "One entry in the batch: \"this input UTXO is being claimed by this key.\"",
+      "anyOf": [
+        {
+          "title": "ClaimEntry",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "title": "utxo_ref",
+              "$ref": "#/definitions/cardano~1transaction~1OutputReference"
+            },
+            {
+              "title": "claimant",
+              "$ref": "#/definitions/aiken~1crypto~1VerificationKeyHash"
+            }
+          ]
+        }
+      ]
+    },
+    "batcher/types/Status": {
+      "title": "Status",
+      "anyOf": [
+        {
+          "title": "Open",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": []
+        },
+        {
+          "title": "Claimed",
+          "dataType": "constructor",
+          "index": 1,
+          "fields": []
+        }
+      ]
+    },
+    "cardano/transaction/OutputReference": {
+      "title": "OutputReference",
+      "description": "An `OutputReference` is a unique reference to an output on-chain. The `output_index`\n corresponds to the position in the output list of the transaction (identified by its id)\n that produced that output",
+      "anyOf": [
+        {
+          "title": "OutputReference",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "title": "transaction_id",
+              "$ref": "#/definitions/ByteArray"
+            },
+            {
+              "title": "output_index",
+              "$ref": "#/definitions/Int"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,22 @@
+name = "batcher/adaptive"
+version = "0.0.0"
+compiler = "v1.1.23"
+plutus = "v3"
+license = "Apache-2.0"
+description = "Adaptive Concurrency-Aware Batcher — batch settlement validator"
+
+[repository]
+user = "batcher"
+project = "adaptive"
+platform = "github"
+
+# NOTE: verify the stdlib version against what `aiken new` generates for your installed
+# Aiken (or the aiken-lang/stdlib releases page) — pin it, don't assume. If in doubt, run:
+#   aiken new batcher/adaptive   (then drop in lib/ and validators/ from this repo)
+#   aiken packages add aiken-lang/stdlib --version <current tag>
+[[dependencies]]
+name = "aiken-lang/stdlib"
+version = "v3.1.0"
+source = "github"
+
+[config]
