@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Aegis AI v2 - Presentation Deck by Team Seleclaw</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@400;700&display=swap');
+    
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #0b0f19;
+      color: #e2e8f0;
+      overflow-x: hidden;
+    }
+    
+    .slide {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      box-sizing: border-box;
+      padding: 60px;
+      page-break-after: always;
+      position: relative;
+      background: radial-gradient(circle at center, #111827 0%, #030712 100%);
+      border-bottom: 2px solid #1e293b;
+    }
+    
+    .slide-content {
+      max-width: 1100px;
+      width: 100%;
+    }
+    
+    h1, h2, h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      margin: 0 0 20px 0;
+    }
+    
+    h1 {
+      font-size: 3.5rem;
+      background: linear-gradient(135deg, #38bdf8 0%, #a855f7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 800;
+      letter-spacing: -0.05em;
+    }
+    
+    h2 {
+      font-size: 2.5rem;
+      color: #38bdf8;
+      border-bottom: 2px solid #1e293b;
+      padding-bottom: 10px;
+      margin-bottom: 30px;
+    }
+    
+    p {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      color: #94a3b8;
+    }
+    
+    .highlight {
+      color: #c084fc;
+      font-weight: 600;
+    }
+    
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-top: 20px;
+    }
+    
+    .card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 24px;
+      backdrop-filter: blur(10px);
+    }
+    
+    .card h3 {
+      color: #a855f7;
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+    }
+    
+    .list-item {
+      margin-bottom: 15px;
+      display: flex;
+      align-items: flex-start;
+      font-size: 1.15rem;
+    }
+    
+    .list-item-bullet {
+      color: #38bdf8;
+      font-weight: bold;
+      margin-right: 15px;
+      font-size: 1.3rem;
+    }
+    
+    .footer {
+      position: absolute;
+      bottom: 30px;
+      left: 60px;
+      right: 60px;
+      display: flex;
+      justify-content: space-between;
+      color: #475569;
+      font-size: 0.9rem;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+    
+    /* Print Layout Overrides for PDF Export */
+    @media print {
+      body {
+        background-color: #ffffff;
+        color: #000000;
+      }
+      .slide {
+        width: 100%;
+        height: 100vh;
+        page-break-after: always;
+        background: none;
+        border: none;
+        padding: 40px;
+        box-sizing: border-box;
+      }
+      h1 {
+        background: none;
+        -webkit-text-fill-color: initial;
+        color: #030712;
+      }
+      h2 {
+        color: #0f172a;
+        border-bottom-color: #cbd5e1;
+      }
+      .card {
+        background: #f8fafc;
+        border-color: #cbd5e1;
+      }
+      .card h3 {
+        color: #6b21a8;
+      }
+      p, .list-item {
+        color: #334155;
+      }
+      .footer {
+        color: #94a3b8;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Slide 1: Cover -->
+  <div class="slide">
+    <div class="slide-content" style="text-align: center;">
+      <h1 style="font-size: 5rem; margin-bottom: 10px;">Aegis AI v2</h1>
+      <p style="font-size: 1.8rem; color: #38bdf8; font-family: 'Space Grotesk', sans-serif; margin-bottom: 50px;">
+        Decentralized AI Trust, Provenance, & Escrow Platform on Cardano
+      </p>
+      <div style="margin-top: 40px; font-size: 1.4rem;">
+        <span style="color: #94a3b8;">Presented by Team:</span> 
+        <strong style="color: #a855f7; font-family: 'Space Grotesk', sans-serif; font-size: 1.8rem; display: block; margin-top: 10px;">Seleclaw</strong>
+      </div>
+    </div>
+    <div class="footer">
+      <span>IndiaCodex Hackathon 2026</span>
+      <span>Slide 1 of 7</span>
+    </div>
+  </div>
+
+  <!-- Slide 2: Problem Statement -->
+  <div class="slide">
+    <div class="slide-content">
+      <h2>The Problem: The AI Data Integrity Crisis</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>1. Unverifiable Dataset Lineage</h3>
+          <p>AI models are trained on datasets with unknown provenance, exposing developers to severe copyright infringements, licensing violations, and data manipulation risks.</p>
+        </div>
+        <div class="card">
+          <h3>2. Centralized Bias & Compliance Checks</h3>
+          <p>Current trust verification models depend on opaque centralized auditors. AI readiness, bias verification, and HIPAA/GDPR regulatory compliance checks remain a black box.</p>
+        </div>
+      </div>
+      <div class="card" style="margin-top: 30px;">
+        <p style="margin: 0; font-size: 1.25rem; text-align: center;">
+          <span class="highlight">The Market Gap:</span> AI needs a decentralized mechanism to verify training data quality, handle licensing peer-to-peer securely, and audit model checkpoints.
+        </p>
+      </div>
+    </div>
+    <div class="footer">
+      <span>Team Seleclaw</span>
+      <span>Slide 2 of 7</span>
+    </div>
+  </div>
+
+  <!-- Slide 3: The Architecture -->
+  <div class="slide">
+    <div class="slide-content">
+      <h2>Technical Architecture</h2>
+      <div class="grid" style="grid-template-columns: 1.2fr 0.8fr;">
+        <div>
+          <div class="list-item">
+            <span class="list-item-bullet">⚡</span>
+            <div>
+              <strong>Lucid Evolution & Cardano Node Connection</strong><br>
+              Direct CIP-30 wallet interface linking Lace/Nami to the Preprod network to submit on-chain datums and signatures.
+            </div>
+          </div>
+          <div class="list-item">
+            <span class="list-item-bullet">🛡️</span>
+            <div>
+              <strong>Aiken Plutus Smart Contracts</strong><br>
+              An automated escrow validation contract checking dataset payments, fee splits (95% creator / 5% treasury), and CIP-25 NFT mints.
+            </div>
+          </div>
+          <div class="list-item">
+            <span class="list-item-bullet">📦</span>
+            <div>
+              <strong>Pinata IPFS Metadata Vault</strong><br>
+              Files and audit schema documents are cryptographically pinned to IPFS, ensuring immutable storage of AI pedigree files.
+            </div>
+          </div>
+        </div>
+        <div class="card" style="display: flex; flex-direction: column; justify-content: center; background: rgba(56, 189, 248, 0.05); border-color: rgba(56, 189, 248, 0.2);">
+          <h3 style="color: #38bdf8; text-align: center; margin-bottom: 20px;">Tech Stack</h3>
+          <p style="text-align: center; margin: 5px 0;"><strong>Frontend:</strong> Next.js 15, Custom Neon Glassmorphism CSS</p>
+          <p style="text-align: center; margin: 5px 0;"><strong>Contracts:</strong> Aiken, Plutus</p>
+          <p style="text-align: center; margin: 5px 0;"><strong>Storage:</strong> Pinata IPFS</p>
+          <p style="text-align: center; margin: 5px 0;"><strong>Network:</strong> Cardano Preprod Testnet</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <span>Team Seleclaw</span>
+      <span>Slide 3 of 7</span>
+    </div>
+  </div>
+
+  <!-- Slide 4: Key Platform Features -->
+  <div class="slide">
+    <div class="slide-content">
+      <h2>Core Innovation & Features</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>1. 9-Node Provenance Graph</h3>
+          <p>An interactive, auditable trajectory illustrating the entire lifecycle of AI training data on-chain: from raw medical provider data down to commercial product royalties.</p>
+        </div>
+        <div class="card">
+          <h3>2. Triple-Index Trust Rating</h3>
+          <p>Real-time client-side checks evaluating datasets side-by-side on **Dataset Trust Score**, **AI Readiness Index**, and **GDPR/HIPAA Compliance** indicators.</p>
+        </div>
+        <div class="card">
+          <h3>3. Secure AI Workspace</h3>
+          <p>A training telemetry dashboard enabling researchers to run containerized notebook jobs and export model weights to mint on-chain checkpoint NFTs.</p>
+        </div>
+        <div class="card">
+          <h3>4. Checked Model Registry</h3>
+          <p>A catalog system that binds compiled machine learning model files directly to their specific training data dependencies, preventing training audit spoofing.</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <span>Team Seleclaw</span>
+      <span>Slide 4 of 7</span>
+    </div>
+  </div>
+
+  <!-- Slide 5: Step-by-Step Workflow -->
+  <div class="slide">
+    <div class="slide-content">
+      <h2>Step-by-Step Project Workflow</h2>
+      <div style="display: flex; flex-direction: column; gap: 15px;">
+        <div class="list-item">
+          <span class="list-item-bullet">1</span>
+          <div><strong>Secure Upload & Scan:</strong> The dataset creator uploads training files. The platform checks formatting, audits GDPR compliance, and scores readiness.</div>
+        </div>
+        <div class="list-item">
+          <span class="list-item-bullet">2</span>
+          <div><strong>IPFS Lock & Mint:</strong> Metadata is pinned to Pinata IPFS, and the Cardano ledger mints a verifiably unique Dataset Certificate NFT.</div>
+        </div>
+        <div class="list-item">
+          <span class="list-item-bullet">3</span>
+          <div><strong>Escrow Locking:</strong> Buyers acquire access. The smart contract locks the purchase ADA, minting a CIP-25 License NFT to the buyer.</div>
+        </div>
+        <div class="list-item">
+          <span class="list-item-bullet">4</span>
+          <div><strong>Model Training & Checkpointing:</strong> The buyer mounts the data in the Secure Workspace, trains their model, and exports weights as a cryptographic NFT.</div>
+        </div>
+        <div class="list-item">
+          <span class="list-item-bullet">5</span>
+          <div><strong>Model Registration:</strong> The model is recorded in the Registry, permanently documenting its dataset dependency path for audit review.</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <span>Team Seleclaw</span>
+      <span>Slide 5 of 7</span>
+    </div>
+  </div>
+
+  <!-- Slide 6: Escrow Logic & Treasury Model -->
+  <div class="slide">
+    <div class="slide-content">
+      <h2>Plutus Smart Escrow & Platform Economics</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Cryptographic Escrow Rules</h3>
+          <p>Contracts validate inputs and outputs on the transaction ledger. Direct peer-to-peer distribution ensures dataset sellers receive funds immediately upon buyer license minting, eliminating middlemen.</p>
+        </div>
+        <div class="card">
+          <h3>5% Governance Treasury Split</h3>
+          <p>Every transaction routes **95% of licensing revenues** directly to the data provider, and **5% to the platform treasury**. The treasury funds are unlocked via community voting rules.</p>
+        </div>
+      </div>
+      <div class="card" style="margin-top: 30px; text-align: center;">
+        <h3>Community Governance Tab</h3>
+        <p style="margin: 0;">ADA token holders vote on platform proposals to manage verification criteria and allocate treasury rewards securely using their own stake keys.</p>
+      </div>
+    </div>
+    <div class="footer">
+      <span>Team Seleclaw</span>
+      <span>Slide 6 of 7</span>
+    </div>
+  </div>
+
+  <!-- Slide 7: Future Outlook & Roadmap -->
+  <div class="slide">
+    <div class="slide-content" style="text-align: center;">
+      <h2>Future Roadmap & Impact</h2>
+      <div class="grid" style="text-align: left; margin-bottom: 40px;">
+        <div class="card">
+          <h3>Short-Term Goals</h3>
+          <p>Complete Zero-Knowledge Proof (ZKP) integrations to verify dataset trust scores and bias levels without revealing raw sensitive patient information.</p>
+        </div>
+        <div class="card">
+          <h3>Long-Term Vision</h3>
+          <p>Build automated micro-royalty routing mechanisms that distribute continuous ADA payouts to data providers whenever commercial models run active inferences.</p>
+        </div>
+      </div>
+      <h3 style="color: #38bdf8; font-size: 1.8rem; font-family: 'Space Grotesk', sans-serif;">Empowering Privacy-First Verifiable AI on Cardano</h3>
+    </div>
+    <div class="footer">
+      <span>Team Seleclaw</span>
+      <span>Slide 7 of 7</span>
+    </div>
+  </div>
+
+</body>
+</html>

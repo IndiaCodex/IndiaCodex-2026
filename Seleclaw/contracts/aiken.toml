@@ -1,0 +1,9 @@
+[project]
+name = "aegis/marketplace"
+version = "1.0.0"
+compiler = "v1.1.0"
+license = "Apache-2.0"
+description = "Aegis AI v2 Cardano smart contract validators"
+
+[dependencies]
+aiken-lang/stdlib = { version = "main", source = "github" }
