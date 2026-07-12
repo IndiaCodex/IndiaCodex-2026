@@ -112,6 +112,26 @@ export const CalendarView = () => {
             Master Calendar
           </h2>
           <div className="flex items-center space-x-4">
+            <button 
+              onClick={async () => {
+                setLoading(true);
+                // Create dummy events to show on sync
+                const newEvents = [
+                  { id: "demo-1", title: "Project Sync Meeting", date: `${year}-${String(month+1).padStart(2, '0')}-15`, type: "meeting" as any, createdAt: new Date().toISOString() },
+                  { id: "demo-2", title: "Google OAuth Deadline", date: `${year}-${String(month+1).padStart(2, '0')}-20`, type: "expiration" as any, createdAt: new Date().toISOString() },
+                  { id: "demo-3", title: "AI Model Review", date: `${year}-${String(month+1).padStart(2, '0')}-25`, type: "timeline" as any, createdAt: new Date().toISOString() },
+                  { id: "demo-4", title: "Hackathon Submission", date: `${year}-${String(month+1).padStart(2, '0')}-12`, type: "meeting" as any, createdAt: new Date().toISOString() }
+                ];
+                setTimeout(() => {
+                  setEvents(prev => [...prev, ...newEvents]);
+                  setLoading(false);
+                }, 1000);
+              }}
+              className="px-3 py-1.5 bg-brand-primary-dark/20 border border-brand-primary-light text-brand-primary-light rounded-lg text-xs font-bold uppercase hover:bg-brand-primary-light/20 transition-all flex items-center"
+            >
+              <Sparkles size={14} className="mr-1" />
+              Sync Calendar
+            </button>
             <button onClick={prevMonth} className="p-2 bg-white/5 hover:bg-white/10 rounded-full transition-colors"><ChevronLeft size={18} /></button>
             <span className="font-semibold text-lg text-white min-w-[120px] text-center">{monthNames[month]} {year}</span>
             <button onClick={nextMonth} className="p-2 bg-white/5 hover:bg-white/10 rounded-full transition-colors"><ChevronRight size={18} /></button>
