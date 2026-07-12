@@ -21,5 +21,7 @@ pnpm-debug.log*
 .DS_Store
 .idea/
 
-# local, machine-specific Claude Code settings (not shared team config)
-.claude/settings.local.json
+# local, machine-specific AI-assistant tooling state — none of it is
+# project configuration, all of it is per-developer session state
+.claude/
+.qodo/

@@ -16,16 +16,41 @@ for the full build history.
 
 ---
 
+## Executive summary
+
+Cardano has excellent individual developer tools — Aiken, Lucid Evolution,
+Mesh, Blockfrost, Ogmios — but no project owns the integration between
+them, so every team re-solves the same plumbing before writing a line of
+business logic. **Forge is that integration layer.** One command,
+`forge build "<description>"`, takes a natural-language request and
+produces a real, compiled Aiken contract, a CIP-57 blueprint, a typed
+TypeScript SDK, a passing test, and a deployment artifact — end to end,
+in about ten seconds, verified against the real Aiken compiler, not a
+mock. Three audited templates exist today (escrow, NFT-minting royalty,
+token vesting), and the platform's one non-negotiable rule is what makes
+this trustworthy rather than gimmicky: **the language model never writes
+blockchain logic.** It only classifies intent and extracts parameters; a
+separate, deterministic template engine renders every line of Aiken
+source, and a low-confidence request is rejected outright rather than
+guessed at. Everything below is either real and tested today, or clearly
+labeled as roadmap — nothing in this repository is aspirational marketing
+dressed up as a feature.
+
 ## Table of contents
 
-- [Problem statement](#problem-statement)
-- [Why Forge?](#why-forge)
-- [Features](#features)
-- [Architecture](#architecture)
-- [Quick start](#quick-start)
+- [Executive summary](#executive-summary)
+- [The problem](#the-problem)
+- [Why Forge exists](#why-forge-exists)
+- [Why this matters to Cardano](#why-this-matters-to-cardano)
+- [Traditional development vs. Forge](#traditional-development-vs-forge)
+- [How Forge works](#how-forge-works)
+- [Supported templates](#supported-templates)
+- [Architecture overview](#architecture-overview)
+- [Judge quick start (2 minutes)](#judge-quick-start-2-minutes)
+- [Full quick start](#full-quick-start)
 - [Demo](#demo)
 - [Screenshots](#screenshots)
-- [Project layout](#project-layout)
+- [Project structure](#project-structure)
 - [Roadmap](#roadmap)
 - [Documentation](#documentation)
 - [Contributing](#contributing)
@@ -33,7 +58,7 @@ for the full build history.
 
 ---
 
-## Problem statement
+## The problem
 
 Cardano has excellent individual developer tools — Aiken as a modern
 validator language, Lucid Evolution and Mesh for off-chain transaction
@@ -52,10 +77,11 @@ the integration between them. In practice, every team:
   generic tool catches.
 
 None of this is a flaw in Aiken, Lucid, or Blockfrost — it's a gap in
-what sits _between_ them. See [`docs/Vision.md`](docs/Vision.md) for the
-full problem analysis.
+what sits _between_ them, and it's why the tooling feels fragmented even
+though every individual piece is solid. See [`docs/Vision.md`](docs/Vision.md)
+for the full problem analysis.
 
-## Why Forge?
+## Why Forge exists
 
 Forge unifies scaffolding, compilation, typed SDK generation, testing,
 and deployment behind one platform — and adds a natural-language entry
@@ -73,6 +99,32 @@ dependency-free: a task this narrow (classify among a few templates,
 pull a number out of a sentence) doesn't need a hosted API call, and a
 live demo should never be able to fail because of a network blip.
 
+## Why this matters to Cardano
+
+- **eUTxO has failure modes no generic tool targets.** Double
+  satisfaction, UTxO contention, and deterministic script-evaluation cost
+  accounting are Cardano-shaped problems that a chain-agnostic tool, or
+  one ported from an EVM codebase, would miss by construction.
+- **The off-chain SDK matters more here than on account-based chains.**
+  Validators are pure functions; all transaction construction and UTxO
+  selection happens off-chain, so the quality of the generated TypeScript
+  SDK is a disproportionately large share of the actual Cardano developer
+  experience.
+- **CIP-57 makes reliable codegen possible today.** Aiken's blueprint
+  output is the machine-readable interface a typed-SDK generator needs —
+  without it, a project like Forge would have to invent its own interface
+  format first.
+- **Cardano hasn't had its "Hardhat moment" yet.** Ethereum's and
+  Solana's tooling inflected sharply once scaffolding, testing, and
+  deployment were unified behind one tool with a plugin ecosystem —
+  Cardano has the compiler-grade primitive (Aiken) but not yet the
+  platform layer on top of it.
+
+Full reasoning in [`docs/Vision.md`](docs/Vision.md) and
+[`docs/CompetitiveAnalysis.md`](docs/CompetitiveAnalysis.md).
+
+## Traditional development vs. Forge
+
 | Traditional development       | Forge                                               |
 | ----------------------------- | --------------------------------------------------- |
 | Set up project manually       | ✓ Automated                                         |
@@ -85,28 +137,55 @@ live demo should never be able to fail because of a network blip.
 | AI assistance                 | Intent parsing only — never writes contract code    |
 | Security model                | Deterministic, audited templates — not AI-generated |
 
-## Features
+## How Forge works
 
-| Capability                                                 | Package                       | Status                                                   |
-| ---------------------------------------------------------- | ----------------------------- | -------------------------------------------------------- |
-| Real Aiken compilation (`aiken build`/`aiken check`)       | `adapter-aiken`               | ✅ Real                                                  |
-| CIP-57 blueprint parsing                                   | `adapter-aiken`               | ✅ Real                                                  |
-| Deterministic contract generation from an audited template | `contract-templates`          | ✅ Real (3 templates: escrow, NFT royalty mint, vesting) |
-| Typed TypeScript SDK generation from a blueprint           | `adapter-codegen-ts`          | ✅ Real                                                  |
-| In-memory UTxO emulator for fast tests                     | `adapter-emulator`            | ✅ Real (generic scenario check — see limitations)       |
-| Natural-language intent parsing & parameter extraction     | `adapter-ai`                  | ✅ Real, local, no hosted API                            |
-| Confidence-gated template matching (`--min-confidence`)    | `application`                 | ✅ Real — refuses to scaffold a low-confidence guess     |
-| Real CIP-19 deployment address + versioned manifest        | `adapter-providers`           | ✅ Real                                                  |
-| `forge build "<description>"` CLI                          | `cli`                         | ✅ Real                                                  |
-| Explainability (`forge explain` / inline "why" output)     | `application`                 | ✅ Real                                                  |
-| Plugin system (ports + hooks, built-ins are plugins too)   | `plugin-api`, `plugin-loader` | ✅ Real                                                  |
-| Security-pattern test generator (`ai-testgen`)             | —                             | 🔜 Roadmap                                               |
-| Real off-chain transaction building / execution            | —                             | 🔜 Roadmap                                               |
+```mermaid
+flowchart TD
+    NL[Natural Language] --> Intent[Intent Parser]
+    Intent --> Confident{"Confident template match?"}
+    Confident -->|No| Reject["Reject (no project created)"]
+    Confident -->|Yes| Compile[Compile]
+    Compile --> Blueprint[Blueprint]
+    Blueprint --> SDK[SDK]
+    SDK --> Tests[Tests]
+    Tests --> Deploy[Deployment]
+```
 
-See [`docs/FinalEngineeringReport.md`](docs/FinalEngineeringReport.md) for
-the full feature matrix with test coverage per item.
+1. **Intent Parser** — the language model classifies the description into
+   a template category and a confidence score. This is one of exactly two
+   places anywhere in the platform the model is called, and it never
+   produces code.
+2. **Confidence gate** — if nothing matches confidently (default
+   threshold 0.6), Forge stops here. No file is written. See
+   [ADR-006](docs/adr/ADR-006-confidence-gated-template-matching.md).
+3. **Compile** — the deterministic Forge Engine renders real Aiken source
+   from the matched template, then the real `aiken build` compiles it into
+   a CIP-57 blueprint.
+4. **Blueprint → SDK → Tests → Deployment** — a typed TypeScript SDK is
+   generated from the blueprint, a functional test runs against an
+   in-memory emulator, and a real CIP-19 deployment address is computed
+   and written to a versioned manifest.
 
-## Architecture
+A larger version of this diagram, plus the full Clean Architecture
+layering, is in [`assets/diagrams/`](assets/diagrams/) and
+[`docs/Architecture.md`](docs/Architecture.md).
+
+## Supported templates
+
+| #   | Template                           | Validator | Use cases                                    |
+| --- | ---------------------------------- | --------- | -------------------------------------------- |
+| 1   | **Escrow with Milestone Payments** | `spend`   | Freelancing · Construction · Project funding |
+| 2   | **NFT Minting with Royalties**     | `mint`    | NFT marketplaces · Creator royalties         |
+| 3   | **Token Vesting**                  | `spend`   | Employee token vesting · Investor lockups    |
+
+Each is real, hand-audited Aiken source, verified against the actual
+Aiken compiler — not AI-generated. See
+[`packages/contract-templates/README.md`](packages/contract-templates/README.md)
+for exactly what each one does, its parameters, and why. A description
+that doesn't confidently match any of the three is rejected, not guessed
+at — see the [Demo](#demo) section below for a real captured example.
+
+## Architecture overview
 
 Clean Architecture, strictly enforced: dependencies point inward only.
 Nothing in `domain` or `application` knows about Aiken binary paths or a
@@ -124,11 +203,40 @@ flowchart TD
 Each box above is swapped via a port — `domain` and `application` never
 import an adapter directly. The full layered breakdown (Domain →
 Application → Plugin API → Adapters → External Tools) and the build-flow
-diagram live in [`docs/Architecture.md`](docs/Architecture.md). The six
-architecture decisions worth reading first are in
-[`docs/adr/`](docs/adr/).
+diagram live in [`docs/Architecture.md`](docs/Architecture.md); rendered
+diagram images for presentations are in
+[`assets/diagrams/`](assets/diagrams/). The six architecture decisions
+worth reading first are in [`docs/adr/`](docs/adr/).
 
-## Quick start
+## Judge quick start (2 minutes)
+
+```bash
+git clone <this-repo-or-fork-url>
+cd Forge   # or the repo root, depending on where you cloned
+pnpm install
+pnpm build
+node packages/cli/dist/bin.js build "Build an escrow smart contract with milestone-based payments"
+```
+
+That's it — in about ten seconds you'll have a real compiled Aiken
+project, a typed SDK, a passing test, and a deployment address, printed
+with the exact reasoning behind the template and parameter choices. To
+see template disambiguation and the confidence gate in action:
+
+```bash
+node packages/cli/dist/bin.js build "Mint an NFT collection with an 8% royalty on every sale"
+node packages/cli/dist/bin.js build "I want to build a decentralized voting system for governance proposals"
+```
+
+The first command routes to a different, real, compiled contract; the
+second is rejected outright (exit code 1) because it doesn't confidently
+match any of the three templates — see [Demo](#demo) for the exact
+captured output of all three. To verify the test suite instead of the
+CLI: `pnpm test` (150 tests, offline, a few seconds) and
+`pnpm test:integration` (8 tests, real Aiken compiler + real network,
+under a minute).
+
+## Full quick start
 
 Requirements: Node.js ≥ 22.13, [pnpm](https://pnpm.io) (pinned via
 `packageManager` in `package.json` — `corepack enable` picks it up
@@ -151,6 +259,11 @@ The first `aiken build` needs network access once, to fetch
 pnpm test              # fast unit suite — 150 tests, fully offline, a few seconds
 pnpm test:integration   # real Aiken compiler + real network — 8 tests, under a minute
 ```
+
+This exact sequence — `pnpm install`, `pnpm build`, `pnpm test`,
+`pnpm test:integration`, then a live `forge build` — has been verified
+end to end from a fully clean workspace (no `node_modules`, no `dist`, no
+build cache) with zero manual intervention beyond the commands shown.
 
 ## Demo
 
@@ -191,15 +304,6 @@ staged. See [`docs/DemoPlan.md`](docs/DemoPlan.md) for the full 5-minute
 walkthrough script.
 
 ### Multiple templates, correctly disambiguated
-
-Three templates exist today, each a real, audited Aiken contract:
-
-1. **Escrow with Milestone Payments**
-   Use Cases: Freelancing · Construction · Project funding
-2. **NFT Minting with Royalties**
-   Use Cases: NFT marketplaces · Creator royalties
-3. **Token Vesting**
-   Use Cases: Employee token vesting · Investor lockups
 
 The same command, two different real-world descriptions, two different
 real, compiled contracts — captured verbatim, same as above:
@@ -253,18 +357,32 @@ Supported Smart Contract Templates
    • Investor lockups
 ```
 
-See [Why Forge?](#why-forge) and
+See [Why Forge exists](#why-forge-exists) and
 [ADR-006](docs/adr/ADR-006-confidence-gated-template-matching.md) for why
 this rejects instead of guessing.
 
 ## Screenshots
 
-Forge is CLI-first, so its "screenshots" are terminal captures — the
-[Demo](#demo) section above is the primary one. A recorded
-asciinema/GIF walkthrough is on the roadmap for a future submission
-update; this repository doesn't ship one yet.
+Forge is CLI-first, so its "screenshots" are terminal captures of real
+runs, rendered as images in [`docs/screenshots/`](docs/screenshots/):
 
-## Project layout
+| Screenshot                                                                  | Shows                                                             |
+| --------------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| [`01-escrow-generation.png`](docs/screenshots/01-escrow-generation.png)     | A full `forge build` run selecting the escrow template            |
+| [`02-nft-generation.png`](docs/screenshots/02-nft-generation.png)           | The same command routing to the NFT minting-royalty template      |
+| [`03-vesting-generation.png`](docs/screenshots/03-vesting-generation.png)   | The same command routing to the token vesting template            |
+| [`04-rejection.png`](docs/screenshots/04-rejection.png)                     | An unrelated request rejected by the confidence gate              |
+| [`05-project-structure.png`](docs/screenshots/05-project-structure.png)     | The generated project's file layout                               |
+| [`06-generated-sdk.png`](docs/screenshots/06-generated-sdk.png)             | The real typed TypeScript SDK generated from the CIP-57 blueprint |
+| [`07-generated-validator.png`](docs/screenshots/07-generated-validator.png) | The real, compiled Aiken validator source                         |
+| [`08-deployment-manifest.png`](docs/screenshots/08-deployment-manifest.png) | The real deployment manifest with a CIP-19 address                |
+
+Every image above is a real captured run, not a mockup. This repository
+is CLI-first with no GUI, so there is no IDE-window screenshot to
+capture honestly — the closest equivalent, the generated project's file
+layout, is `05-project-structure.png` above.
+
+## Project structure
 
 ```
 packages/
@@ -283,7 +401,10 @@ packages/
 └── cli/                 # the `forge` command
 docs/
 ├── adr/                 # 6 Architecture Decision Records
+├── screenshots/         # real captured run screenshots
 └── *.md                 # Vision, PRD, Architecture, competitive analysis, ...
+assets/
+└── diagrams/            # rendered PNG versions of every architecture diagram
 ```
 
 Every package's own `README.md` explains its specific responsibility.
@@ -318,7 +439,7 @@ Full detail, including what's explicitly _not_ planned and why, in
 | [`docs/Vision.md`](docs/Vision.md)                                 | Problem, why now, why Cardano                                   |
 | [`docs/PRD.md`](docs/PRD.md)                                       | Users, requirements, MVP scope                                  |
 | [`docs/Architecture.md`](docs/Architecture.md)                     | Layered architecture, build-flow diagram, ports and use cases   |
-| [`docs/adr/`](docs/adr/)                                           | The 5 key architectural decisions, with alternatives considered |
+| [`docs/adr/`](docs/adr/)                                           | The 6 key architectural decisions, with alternatives considered |
 | [`docs/CompetitiveAnalysis.md`](docs/CompetitiveAnalysis.md)       | vs. Hardhat, Foundry, Anchor, Brownie, Truffle                  |
 | [`docs/BusinessCase.md`](docs/BusinessCase.md)                     | Why this should exist, for reviewers and funders                |
 | [`docs/DemoPlan.md`](docs/DemoPlan.md)                             | The 5-minute demo script                                        |
@@ -326,6 +447,8 @@ Full detail, including what's explicitly _not_ planned and why, in
 | [`docs/ProductionReadiness.md`](docs/ProductionReadiness.md)       | Honest strengths/weaknesses/security assessment                 |
 | [`docs/JudgePreparation.md`](docs/JudgePreparation.md)             | Pitches (30s/2min/5min) + FAQ                                   |
 | [`docs/FinalEngineeringReport.md`](docs/FinalEngineeringReport.md) | Architecture summary, feature matrix, known limitations         |
+| [`docs/JudgeCheatSheet.md`](docs/JudgeCheatSheet.md)               | One-page condensed reference for evaluation                     |
+| [`EXECUTIVE_SUMMARY.md`](EXECUTIVE_SUMMARY.md)                     | One-page project summary (Markdown + PDF)                       |
 
 ## Contributing
 
