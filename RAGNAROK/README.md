@@ -77,15 +77,15 @@ Campus and community events still rely on:
 |-------|------|
 | Brand logo | [`public/logo.png`](./public/logo.png) |
 | Product visuals | [`public/readme/prompt-to-event.png`](./public/readme/prompt-to-event.png), [`public/readme/proof-engine.png`](./public/readme/proof-engine.png) |
-| Pitch deck | [`OnChainIn-Pitch-Deck.pptx (also as OnChainIn_Pitch_RAGNAROK.pptx)`](./OnChainIn-Pitch-Deck.pptx (also as OnChainIn_Pitch_RAGNAROK.pptx)) |
+| Pitch deck | [`OnChainIn-Pitch-Deck.pptx`](./OnChainIn-Pitch-Deck.pptx) |
 
 ### Demo flow (live)
 
 1. Open **[https://onchainin.vercel.app](https://onchainin.vercel.app)**  
-2. Sign up as **Organizer** â†’ create event (manual or AI) â†’ set free or Cardano mode  
-3. Sign up as **Participant** â†’ apply â†’ organizer approves  
-4. Connect CIP-30 wallet on **Preprod** â†’ **Check in on-chain**  
-5. Organizer issues certificate â†’ open **Verify** page (hash + Blockfrost)
+2. Sign up as **Organizer** → create event (manual or AI) → set free or Cardano mode  
+3. Sign up as **Participant** → apply → organizer approves  
+4. Connect CIP-30 wallet on **Preprod** → **Check in on-chain**  
+5. Organizer issues certificate → open **Verify** page (hash + Blockfrost)
 
 ### Local demo
 
@@ -115,9 +115,11 @@ Env used in production (set in Vercel, not committed):
 
 ## 7. PPT Link
 
-**Pitch deck in this folder:**
+**Pitch deck uploaded in this folder (required by rules):**
+
 - [OnChainIn-Pitch-Deck.pptx](./OnChainIn-Pitch-Deck.pptx)
-- [OnChainIn_Pitch_RAGNAROK.pptx](./OnChainIn_Pitch_RAGNAROK.pptx) (same file)
+- Same file also as [OnChainIn_Pitch_RAGNAROK.pptx](./OnChainIn_Pitch_RAGNAROK.pptx)
+
 ---
 
 ## 8. Team Members' Info
