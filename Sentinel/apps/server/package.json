@@ -1,0 +1,33 @@
+{
+  "name": "@sentinel/server",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Sentinel HTTP API — Fastify composition root wiring domain ports to adapters.",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "seed:demo": "tsx src/demo/run-seed.ts",
+    "build": "tsc -p tsconfig.build.json",
+    "start": "node dist/server.js",
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@fastify/cors": "^11.3.0",
+    "@sentinel/adapter-masumi": "workspace:*",
+    "@sentinel/application": "workspace:*",
+    "@sentinel/domain": "workspace:*",
+    "@sentinel/execution-journal": "workspace:*",
+    "@sentinel/export-json": "workspace:*",
+    "@sentinel/storage-memory": "workspace:*",
+    "@sentinel/storage-sqlite": "workspace:*",
+    "fastify": "^5.10.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.21",
+    "tsx": "^4.23.1",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.10"
+  }
+}

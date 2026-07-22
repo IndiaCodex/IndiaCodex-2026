@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens, wired into Tailwind's utility generation via @theme so
+ * `bg-surface-1`, `text-ink-secondary`, etc. are available as regular
+ * utility classes. The values themselves live in plain CSS custom
+ * properties below so they can vary by [data-theme] at runtime without
+ * regenerating any CSS — Tailwind's utilities just reference the
+ * variable, not a literal color.
+ */
+@theme {
+  --color-surface-page: var(--surface-page);
+  --color-surface-1: var(--surface-1);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+
+  --color-ink-primary: var(--ink-primary);
+  --color-ink-secondary: var(--ink-secondary);
+  --color-ink-muted: var(--ink-muted);
+
+  --color-border-hairline: var(--border-hairline);
+  --color-border-emphasis: var(--border-emphasis);
+
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+
+  --color-status-good: var(--status-good);
+  --color-status-warning: var(--status-warning);
+  --color-status-serious: var(--status-serious);
+  --color-status-critical: var(--status-critical);
+
+  --font-sans: var(--sans-font);
+  --font-mono-ui: var(--mono-font);
+}
+
+/*
+ * Dark is the default surface (Step 3.4 design goal); light is an
+ * explicit opt-in via [data-theme="light"] on <html>, set by the theme
+ * toggle (src/lib/theme.ts) — not by OS preference, since the product
+ * default is dark regardless of system setting.
+ */
+:root,
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --surface-page: #0d0d0d;
+  --surface-1: #1a1a19;
+  --surface-2: #232322;
+  --surface-3: #2c2c2a;
+
+  --ink-primary: #ffffff;
+  --ink-secondary: #c3c2b7;
+  --ink-muted: #898781;
+
+  --border-hairline: #2c2c2a;
+  --border-emphasis: #383835;
+
+  --accent: #3987e5;
+  --accent-ink: #ffffff;
+
+  --status-good: #0ca30c;
+  --status-warning: #fab219;
+  --status-serious: #ec835a;
+  --status-critical: #d03b3b;
+
+  --mono-font: ui-monospace, "SF Mono", "Cascadia Code", "JetBrains Mono", Consolas, monospace;
+  --sans-font: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --surface-page: #f9f9f7;
+  --surface-1: #fcfcfb;
+  --surface-2: #f2f1ee;
+  --surface-3: #e8e7e2;
+
+  --ink-primary: #0b0b0b;
+  --ink-secondary: #52514e;
+  --ink-muted: #898781;
+
+  --border-hairline: #e1e0d9;
+  --border-emphasis: #c3c2b7;
+
+  --accent: #2a78d6;
+  --accent-ink: #ffffff;
+
+  --status-good: #0ca30c;
+  --status-warning: #b8790a;
+  --status-serious: #c85f3a;
+  --status-critical: #d03b3b;
+}
+
+body {
+  background-color: var(--surface-page);
+  color: var(--ink-primary);
+  font-family: var(--sans-font);
+}

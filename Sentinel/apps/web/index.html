@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sentinel — Engineering Confidence for Autonomous AI Agents</title>
+    <script>
+      // Set the theme before first paint, so there's no flash of the
+      // wrong theme. Kept intentionally tiny and inline — this is the
+      // one place a script belongs outside src/, since it must run
+      // before any stylesheet or React code loads.
+      (function () {
+        var stored = localStorage.getItem("sentinel-theme");
+        document.documentElement.setAttribute("data-theme", stored === "light" ? "light" : "dark");
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

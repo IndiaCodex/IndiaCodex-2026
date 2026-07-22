@@ -1,0 +1,39 @@
+{
+  "name": "sentinel",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Engineering Confidence for Autonomous AI Agents",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.0.0",
+    "pnpm": ">=11.0.0"
+  },
+  "packageManager": "pnpm@11.12.0",
+  "scripts": {
+    "build": "pnpm -r run build",
+    "dev:server": "pnpm --filter @sentinel/server run dev",
+    "dev:web": "pnpm --filter @sentinel/web run dev",
+    "seed:demo": "pnpm --filter @sentinel/server run seed:demo",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "pnpm -r run typecheck",
+    "verify": "pnpm build && pnpm lint && pnpm typecheck && pnpm test",
+    "demo": "pnpm build && pnpm run seed:demo && concurrently -n server,web -c blue,magenta \"pnpm --filter @sentinel/server run start\" \"pnpm --filter @sentinel/web exec vite preview --port 5173 --strictPort\""
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^22.19.21",
+    "concurrently": "^10.0.3",
+    "eslint": "^10.7.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "prettier": "^3.9.5",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.64.0",
+    "vitest": "^4.1.10"
+  }
+}
