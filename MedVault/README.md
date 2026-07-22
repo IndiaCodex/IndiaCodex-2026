@@ -76,3 +76,6 @@ Ten backend modules shipped, covered by a 25-test pytest suite (auth, wallets, p
 - Passwords are hashed with Argon2id; JWT access tokens are short-lived (15 min) with rotating, single-use refresh tokens (burned on use).
 - All money is stored as integer lovelace, never floats, to avoid rounding bugs in a financial system.
 - No medical data — diagnoses, documents, patient identity — has a column to live in. It's not encrypted; it's simply never received.
+
+## Demo video
+https://1drv.ms/v/c/d18b4dfe0a0e6856/IQA-kTY_tpceRa6Zmnvz9ewKAY-dKF_Ie7LYklOmCZQVJwY?e=rycWAI
