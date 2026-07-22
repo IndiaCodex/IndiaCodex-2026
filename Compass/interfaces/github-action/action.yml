@@ -1,0 +1,16 @@
+name: 'Forge Midnight Compatibility Check'
+description: 'Runs the Compass compatibility engine against the real Midnight ecosystem and posts a compatibility report as a pull request comment.'
+author: 'Forge Midnight'
+inputs:
+  github-token:
+    description: 'A token with permission to read repository content and comment on pull requests (e.g. secrets.GITHUB_TOKEN).'
+    required: true
+  db-path:
+    description: 'Optional path to a SQLite file to persist snapshot history across runs. Omit for an ephemeral, run-scoped snapshot.'
+    required: false
+outputs:
+  has-incompatibility:
+    description: '"true" if the compatibility matrix found any incompatible relationship in this run, "false" otherwise.'
+runs:
+  using: 'node20'
+  main: 'dist/action-entrypoint.js'

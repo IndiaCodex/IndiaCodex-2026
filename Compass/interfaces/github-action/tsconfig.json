@@ -1,0 +1,17 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src"
+  },
+  "include": ["src"],
+  "references": [
+    { "path": "../../core/domain" },
+    { "path": "../../core/application" },
+    { "path": "../../plugins/midnight" },
+    { "path": "../../storage/storage-sdk" },
+    { "path": "../../storage/adapters/memory" },
+    { "path": "../../storage/adapters/sqlite" },
+    { "path": "../reporting" }
+  ]
+}
