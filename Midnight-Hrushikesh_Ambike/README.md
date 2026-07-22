@@ -10,6 +10,9 @@
 # Video Recording Link= https://drive.google.com/file/d/15g19PQl2R6uod3vOyZ7dEDgk_aNOmURq/view?usp=drive_link
 
 # Live Demo/Hosted Website = https://por-browser.netlify.app/
+
+# PPT link= https://drive.google.com/file/d/15g19PQl2R6uod3vOyZ7dEDgk_aNOmURq/view?usp=drive_link
+
 ## Problem
 
 Every custodian, exchange, or stablecoin issuer asks customers to trust a number they can't verify: "we hold enough to cover what we owe you." FTX proved that number can be a lie for years. Publishing a full balance sheet fixes trust but leaks every customer's balance to the world.
