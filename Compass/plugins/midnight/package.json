@@ -1,0 +1,24 @@
+{
+  "name": "@compass/plugin-midnight",
+  "description": "The Midnight ecosystem plugin: a real GitHub-backed source adapter, capability extractors, and compatibility rule pack.",
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc -b"
+  },
+  "dependencies": {
+    "@compass/application": "*",
+    "@compass/domain": "*",
+    "@compass/plugin-sdk": "*"
+  },
+  "devDependencies": {
+    "@compass/testing": "*"
+  }
+}

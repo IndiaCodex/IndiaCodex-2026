@@ -1,0 +1,24 @@
+{
+  "name": "@compass/storage-sqlite",
+  "description": "SQLite-backed SnapshotRepositoryPort adapter for Compass.",
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc -b"
+  },
+  "dependencies": {
+    "@compass/domain": "*",
+    "@compass/storage-sdk": "*",
+    "better-sqlite3": "^12.11.1"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13"
+  }
+}
