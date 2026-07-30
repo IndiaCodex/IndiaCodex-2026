@@ -1,0 +1,35 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const auth_routes_1 = __importDefault(require("./auth.routes"));
+const student_routes_1 = __importDefault(require("./student.routes"));
+const courses_routes_1 = __importDefault(require("./courses.routes"));
+const ai_routes_1 = __importDefault(require("./ai.routes"));
+const quiz_routes_1 = __importDefault(require("./quiz.routes"));
+const flashcards_routes_1 = __importDefault(require("./flashcards.routes"));
+const certificates_routes_1 = __importDefault(require("./certificates.routes"));
+const gamification_routes_1 = __importDefault(require("./gamification.routes"));
+const community_routes_1 = __importDefault(require("./community.routes"));
+const career_routes_1 = __importDefault(require("./career.routes"));
+const admin_routes_1 = __importDefault(require("./admin.routes"));
+const teacher_routes_1 = __importDefault(require("./teacher.routes"));
+const employer_routes_1 = __importDefault(require("./employer.routes"));
+const router = (0, express_1.Router)();
+// API Version 1 Namespace
+router.use('/auth', auth_routes_1.default);
+router.use('/student', student_routes_1.default);
+router.use('/courses', courses_routes_1.default);
+router.use('/ai', ai_routes_1.default);
+router.use('/quiz', quiz_routes_1.default);
+router.use('/flashcards', flashcards_routes_1.default);
+router.use('/certificates', certificates_routes_1.default);
+router.use('/gamification', gamification_routes_1.default);
+router.use('/community', community_routes_1.default);
+router.use('/career', career_routes_1.default);
+router.use('/admin', admin_routes_1.default);
+router.use('/teacher', teacher_routes_1.default);
+router.use('/employer', employer_routes_1.default);
+exports.default = router;
