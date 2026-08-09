@@ -1,0 +1,95 @@
+// Social Farming Engine — Phase 1 (Foundation) schema.
+// Append-only tables (raw_events, activities) are immutable by convention.
+// Later phases add: campaigns, submissions, verifications, pcp_ledger,
+// reputation_ledger, trust_scores, milestones, leaderboards, allocations.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/// A contributor, identified by their Cardano wallet address (verified via CIP-30).
+model User {
+  id            String     @id @default(uuid())
+  walletAddress String     @unique
+  stakeKey      String?
+  displayName   String?
+  socials       Json       @default("{}")
+  createdAt     DateTime   @default(now())
+  activities    Activity[]
+
+  @@map("users")
+}
+
+/// Short-lived nonce for wallet sign-in (one-time use).
+model AuthNonce {
+  id        String    @id @default(uuid())
+  address   String
+  nonce     String    @unique
+  usedAt    DateTime?
+  expiresAt DateTime
+  createdAt DateTime  @default(now())
+
+  @@index([address])
+  @@map("auth_nonces")
+}
+
+/// Local mirror of a launchpad project. NOT authoritative for chain state.
+model Project {
+  id            String     @id // launchpad project id
+  tokenPolicyId String?
+  creatorWallet String?
+  status        String     @default("active")
+  rewardPoolRef String?
+  migratedAt    DateTime?
+  createdAt     DateTime   @default(now())
+  activities    Activity[]
+
+  @@map("projects")
+}
+
+/// Every inbound launchpad event, stored verbatim. Append-only; the replay source.
+model RawEvent {
+  eventId     String    @id
+  type        String
+  payload     Json
+  signature   String?
+  receivedAt  DateTime  @default(now())
+  processedAt DateTime?
+
+  @@index([type])
+  @@map("raw_events")
+}
+
+/// Idempotency guard — fast dedupe on event_id.
+model ProcessedEvent {
+  eventId String   @id
+  at      DateTime @default(now())
+
+  @@map("processed_events")
+}
+
+/// Immutable record of a launchpad or platform action. Append-only.
+model Activity {
+  id            String   @id @default(uuid())
+  userId        String?
+  projectId     String?
+  type          String
+  source        String // "launchpad" | "platform"
+  payload       Json     @default("{}")
+  occurredAt    DateTime
+  originEventId String?
+  createdAt     DateTime @default(now())
+
+  user    User?    @relation(fields: [userId], references: [id])
+  project Project? @relation(fields: [projectId], references: [id])
+
+  @@index([projectId, type])
+  @@index([userId])
+  @@index([occurredAt])
+  @@map("activities")
+}
