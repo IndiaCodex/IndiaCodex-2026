@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create Project | TrustLock</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Inter,Arial,sans-serif;
+}
+
+body{
+background:#0f172a;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+color:white;
+}
+
+.container{
+width:600px;
+background:#1e293b;
+padding:35px;
+border-radius:18px;
+box-shadow:0 20px 40px rgba(0,0,0,.4);
+border:1px solid #334155;
+}
+
+h1{
+text-align:center;
+margin-bottom:25px;
+color:#3b82f6;
+}
+
+label{
+display:block;
+margin:15px 0 8px;
+font-weight:600;
+}
+
+input,
+textarea{
+width:100%;
+padding:14px;
+border:none;
+outline:none;
+border-radius:10px;
+background:#0f172a;
+color:white;
+font-size:15px;
+border:1px solid #334155;
+}
+
+input:focus,
+textarea:focus{
+border-color:#3b82f6;
+}
+
+textarea{
+resize:none;
+height:120px;
+}
+
+.row{
+display:flex;
+gap:20px;
+}
+
+.col{
+flex:1;
+}
+
+button{
+width:100%;
+margin-top:25px;
+padding:15px;
+border:none;
+border-radius:10px;
+background:#2563eb;
+color:white;
+font-size:17px;
+font-weight:bold;
+cursor:pointer;
+transition:.3s;
+}
+
+button:hover{
+background:#1d4ed8;
+transform:translateY(-2px);
+}
+
+.back{
+display:block;
+text-align:center;
+margin-top:18px;
+color:#94a3b8;
+text-decoration:none;
+}
+
+.back:hover{
+color:white;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🚀 Create New Escrow</h1>
+
+<form method="POST">
+
+{% csrf_token %}
+
+<label>Project Title</label>
+
+<input
+type="text"
+name="title"
+placeholder="Enter Project Title"
+required>
+
+<label>Requirement Description</label>
+
+<textarea
+name="description"
+placeholder="Describe the project requirements..."
+required></textarea>
+
+<div class="row">
+
+<div class="col">
+
+<label>Budget (₹)</label>
+
+<input
+type="number"
+name="budget"
+placeholder="5000"
+required>
+
+</div>
+
+<div class="col">
+
+<label>Deadline</label>
+
+<input
+type="date"
+name="deadline"
+required>
+
+</div>
+
+</div>
+
+<label>Client Name</label>
+
+<input
+type="text"
+name="client"
+placeholder="Acme Pvt Ltd"
+required>
+
+<label>Freelancer Name</label>
+
+<input
+type="text"
+name="freelancer"
+placeholder="John Doe"
+required>
+
+<label>6-Digit Security PIN</label>
+
+<input
+type="password"
+name="pin"
+placeholder="123456"
+maxlength="6"
+required>
+
+<button type="submit">
+
+🔒 Create Escrow
+
+</button>
+
+</form>
+
+<a href="/client/" class="back">
+
+← Back to Dashboard
+
+</a>
+
+</div>
+
+</body>
+</html>

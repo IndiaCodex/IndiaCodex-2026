@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>Submit Preview</title>
+
+</head>
+
+<body>
+
+<h1>Submit Work Preview</h1>
+
+<form method="POST" enctype="multipart/form-data">
+
+{% csrf_token %}
+
+<input type="file" name="preview">
+
+<br><br>
+
+<button>
+
+Upload Preview
+
+</button>
+
+</form>
+
+</body>
+
+</html>
