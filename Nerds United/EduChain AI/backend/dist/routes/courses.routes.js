@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const courses_controller_1 = require("../controllers/courses.controller");
+const auth_1 = require("../middleware/auth");
+const router = (0, express_1.Router)();
+router.get('/', courses_controller_1.listCourses);
+router.get('/:id', courses_controller_1.getCourse);
+router.use(auth_1.authenticateJWT);
+router.post('/enroll', courses_controller_1.enrollCourse);
+router.patch('/progress', courses_controller_1.updateProgress);
+router.post('/review', courses_controller_1.submitReview);
+exports.default = router;

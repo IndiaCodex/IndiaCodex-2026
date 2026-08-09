@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const flashcards_controller_1 = require("../controllers/flashcards.controller");
+const auth_1 = require("../middleware/auth");
+const router = (0, express_1.Router)();
+router.use(auth_1.authenticateJWT);
+router.post('/', flashcards_controller_1.createFlashcardSet);
+router.get('/', flashcards_controller_1.getFlashcardSets);
+router.post('/review', flashcards_controller_1.submitCardReview);
+exports.default = router;
