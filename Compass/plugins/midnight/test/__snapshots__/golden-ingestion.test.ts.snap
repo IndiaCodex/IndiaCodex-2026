@@ -1,0 +1,26 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`End-to-end ingestion of the real Midnight ecosystem fixture > matches the golden compatibility matrix view 1`] = `
+[
+  {
+    "from": "midnightntwrk/create-mn-app",
+    "status": "incompatible",
+    "to": "nodejs/node",
+  },
+  {
+    "from": "midnightntwrk/example-counter",
+    "status": "incompatible",
+    "to": "midnightntwrk/compact",
+  },
+  {
+    "from": "midnightntwrk/example-counter",
+    "status": "incompatible",
+    "to": "midnightntwrk/midnight-js",
+  },
+  {
+    "from": "midnightntwrk/midnight-js",
+    "status": "incompatible",
+    "to": "nodejs/node",
+  },
+]
+`;

@@ -1,0 +1,110 @@
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+  margin-top: var(--space-2xl);
+}
+
+.card {
+  min-width: 0;
+  display: flex;
+}
+
+.cardInner {
+  flex: 1;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-raised);
+  padding: var(--space-lg);
+  transition:
+    border-color var(--duration-normal) var(--ease-standard),
+    transform var(--duration-normal) var(--ease-out-expo);
+}
+
+.cardInner:hover {
+  transform: translateY(-3px);
+}
+
+.cardInner[data-tier="bronze"] {
+  border-top: 3px solid var(--color-tier-bronze);
+}
+
+.cardInner[data-tier="silver"] {
+  border-top: 3px solid var(--color-tier-silver);
+}
+
+.cardInner[data-tier="gold"] {
+  border-top: 3px solid var(--color-tier-gold);
+  box-shadow: var(--shadow-glow-accent);
+}
+
+.cardInner[data-tier="bronze"]:hover {
+  border-color: var(--color-tier-bronze);
+}
+
+.cardInner[data-tier="silver"]:hover {
+  border-color: var(--color-tier-silver);
+}
+
+.cardInner[data-tier="gold"]:hover {
+  border-color: var(--color-tier-gold);
+}
+
+.tierName {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+}
+
+.cardInner[data-tier="bronze"] .tierName {
+  color: var(--color-tier-bronze);
+}
+
+.cardInner[data-tier="silver"] .tierName {
+  color: var(--color-tier-silver);
+}
+
+.cardInner[data-tier="gold"] .tierName {
+  color: var(--color-tier-gold);
+}
+
+.ltv {
+  margin-top: var(--space-md);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: var(--tracking-tight);
+}
+
+.ltvUnit {
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--color-text-dim);
+  margin-left: var(--space-2xs);
+}
+
+.requirement {
+  margin-top: var(--space-sm);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+}
+
+.creditLine {
+  margin-top: var(--space-md);
+  padding-top: var(--space-sm);
+  border-top: 1px dashed var(--color-accent-border);
+  font-size: var(--text-sm);
+  color: var(--color-accent);
+}
+
+@media (max-width: 820px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+}

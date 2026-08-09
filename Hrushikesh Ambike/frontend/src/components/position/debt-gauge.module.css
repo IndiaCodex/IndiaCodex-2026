@@ -1,0 +1,224 @@
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  padding: var(--space-lg);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-panel);
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-md);
+}
+
+.eyebrow {
+  margin: 0 0 var(--space-3xs);
+  font-size: var(--text-2xs);
+  color: var(--color-positive);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+}
+
+.title {
+  font-size: var(--text-lg);
+}
+
+.placeholderTag {
+  flex-shrink: 0;
+  padding: var(--space-3xs) var(--space-xs);
+  border: 1px dashed var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-faint);
+  font-size: var(--text-2xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+}
+
+.readout {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-md);
+}
+
+.readoutLabel {
+  margin: 0 0 var(--space-3xs);
+  font-size: var(--text-2xs);
+  color: var(--color-text-faint);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+}
+
+.readoutValue {
+  margin: 0;
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.readoutSecondary {
+  text-align: right;
+  color: var(--color-text-faint);
+}
+
+.readoutSecondary p:last-child {
+  margin: 0;
+  font-size: var(--text-md);
+  text-decoration: line-through;
+  text-decoration-color: var(--color-border-strong);
+  color: var(--color-text-faint);
+}
+
+.gaugeTrack {
+  position: relative;
+  height: 14px;
+  border-radius: 999px;
+  background: var(--color-bg-inset);
+  border: 1px solid var(--color-border-strong);
+  overflow: hidden;
+}
+
+.gaugeFill {
+  position: absolute;
+  inset: 0;
+  width: 0;
+  background: linear-gradient(
+    90deg,
+    var(--color-positive-bg),
+    var(--color-positive)
+  );
+  border-radius: 999px;
+  transition: width var(--duration-slow) var(--ease-out-expo);
+}
+
+.gaugeShimmer {
+  position: absolute;
+  inset: 0;
+  width: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    oklch(100% 0 0 / 0.25) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2.6s ease-in-out infinite;
+  border-radius: 999px;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.gaugeCaption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  font-size: var(--text-xs);
+}
+
+.gaugeCaptionPositive {
+  color: var(--color-positive);
+  font-weight: 600;
+}
+
+.gaugeCaptionMuted {
+  color: var(--color-text-faint);
+}
+
+.liveTag {
+  border-style: solid;
+  border-color: var(--color-positive);
+  color: var(--color-positive);
+}
+
+.readoutPlain {
+  margin: 0;
+  font-size: var(--text-md);
+  color: var(--color-text-dim);
+}
+
+.emptyDebtNote {
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-positive-bg);
+  border: 1px solid var(--color-positive);
+  border-left-width: 3px;
+  border-radius: var(--radius-sm);
+  color: var(--color-text-dim);
+  font-size: var(--text-sm);
+  line-height: var(--leading-snug);
+}
+
+.emptyDebtNote strong {
+  color: var(--color-positive);
+}
+
+.projectionStats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+  margin: 0;
+}
+
+.projectionStats dt {
+  font-size: var(--text-2xs);
+  color: var(--color-text-faint);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  margin-bottom: var(--space-3xs);
+}
+
+.projectionStats dd {
+  margin: 0;
+  font-size: var(--text-md);
+  font-weight: 600;
+}
+
+@media (max-width: 560px) {
+  .projectionStats {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+}
+
+.mechanicNote {
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--color-border);
+  font-size: var(--text-xs);
+  color: var(--color-text-dim);
+  line-height: var(--leading-normal);
+}
+
+.mechanicNote strong {
+  color: var(--color-text);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gaugeShimmer {
+    animation: none;
+    display: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .readout {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2xs);
+  }
+
+  .readoutSecondary {
+    text-align: left;
+  }
+}

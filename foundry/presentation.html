@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Foundry — India Codex '26 Presentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Sora:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f3f2ee;
+      --bg-secondary: #e9e8e3;
+      --surface: #ffffff;
+      --ink: #161a21;
+      --muted: #4f5866;
+      --dim: #7a8391;
+      --primary: #0033ad;
+      --primary-hover: #002992;
+      --primary-muted: rgba(0, 51, 173, 0.09);
+      --accent: #b45309;
+      --accent-muted: rgba(180, 83, 9, 0.1);
+      --border: #dde1e8;
+      --success: #0d9668;
+      --success-muted: rgba(13, 150, 104, 0.12);
+      --section-pad: clamp(2.5rem, 6vw, 5rem);
+      --content-max: 72rem;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "IBM Plex Sans", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    /* ---- Nav rail ---- */
+    .nav-rail {
+      position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3.25rem;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1.25rem 0;
+      gap: 0.5rem;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      box-shadow: 2px 0 12px rgba(22, 26, 33, 0.04);
+    }
+
+    .nav-rail a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 0.5rem;
+      font-size: 0.625rem;
+      font-weight: 700;
+      color: var(--dim);
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .nav-rail a:hover,
+    .nav-rail a:focus-visible {
+      background: var(--primary-muted);
+      color: var(--primary);
+      outline: none;
+    }
+
+    .nav-logo {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 0.5rem;
+      background: var(--primary);
+      color: #fff;
+      font-family: Sora, sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.5rem;
+    }
+
+    /* ---- Slide sections ---- */
+    .deck { margin-left: 3.25rem; }
+
+    .slide-section {
+      min-height: 100vh;
+      padding: var(--section-pad) clamp(1.5rem, 4vw, 3rem);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .slide-section:nth-child(even) {
+      background:
+        radial-gradient(ellipse 60% 40% at 100% 0%, rgba(0, 51, 173, 0.05), transparent 50%),
+        var(--bg);
+    }
+
+    .slide-section:nth-child(odd):not(.slide-section--hero):not(.slide-section--closing) {
+      background: var(--surface);
+    }
+
+    .slide-inner {
+      width: 100%;
+      max-width: var(--content-max);
+      margin: 0 auto;
+    }
+
+    .section-label {
+      display: inline-block;
+      margin-bottom: 0.75rem;
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--dim);
+    }
+
+    .section-label--accent { color: var(--accent); }
+
+    h1, h2, h3 {
+      font-family: Sora, sans-serif;
+      letter-spacing: -0.02em;
+    }
+
+    h1 {
+      font-size: clamp(2.25rem, 5vw, 3.5rem);
+      font-weight: 700;
+      line-height: 1.08;
+    }
+
+    h2 {
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+
+    h3 {
+      font-size: 1.0625rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .lead {
+      font-size: clamp(1rem, 2vw, 1.125rem);
+      color: var(--muted);
+      max-width: 42rem;
+      margin-top: 1rem;
+    }
+
+    .forge-seam {
+      padding-left: 1rem;
+      border-left: 3px solid var(--accent);
+    }
+
+    /* ---- Hero ---- */
+    .slide-section--hero {
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(0, 51, 173, 0.08), transparent 55%),
+        linear-gradient(180deg, #f8f7f4 0%, var(--bg) 100%);
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 2rem;
+    }
+
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--surface);
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: var(--muted);
+    }
+
+    .hero-pill strong { color: var(--primary); }
+
+    /* ---- Grids & cards ---- */
+    .grid-2 {
+      display: grid;
+      gap: 1.25rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      margin-top: 1.5rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      margin-top: 1.5rem;
+    }
+
+    .grid-4 {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      margin-top: 1.5rem;
+    }
+
+    .card {
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      background: var(--surface);
+      padding: 1.25rem 1.5rem;
+      box-shadow: 0 1px 2px rgba(22, 26, 33, 0.04), 0 6px 20px rgba(22, 26, 33, 0.05);
+    }
+
+    .slide-section:nth-child(odd) .card {
+      background: var(--bg);
+    }
+
+    .card p, .card li {
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+
+    .card ul {
+      margin-top: 0.5rem;
+      padding-left: 1.125rem;
+    }
+
+    .card li { margin-bottom: 0.35rem; }
+
+    .card--highlight {
+      border-color: rgba(0, 51, 173, 0.2);
+      background: var(--primary-muted);
+    }
+
+    .card--accent::before {
+      content: "";
+      display: block;
+      width: 2.5rem;
+      height: 3px;
+      margin-bottom: 0.75rem;
+      border-radius: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--primary));
+    }
+
+    /* ---- Flow steps ---- */
+    .flow-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+
+    .flow-step {
+      text-align: center;
+      padding: 1.25rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      background: var(--surface);
+    }
+
+    .flow-step__num {
+      font-family: Sora, sans-serif;
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .flow-step__title {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 0.25rem;
+    }
+
+    .flow-step__desc {
+      font-size: 0.75rem;
+      color: var(--dim);
+      line-height: 1.4;
+    }
+
+    /* ---- Feature cards ---- */
+    .feature-card {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .feature-route {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.6875rem;
+      color: var(--primary);
+      background: var(--primary-muted);
+      padding: 0.2rem 0.5rem;
+      border-radius: 0.375rem;
+      align-self: flex-start;
+    }
+
+    /* ---- Agent cards ---- */
+    .agent-card {
+      position: relative;
+      padding-top: 1.5rem;
+    }
+
+    .agent-card__role {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      font-size: 0.625rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.5rem;
+      border-radius: 999px;
+      background: var(--bg-secondary);
+      color: var(--dim);
+    }
+
+    .agent-card--core .agent-card__role {
+      background: var(--primary-muted);
+      color: var(--primary);
+    }
+
+    .agent-card--ceo {
+      border-color: rgba(180, 83, 9, 0.25);
+      background: var(--accent-muted);
+    }
+
+    .agent-card--ceo .agent-card__role {
+      background: rgba(180, 83, 9, 0.15);
+      color: var(--accent);
+    }
+
+    .agent-fee {
+      margin-top: 0.75rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .cap-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-top: 0.75rem;
+    }
+
+    .cap {
+      font-size: 0.6875rem;
+      font-weight: 500;
+      padding: 0.2rem 0.5rem;
+      border-radius: 0.375rem;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+    }
+
+    /* ---- DAG diagram ---- */
+    .dag {
+      margin-top: 1.5rem;
+      padding: 1.5rem;
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      background: var(--bg);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.75rem;
+      line-height: 1.8;
+      color: var(--muted);
+      overflow-x: auto;
+      white-space: pre;
+    }
+
+    .dag .node-active { color: var(--primary); font-weight: 600; }
+    .dag .node-parallel { color: var(--accent); }
+
+    /* ---- Chips ---- */
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .chip {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--ink);
+    }
+
+    .chip--primary {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff;
+    }
+
+    /* ---- Contract table ---- */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      font-size: 0.875rem;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--dim);
+      background: var(--bg);
+    }
+
+    td { color: var(--muted); }
+    td strong { color: var(--ink); font-weight: 600; }
+
+    code {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.8125em;
+      background: var(--bg-secondary);
+      padding: 0.1em 0.35em;
+      border-radius: 0.25rem;
+    }
+
+    /* ---- Closing ---- */
+    .slide-section--closing {
+      background:
+        radial-gradient(ellipse 70% 50% at 50% 100%, rgba(0, 51, 173, 0.08), transparent 55%),
+        var(--bg);
+      text-align: center;
+    }
+
+    .slide-section--closing .slide-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+
+    .cta-box {
+      padding: 1rem 1.5rem;
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      background: var(--surface);
+      font-size: 0.875rem;
+      color: var(--muted);
+      text-align: left;
+      min-width: 200px;
+    }
+
+    .cta-box strong {
+      display: block;
+      color: var(--ink);
+      margin-bottom: 0.25rem;
+    }
+
+    /* ---- Print ---- */
+    @media print {
+      .nav-rail { display: none; }
+      .deck { margin-left: 0; }
+      .slide-section {
+        min-height: auto;
+        page-break-after: always;
+        page-break-inside: avoid;
+        padding: 12mm 14mm;
+      }
+      .slide-section:last-child { page-break-after: auto; }
+    }
+
+    @media (max-width: 640px) {
+      .nav-rail { display: none; }
+      .deck { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav-rail" aria-label="Sections">
+    <div class="nav-logo">F</div>
+    <a href="#s01" title="Intro">01</a>
+    <a href="#s02" title="Problem">02</a>
+    <a href="#s03" title="Solution">03</a>
+    <a href="#s04" title="Flow">04</a>
+    <a href="#s05" title="Features">05</a>
+    <a href="#s06" title="Execution">06</a>
+    <a href="#s07" title="Agents">07</a>
+    <a href="#s08" title="Cardano">08</a>
+    <a href="#s09" title="Contracts">09</a>
+    <a href="#s10" title="Stack">10</a>
+    <a href="#s11" title="Demo">11</a>
+  </nav>
+
+  <main class="deck">
+
+    <!-- 01 · TITLE -->
+    <section id="s01" class="slide-section slide-section--hero">
+      <div class="slide-inner forge-seam">
+        <p class="section-label">India Codex '26 · Team foundry</p>
+        <h1>Foundry</h1>
+        <p class="lead">The operating system for autonomous software companies on Cardano. Describe an idea in plain language — Foundry scopes the work, assembles a tailored agent team, funds execution on-chain, and delivers deployable artifacts from research through Preprod deployment.</p>
+        <div class="hero-meta">
+          <span class="hero-pill"><strong>Cardano</strong> Preprod</span>
+          <span class="hero-pill"><strong>9</strong> AI agents + CEO</span>
+          <span class="hero-pill"><strong>Aiken</strong> smart contracts</span>
+          <span class="hero-pill"><strong>Masumi</strong> agent economy</span>
+          <span class="hero-pill">Print → PDF for submission</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 · PROBLEM -->
+    <section id="s02" class="slide-section">
+      <div class="slide-inner">
+        <p class="section-label section-label--accent">02 · Problem</p>
+        <h2>Building on Cardano is a multi-discipline marathon</h2>
+        <p class="lead">A single dApp touches research, architecture, Aiken contracts, frontend wallet integration, security review, QA, documentation, and Preprod deployment — usually across disconnected tools and manual handoffs.</p>
+        <div class="grid-2">
+          <div class="card card--highlight">
+            <h3>For founders &amp; small teams</h3>
+            <ul>
+              <li>No unified path from idea → scoped plan → working code</li>
+              <li>Hard to know which specialists are actually needed</li>
+              <li>Contract, frontend, and docs drift out of sync</li>
+              <li>On-chain funding and agent payments are opaque</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>For developers</h3>
+            <ul>
+              <li>Repetitive scaffolding for every new Cardano project</li>
+              <li>Security and QA often skipped under time pressure</li>
+              <li>No live view of who did what and with what confidence</li>
+              <li>Deployment steps scattered across scripts and notes</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 · SOLUTION -->
+    <section id="s03" class="slide-section">
+      <div class="slide-inner">
+        <p class="section-label section-label--accent">03 · Solution</p>
+        <h2>A virtual software company — orchestrated on Cardano</h2>
+        <p class="lead">Foundry is not a chatbot. It is an autonomous company simulator: a CEO agent decomposes your brief into a dependency DAG, specialist agents execute in parallel where possible, and every step is wallet-funded, streamed live, and downloadable as production artifacts.</p>
+        <div class="grid-3">
+          <div class="card card--accent">
+            <h3>AI-native scoping</h3>
+            <p>Analyzes your brief, detects complexity, and picks only the agents you need — with manual override and tooltips.</p>
+          </div>
+          <div class="card card--accent">
+            <h3>Live orchestration</h3>
+            <p>React Flow DAG shows agent status, confidence scores, costs, and per-node output files as execution runs.</p>
+          </div>
+          <div class="card card--accent">
+            <h3>Cardano-native</h3>
+            <p>CIP-30 wallet funding to treasury, Aiken contract generation, Masumi agent registry, Preprod deploy pipeline.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 · USER FLOW -->
+    <section id="s04" class="slide-section">
+      <div class="slide-inner">
+        <p class="section-label section-label--accent">04 · User journey</p>
+        <h2>From idea to deployable company in four phases</h2>
+        <div class="flow-row">
+          <div class="flow-step">
+            <div class="flow-step__num">Phase 01</div>
+            <div class="flow-step__title">Create company</div>
+            <div class="flow-step__desc">Name, goal, description. AI scope analysis detects capabilities and suggests agents.</div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-step__num">Phase 02</div>
+            <div class="flow-step__title">Pick your team</div>
+            <div class="flow-step__desc">Toggle specialists on/off. Research &amp; Architecture always run. Reset to AI pick anytime.</div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-step__num">Phase 03</div>
+            <div class="flow-step__title">Fund &amp; execute</div>
+            <div class="flow-step__desc">Connect Preprod wallet. Fund treasury. Watch the DAG execute with streaming logs.</div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-step__num">Phase 04</div>
+            <div class="flow-step__title">Outputs &amp; deploy</div>
+            <div class="flow-step__desc">Download artifacts per agent. Run 6-step Aiken deploy pipeline to Preprod.</div>
+          </div>
+        </div>
+        <div class="card" style="margin-top: 1.5rem;">
+          <h3>Payment flow</h3>
+          <p><strong>User wallet</strong> → treasury (15% protocol fee) → agent fees (85%) → execution unlocks. Cost breakdown shown before funding. Unused funds conceptually returnable; spend reservations prevent double-spend in UI.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 · FEATURES -->
+    <section id="s05" class="slide-section">
+      <div class="slide-inner">
+        <p class="section-label section-label--accent">05 · Platform features</p>
+        <h2>Every surface in the app — explained</h2>
+        <div class="grid-2">
+          <div class="card feature-card">
+            <span class="feature-route">/</span>
+            <h3>Landing page</h3>
+            <p>Product positioning, feature grid, how-it-works steps, and CTA to create a company. Workshop-daylight design with Cardano blue accent.</p>
+          </div>
+          <div class="card feature-card">
+            <span class="feature-route">/dashboard</span>
+            <h3>Company dashboard</h3>
+            <p>Live metrics, recent projects, activity feed, and health charts. Operational view of your autonomous companies at a glance.</p>
+          </div>
+          <div class="card feature-card">
+            <span class="feature-route">/projects</span>
+            <h3>Project list</h3>
+            <p>All companies you've created with status badges (draft, executing, completed, failed) and quick navigation to detail views.</p>
+          </div>
+          <div class="card feature-card">
+            <span class="feature-route">/projects/new</span>
+            <h3>Project creation wizard</h3>
+            <p>3-step flow: project details → AI scope analysis (complexity, summary, detected capabilities) → agent picker with tooltips and "Reset to AI pick".</p>
+          </div>
+          <div class="card feature-card">
+            <span class="feature-route">/projects/[id]</span>
+            <h3>Project detail</h3>
+            <p>Company org chart, treasury display, agent roster summary, and navigation to execution, outputs, and deploy.</p>
+          </div>
+          <div class="card feature-card">
+            <span class="feature-route">/projects/[id]/execution</span>
+            <h3>Live execution canvas</h3>
+            <p>React Flow DAG, wallet connect, fund &amp; execute, streaming agent logs, confidence bars on nodes, output chips per agent, scrollable agent sidebar, output preview drawer.</p>
+          </div>
+          <div class="card feature-card">
+            <span class="feature-route">/projects/[id]/outputs</span>
+            <h3>Artifact downloads</h3>
+            <p>Browse outputs by type (readme, contract, frontend, security, docs, deployment). Preview in-app, download individual files or full bundle.</p>
+          </div>
+          <div class="card feature-card">
+            <span class="feature-route">/projects/[id]/deploy</span>
+            <h3>Deploy pipeline</h3>
+            <p>6-step Preprod deployment: compile Aiken → generate keys → faucet → build tx → submit → verify on explorer. Copy commands, track step status.</p>
+          </div>
+          <div class="card feature-card">
+            <span class="feature-route">/marketplace</span>
+            <h3>Agent marketplace</h3>
+            <p>Browse Masumi-registered agents with capabilities, pricing, and tags. Filter by role. Discovery layer for the agent economy.</p>
+          </div>
+          <div class="card feature-card">
+            <span class="feature-route">/settings</span>
+            <h3>Settings</h3>
+            <p>OpenAI / OpenRouter API key, model selection, temperature, Cardano network, Masumi mock mode, execution speed (slow / normal / fast / instant).</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 · EXECUTION -->
+    <section id="s06" class="slide-section">
+      <div class="slide-inner">
+        <p class="section-label section-label--accent">06 · Execution engine</p>
+        <h2>CEO-orchestrated parallel DAG</h2>
+        <p class="lead">The execution controller registers agents on Masumi, runs the CEO for scope/DAG, then executes specialists in topological waves — as many ready nodes as possible in parallel per wave.</p>
+        <div class="grid-2">
+          <div>
+            <h3>Streaming events (NDJSON)</h3>
+            <div class="card">
+              <ul>
+                <li><code>dag:generated</code> — dynamic task graph from CEO</li>
+                <li><code>agent:status</code> — waiting → working → completed</li>
+                <li><code>agent:log</code> — live log lines per agent</li>
+                <li><code>agent:reasoning</code> — chain-of-thought snippets</li>
+                <li><code>agent:output</code> — structured JSON result</li>
+                <li><code>agent:confidence</code> — 0–1 quality score</li>
+                <li><code>agent:cost</code> / <code>agent:duration</code></li>
+                <li><code>outputs:generated</code> — downloadable files</li>
+                <li><code>execution:complete</code> — company finished</li>
+              </ul>
+            </div>
+          </div>
+          <div>
+            <h3>Default dependency graph</h3>
+            <div class="dag"><span class="node-active">research</span>
+  └── <span class="node-active">architecture</span>
+       ├── <span class="node-parallel">contract-engineer</span> ──┬── <span class="node-active">security-engineer</span>
+       └── <span class="node-parallel">frontend-engineer</span> ──┴── <span class="node-active">qa-engineer</span>
+                                    └── documentation-engineer
+                                         └── deployment-engineer
+
+<span class="node-parallel">Parallel wave:</span> contracts + frontend after architecture
+<span class="node-active">CEO</span> runs outside DAG — scopes &amp; decomposes only</div>
+          </div>
+        </div>
+        <div class="card" style="margin-top: 1.25rem;">
+          <h3>Scope-tailored execution</h3>
+          <p>Only agents detected in the project brief are included. Core agents (Research, Architecture) always run. If scope was pre-analyzed at creation, CEO uses a fast-path without an extra LLM call. Deployment auto-adds Documentation when selected.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 · AGENTS -->
+    <section id="s07" class="slide-section">
+      <div class="slide-inner">
+        <p class="section-label section-label--accent">07 · Agent roster</p>
+        <h2>Nine specialists + one orchestrator</h2>
+        <p class="lead">Each agent has a dedicated system prompt, Masumi marketplace metadata, per-task fee (lovelace), memory, and structured JSON output schema. Below: role, responsibility, outputs, and when AI selects them.</p>
+
+        <div class="grid-2" style="margin-top: 1.5rem;">
+          <div class="card agent-card agent-card--ceo">
+            <span class="agent-card__role">Orchestrator</span>
+            <h3>CEO</h3>
+            <p>Chief Executive Officer — does not appear in the execution DAG. Analyzes the project brief, decomposes work into tasks, and generates the dependency graph. Reviews quality across the company. Fast-path when scope was already analyzed at project creation.</p>
+            <p><strong>Outputs:</strong> project summary, architecture overview, contracts/frontend/security summaries, dynamic DAG.</p>
+            <div class="cap-list">
+              <span class="cap">project-analysis</span>
+              <span class="cap">task-decomposition</span>
+              <span class="cap">orchestration</span>
+              <span class="cap">quality-review</span>
+            </div>
+            <div class="agent-fee">Fee: 0.5 ₳ (500,000 lovelace)</div>
+          </div>
+
+          <div class="card agent-card agent-card--core">
+            <span class="agent-card__role">Core · always on</span>
+            <h3>Researcher</h3>
+            <p>Reads your brief and produces requirements, user stories, and Cardano ecosystem context before any building starts. Identifies technologies, risks, and recommendations.</p>
+            <p><strong>Outputs:</strong> research summary markdown — key findings, technologies, risks, recommendations.</p>
+            <p><strong>Triggered when:</strong> always (core agent).</p>
+            <div class="cap-list">
+              <span class="cap">web-research</span>
+              <span class="cap">technology-analysis</span>
+              <span class="cap">risk-assessment</span>
+            </div>
+            <div class="agent-fee">Fee: 0.3 ₳</div>
+          </div>
+
+          <div class="card agent-card agent-card--core">
+            <span class="agent-card__role">Core · always on</span>
+            <h3>Architect</h3>
+            <p>Designs how the product fits together — on-chain vs off-chain boundaries, data flow, APIs, component hierarchy, and folder structure. Every specialist builds from this blueprint.</p>
+            <p><strong>Outputs:</strong> architecture overview — components, data flow, folder structure.</p>
+            <p><strong>Triggered when:</strong> always (core agent).</p>
+            <div class="cap-list">
+              <span class="cap">system-design</span>
+              <span class="cap">component-modeling</span>
+              <span class="cap">data-flow-design</span>
+            </div>
+            <div class="agent-fee">Fee: 0.4 ₳</div>
+          </div>
+
+          <div class="card agent-card">
+            <span class="agent-card__role">Specialist</span>
+            <h3>Contract Engineer</h3>
+            <p>Writes Aiken smart contracts — validators, minting policies, vesting, DAO logic, and on-chain state machines. Produces validation rules and deployment plan for contracts.</p>
+            <p><strong>Outputs:</strong> <code>.ak</code> contract files, tests, validation &amp; deployment notes.</p>
+            <p><strong>Triggered when:</strong> smart contract, validator, NFT, token, vesting, staking, governance, DAO, on-chain keywords detected.</p>
+            <div class="cap-list">
+              <span class="cap">aiken-development</span>
+              <span class="cap">contract-optimization</span>
+              <span class="cap">validation</span>
+            </div>
+            <div class="agent-fee">Fee: 0.6 ₳</div>
+          </div>
+
+          <div class="card agent-card">
+            <span class="agent-card__role">Specialist</span>
+            <h3>Frontend Engineer</h3>
+            <p>Builds the user-facing app — wallet connection, pages, dashboards, and the interface that talks to your contracts. React / Next.js scaffold with API routes and styling notes.</p>
+            <p><strong>Outputs:</strong> frontend scaffold markdown — components, pages, API routes, dependencies.</p>
+            <p><strong>Triggered when:</strong> frontend, UI, dApp, dashboard, wallet connect, landing page keywords detected.</p>
+            <div class="cap-list">
+              <span class="cap">react-development</span>
+              <span class="cap">ui-design</span>
+              <span class="cap">api-integration</span>
+            </div>
+            <div class="agent-fee">Fee: 0.4 ₳</div>
+          </div>
+
+          <div class="card agent-card">
+            <span class="agent-card__role">Specialist</span>
+            <h3>Security Engineer</h3>
+            <p>Reviews contracts and architecture for vulnerabilities, attack paths, and Cardano-specific security risks. Scores overall security posture.</p>
+            <p><strong>Outputs:</strong> security audit report — vulnerabilities by severity, recommendations, score /100.</p>
+            <p><strong>Triggered when:</strong> smart contracts exist AND security/audit/exploit keywords or non-trivial on-chain risk.</p>
+            <div class="cap-list">
+              <span class="cap">security-audit</span>
+              <span class="cap">vulnerability-detection</span>
+              <span class="cap">penetration-testing</span>
+            </div>
+            <div class="agent-fee">Fee: 0.5 ₳</div>
+          </div>
+
+          <div class="card agent-card">
+            <span class="agent-card__role">Specialist</span>
+            <h3>QA Engineer</h3>
+            <p>Creates test plans, integration checks, and acceptance criteria so outputs are verified before delivery. Targets coverage goals per project complexity.</p>
+            <p><strong>Outputs:</strong> QA test plan — test cases, coverage target, recommendations.</p>
+            <p><strong>Triggered when:</strong> test, QA, quality, e2e, integration test keywords detected.</p>
+            <div class="cap-list">
+              <span class="cap">test-planning</span>
+              <span class="cap">test-case-generation</span>
+              <span class="cap">coverage-analysis</span>
+            </div>
+            <div class="agent-fee">Fee: 0.25 ₳</div>
+          </div>
+
+          <div class="card agent-card">
+            <span class="agent-card__role">Specialist</span>
+            <h3>Documentation Engineer</h3>
+            <p>Produces README, setup guides, API notes, deployment guide, developer notes, and Catalyst proposal draft — full handoff documentation.</p>
+            <p><strong>Outputs:</strong> README.md, technical docs, API docs, deployment guide, Catalyst proposal.</p>
+            <p><strong>Triggered when:</strong> documentation, readme, docs, guide keywords — or auto-added when Deployment is selected.</p>
+            <div class="cap-list">
+              <span class="cap">technical-writing</span>
+              <span class="cap">api-documentation</span>
+              <span class="cap">guide-creation</span>
+            </div>
+            <div class="agent-fee">Fee: 0.2 ₳</div>
+          </div>
+
+          <div class="card agent-card">
+            <span class="agent-card__role">Specialist</span>
+            <h3>Deployment Engineer</h3>
+            <p>Prepares Preprod deployment plan — checklist, ordered steps with shell commands, configuration JSON, and verification steps.</p>
+            <p><strong>Outputs:</strong> deployment plan markdown with checklist and commands.</p>
+            <p><strong>Triggered when:</strong> deploy, devops, CI/CD, release keywords detected.</p>
+            <div class="cap-list">
+              <span class="cap">deployment-planning</span>
+              <span class="cap">configuration-management</span>
+              <span class="cap">ci-cd-setup</span>
+            </div>
+            <div class="agent-fee">Fee: 0.35 ₳</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 08 · CARDANO -->
+    <section id="s08" class="slide-section">
+      <div class="slide-inner">
+        <p class="section-label section-label--accent">08 · Cardano integration</p>
+        <h2>Native to Preprod — wallet to treasury to chain</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Wallet (CIP-30)</h3>
+            <ul>
+              <li>Mesh SDK bridge — Vesper, Eternl, Nami, Lace</li>
+              <li>Preprod network only (<code>networkId === 0</code>)</li>
+              <li>Wallet persistence across sessions</li>
+              <li>MetaMask / non-Cardano wallets filtered out</li>
+              <li>Balance display, address copy, disconnect flow</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Treasury funding</h3>
+            <ul>
+              <li>User funds treasury before execution starts</li>
+              <li>85% allocated to agent fees, 15% protocol treasury fee</li>
+              <li>Cost breakdown with roster-aware budget estimate</li>
+              <li>Mock funding mode when treasury address not configured</li>
+              <li>Spend reservations prevent UI double-spend</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Masumi agent economy</h3>
+            <ul>
+              <li>Each agent registers on Masumi at execution start</li>
+              <li>Marketplace discovery with pricing and capabilities</li>
+              <li>Payment API integration (mock mode for local dev)</li>
+              <li>Agent identity, tags, and request limits per role</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Generated on-chain artifacts</h3>
+            <ul>
+              <li>Contract Engineer produces Aiken source per project</li>
+              <li>Separate <code>contracts/</code> repo with reference validators</li>
+              <li>6-step deploy UI: compile → keys → faucet → build → submit → verify</li>
+              <li>Explorer links for submitted Preprod transactions</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 09 · SMART CONTRACTS -->
+    <section id="s09" class="slide-section">
+      <div class="slide-inner">
+        <p class="section-label section-label--accent">09 · Smart contracts</p>
+        <h2>Aiken validators — separate on-chain codebase</h2>
+        <p class="lead">Reference contracts in <code>foundry/contracts/</code>. Built with Aiken ≥1.1, tested, and deployable to Preprod via included scripts.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Validator</th>
+              <th>File</th>
+              <th>Purpose</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>main</strong></td>
+              <td><code>validators/main.ak</code></td>
+              <td>Owner-signed spending validator — administration and payment forwarding</td>
+            </tr>
+            <tr>
+              <td><strong>lock</strong></td>
+              <td><code>validators/lock.ak</code></td>
+              <td>Timelock — lock ADA until deadline; owner or beneficiaries unlock; owner can extend</td>
+            </tr>
+            <tr>
+              <td><strong>mint</strong></td>
+              <td><code>validators/mint.ak</code></td>
+              <td>Minting policy — owner-signed mint; open burn for any holder</td>
+            </tr>
+            <tr>
+              <td><strong>vesting</strong></td>
+              <td><code>validators/vesting.ak</code></td>
+              <td>Linear vesting with cliff — init position, withdraw on schedule until vesting end</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="chips">
+          <span class="chip">lib/foundry/types.ak</span>
+          <span class="chip">lib/foundry/utils.ak</span>
+          <span class="chip">tests/*.ak</span>
+          <span class="chip">scripts/deploy.sh</span>
+          <span class="chip">aiken check && aiken build</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 · TECH STACK -->
+    <section id="s10" class="slide-section">
+      <div class="slide-inner">
+        <p class="section-label section-label--accent">10 · Tech stack</p>
+        <h2>What powers Foundry</h2>
+        <div class="grid-3">
+          <div class="card">
+            <h3>Frontend</h3>
+            <div class="chips">
+              <span class="chip chip--primary">Next.js 16</span>
+              <span class="chip">React 19</span>
+              <span class="chip">Tailwind CSS 4</span>
+              <span class="chip">React Flow</span>
+              <span class="chip">Framer Motion</span>
+              <span class="chip">Radix UI</span>
+              <span class="chip">Zustand</span>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Backend &amp; AI</h3>
+            <div class="chips">
+              <span class="chip chip--primary">NDJSON streaming</span>
+              <span class="chip">OpenAI SDK</span>
+              <span class="chip">OpenRouter</span>
+              <span class="chip">Zod</span>
+              <span class="chip">Structured JSON</span>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Cardano &amp; chain</h3>
+            <div class="chips">
+              <span class="chip chip--primary">Mesh SDK</span>
+              <span class="chip">CIP-30</span>
+              <span class="chip">Aiken</span>
+              <span class="chip">Preprod</span>
+              <span class="chip">Masumi</span>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="margin-top: 1.25rem;">
+          <h3>Mock mode — demo without API keys</h3>
+          <p>Leave <code>OPENAI_API_KEY</code> empty or use placeholder → all agents return realistic structured outputs. Set <code>MASUMI_MOCK=true</code> and skip treasury address for full local demo. Perfect for hackathon judging without live infra.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11 · DEMO & CLOSE -->
+    <section id="s11" class="slide-section slide-section--closing">
+      <div class="slide-inner">
+        <p class="section-label">11 · Try it</p>
+        <h2>Run Foundry locally</h2>
+        <p class="lead" style="text-align: center; max-width: 36rem;">Clone the <code>foundry/</code> folder → <code>pnpm install</code> → copy <code>.env.example</code> → <code>pnpm dev</code> → open localhost:3000</p>
+        <div class="cta-row">
+          <div class="cta-box">
+            <strong>Quick demo path</strong>
+            /projects/new → AI scope → pick agents → connect wallet → execute → download outputs
+          </div>
+          <div class="cta-box">
+            <strong>Team foundry</strong>
+            Harish Kotra<br />
+            Built at IndiaCodex '26
+          </div>
+        </div>
+        <p style="margin-top: 2.5rem; font-size: 0.875rem; color: var(--dim);">
+          <strong style="color: var(--primary); font-family: Sora, sans-serif; font-size: 1.25rem;">Foundry</strong><br />
+          Describe an idea. Watch a company build it — on Cardano.
+        </p>
+      </div>
+    </section>
+
+  </main>
+</body>
+</html>

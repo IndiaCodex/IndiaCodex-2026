@@ -1,0 +1,26 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: social-farming-pg
+    environment:
+      POSTGRES_USER: social
+      POSTGRES_PASSWORD: social
+      POSTGRES_DB: social_farming
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U social -d social_farming"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    container_name: social-farming-redis
+    ports:
+      - "6380:6379"
+
+volumes:
+  pgdata:

@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src",
+    "resolveJsonModule": true
+  },
+  "include": ["src"],
+  "references": [
+    { "path": "../../core/domain" },
+    { "path": "../../core/application" },
+    { "path": "../plugin-sdk" }
+  ]
+}

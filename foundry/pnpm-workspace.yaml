@@ -1,0 +1,7 @@
+allowBuilds:
+  chacha-native: true
+  protobufjs: true
+  sharp: true
+  unrs-resolver: true
+overrides:
+  libsodium-wrappers-sumo: 0.8.4

@@ -1,0 +1,39 @@
+{
+  "name": "midnight-compass",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Ecosystem compatibility intelligence for Midnight.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "workspaces": [
+    "core/*",
+    "plugins/*",
+    "storage/*",
+    "storage/adapters/*",
+    "interfaces/*"
+  ],
+  "scripts": {
+    "build": "tsc -b",
+    "clean": "tsc -b --clean",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "boundaries": "depcruise --config .dependency-cruiser.cjs core plugins storage interfaces",
+    "ci": "npm run build && npm run lint && npm run boundaries && npm run test:coverage",
+    "demo": "node scripts/demo.mjs"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^26.1.1",
+    "@vitest/coverage-v8": "^4.1.10",
+    "dependency-cruiser": "^18.1.0",
+    "eslint": "^10.7.0",
+    "fast-check": "^4.9.0",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.64.0",
+    "vitest": "^4.1.10"
+  }
+}

@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Project Details</title>
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+<body>
+
+<div class="sidebar">
+    <h2>🔒 TrustLock</h2>
+
+    <a href="/client/">Dashboard</a>
+    <a href="/">Home</a>
+</div>
+
+<div class="content">
+
+<h1>{{ project.title }}</h1>
+
+<div class="card">
+
+<h3>📄 Description</h3>
+
+<p>{{ project.description }}</p>
+
+<hr>
+
+<h3>💰 Budget</h3>
+
+<p>₹{{ project.budget }}</p>
+
+<hr>
+
+<h3>📅 Deadline</h3>
+
+<p>{{ project.deadline }}</p>
+
+<hr>
+
+<h3>Status</h3>
+
+<h2>{{ project.status }}</h2>
+
+{% if project.preview %}
+
+<hr>
+
+<h3>Developer Preview</h3>
+
+<a class="btn" href="{{ project.preview.url }}">
+Download Preview
+</a>
+
+{% endif %}
+
+<br><br>
+
+{% if project.status == "Submitted" %}
+
+<a class="btn" href="/approve/{{project.id}}/">
+Approve
+</a>
+
+<a class="btn-danger"
+href="/dispute/{{project.id}}/">
+Raise Dispute
+</a>
+
+{% endif %}
+
+</div>
+
+</div>
+
+</body>
+</html>
