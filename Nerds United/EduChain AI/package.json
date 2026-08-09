@@ -1,0 +1,8 @@
+{
+  "name": "educhain-ai",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend"
+  ]
+}

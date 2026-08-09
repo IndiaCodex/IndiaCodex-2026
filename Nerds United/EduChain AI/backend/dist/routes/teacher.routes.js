@@ -1,0 +1,14 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const teacher_controller_1 = require("../controllers/teacher.controller");
+const auth_1 = require("../middleware/auth");
+const client_1 = require("@prisma/client");
+const router = (0, express_1.Router)();
+router.use(auth_1.authenticateJWT);
+router.use((0, auth_1.requireRole)([client_1.UserRole.TEACHER, client_1.UserRole.INSTITUTION, client_1.UserRole.ADMIN]));
+router.post('/courses', teacher_controller_1.createCourse);
+router.patch('/courses/publish', teacher_controller_1.publishCourse);
+router.post('/lessons', teacher_controller_1.addLesson);
+router.get('/analytics', teacher_controller_1.getTeacherAnalytics);
+exports.default = router;

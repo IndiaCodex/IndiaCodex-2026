@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const career_controller_1 = require("../controllers/career.controller");
+const auth_1 = require("../middleware/auth");
+const router = (0, express_1.Router)();
+router.use(auth_1.authenticateJWT);
+router.post('/analyze', career_controller_1.analyzeCareer);
+router.get('/progress', career_controller_1.getProgressReport);
+exports.default = router;
