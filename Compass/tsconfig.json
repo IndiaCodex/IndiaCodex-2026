@@ -1,0 +1,16 @@
+{
+  "files": [],
+  "references": [
+    { "path": "core/domain" },
+    { "path": "core/application" },
+    { "path": "core/testing" },
+    { "path": "plugins/plugin-sdk" },
+    { "path": "plugins/midnight" },
+    { "path": "interfaces/reporting" },
+    { "path": "interfaces/cli" },
+    { "path": "interfaces/github-action" },
+    { "path": "storage/storage-sdk" },
+    { "path": "storage/adapters/memory" },
+    { "path": "storage/adapters/sqlite" }
+  ]
+}
