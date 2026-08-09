@@ -1,0 +1,19 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src"
+  },
+  "include": ["src"],
+  "references": [
+    { "path": "../domain" },
+    { "path": "../plugin-api" },
+    { "path": "../application" },
+    { "path": "../plugin-loader" },
+    { "path": "../adapter-aiken" },
+    { "path": "../adapter-codegen-ts" },
+    { "path": "../adapter-emulator" },
+    { "path": "../adapter-filesystem" },
+    { "path": "../contract-templates" }
+  ]
+}

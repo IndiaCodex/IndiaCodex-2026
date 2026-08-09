@@ -1,0 +1,9 @@
+# CODEOWNERS
+#
+# One maintainer today — update this file with real GitHub usernames/teams
+# once this repository has additional maintainers. Until then, every path
+# routes review to the project author.
+#
+# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+* @younusbasha

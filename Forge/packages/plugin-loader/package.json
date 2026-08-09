@@ -1,0 +1,27 @@
+{
+  "name": "@forge/plugin-loader",
+  "version": "0.0.0",
+  "description": "Forge platform — plugin discovery, dependency ordering, and PlatformRegistry bootstrapping.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -b",
+    "clean": "tsc -b --clean"
+  },
+  "dependencies": {
+    "@forge/application": "workspace:*",
+    "@forge/domain": "workspace:*",
+    "@forge/plugin-api": "workspace:*"
+  }
+}

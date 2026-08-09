@@ -1,0 +1,27 @@
+# dependencies
+node_modules/
+
+# build output
+dist/
+*.tsbuildinfo
+
+# test coverage
+coverage/
+
+# logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# environment
+.env
+.env.local
+
+# editor / OS
+.DS_Store
+.idea/
+
+# local, machine-specific AI-assistant tooling state — none of it is
+# project configuration, all of it is per-developer session state
+.claude/
+.qodo/

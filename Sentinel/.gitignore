@@ -1,0 +1,26 @@
+node_modules/
+dist/
+coverage/
+*.tsbuildinfo
+*.log
+.DS_Store
+.env
+.env.local
+*.sqlite
+*.sqlite-journal
+*.sqlite-wal
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+/apps/web/dist/
+/apps/server/dist/
+/apps/server/data/
+.turbo/
+
+# Note: in Sentinel's own standalone repository, the generated
+# presentation .pptx is intentionally excluded here (regenerate from
+# presentation/*.md; a build artifact, not source). In this IndiaCodex
+# submission copy, the exclusion is deliberately NOT applied — the
+# competition's rules require the PPT to be present in the submission
+# folder, so presentation/Sentinel-RC1-Presentation.pptx is tracked here.
