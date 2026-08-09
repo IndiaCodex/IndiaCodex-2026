@@ -1,0 +1,48 @@
+/*
+ * Shared landing-section scaffolding. Sections read as terminal "log
+ * entries": hairline rule on top, mono eyebrow with a sequence index,
+ * display title, dim lede. Numbering is real information here — the loan
+ * lifecycle is an actual ordered sequence.
+ */
+
+.section {
+  border-top: 1px solid var(--color-border);
+  padding: var(--space-3xl) var(--space-lg);
+}
+
+.sectionInner {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-sm);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.eyebrowIndex {
+  color: var(--color-text-faint);
+}
+
+.sectionTitle {
+  margin-top: var(--space-md);
+  font-size: var(--text-2xl);
+  letter-spacing: var(--tracking-tight);
+  max-width: 24ch;
+  text-wrap: balance;
+}
+
+.sectionLede {
+  margin-top: var(--space-md);
+  max-width: 58ch;
+  font-size: var(--text-md);
+  line-height: var(--leading-normal);
+  color: var(--color-text-dim);
+}

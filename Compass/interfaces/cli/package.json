@@ -1,0 +1,31 @@
+{
+  "name": "@compass/cli",
+  "description": "forge-midnight: the Compass CLI for the Midnight ecosystem.",
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "forge-midnight": "./dist/bin.js"
+  },
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc -b"
+  },
+  "dependencies": {
+    "@compass/application": "*",
+    "@compass/domain": "*",
+    "@compass/plugin-midnight": "*",
+    "@compass/reporting": "*",
+    "@compass/storage-memory": "*",
+    "@compass/storage-sdk": "*",
+    "@compass/storage-sqlite": "*"
+  },
+  "devDependencies": {
+    "@compass/testing": "*"
+  }
+}
