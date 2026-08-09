@@ -1,0 +1,38 @@
+# dependencies
+node_modules/
+**/node_modules/
+
+# next.js
+apps/web/.next/
+apps/web/out/
+apps/web/build/
+apps/web/next-env.d.ts
+
+# aiken build artifacts
+contracts/build/
+contracts/artifacts/
+
+# env / secrets
+.env
+.env.local
+.env*.local
+**/.env
+**/.env.local
+**/.env*.local
+
+# misc
+.DS_Store
+*.log
+npm-debug.log*
+
+# secrets — never commit
+/seedphrase.txt
+seedphrase.txt
+*.seed
+
+# debug artifacts
+.playwright-mcp/
+**/.playwright-mcp/
+/moonpad-full.png
+/snekpad.png
+/social.png

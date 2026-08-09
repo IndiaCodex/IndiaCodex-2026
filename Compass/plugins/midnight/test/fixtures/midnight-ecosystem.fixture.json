@@ -1,0 +1,244 @@
+{
+  "repositories": {
+    "midnightntwrk/midnight-js": {
+      "fullName": "midnightntwrk/midnight-js",
+      "htmlUrl": "https://github.com/midnightntwrk/midnight-js",
+      "defaultBranch": "main"
+    },
+    "midnightntwrk/compact": {
+      "fullName": "midnightntwrk/compact",
+      "htmlUrl": "https://github.com/midnightntwrk/compact",
+      "defaultBranch": "main"
+    },
+    "midnightntwrk/midnight-node": {
+      "fullName": "midnightntwrk/midnight-node",
+      "htmlUrl": "https://github.com/midnightntwrk/midnight-node",
+      "defaultBranch": "main"
+    },
+    "midnightntwrk/example-counter": {
+      "fullName": "midnightntwrk/example-counter",
+      "htmlUrl": "https://github.com/midnightntwrk/example-counter",
+      "defaultBranch": "main"
+    },
+    "midnightntwrk/midnight-docs": {
+      "fullName": "midnightntwrk/midnight-docs",
+      "htmlUrl": "https://github.com/midnightntwrk/midnight-docs",
+      "defaultBranch": "main"
+    },
+    "midnightntwrk/create-mn-app": {
+      "fullName": "midnightntwrk/create-mn-app",
+      "htmlUrl": "https://github.com/midnightntwrk/create-mn-app",
+      "defaultBranch": "main"
+    }
+  },
+  "releases": {
+    "midnightntwrk/midnight-js": [
+      {
+        "tagName": "v5.0.0-beta.6",
+        "name": "Release v5.0.0-beta.6",
+        "publishedAt": "2026-07-10T17:17:41Z",
+        "prerelease": true
+      },
+      {
+        "tagName": "v5.0.0-beta.4",
+        "name": "Release v5.0.0-beta.4",
+        "publishedAt": "2026-07-08T10:40:26Z",
+        "prerelease": true
+      },
+      {
+        "tagName": "v5.0.0-beta.3",
+        "name": "Release v5.0.0-beta.3",
+        "publishedAt": "2026-07-03T11:25:33Z",
+        "prerelease": false
+      },
+      {
+        "tagName": "v5.0.0-beta.1",
+        "name": "Release v5.0.0-beta.1",
+        "publishedAt": "2026-07-02T18:56:28Z",
+        "prerelease": false
+      },
+      {
+        "tagName": "v5.0.0-alpha.1",
+        "name": "Release v5.0.0-alpha.1",
+        "publishedAt": "2026-06-29T16:21:48Z",
+        "prerelease": false
+      },
+      {
+        "tagName": "v4.1.1",
+        "name": "Release v4.1.1",
+        "publishedAt": "2026-06-02T07:30:44Z",
+        "prerelease": false
+      },
+      {
+        "tagName": "v4.1.0",
+        "name": "Release v4.1.0",
+        "publishedAt": "2026-05-20T13:03:02Z",
+        "prerelease": false
+      },
+      {
+        "tagName": "v4.0.4",
+        "name": "Release v4.0.4",
+        "publishedAt": "2026-04-01T14:34:21Z",
+        "prerelease": false
+      }
+    ],
+    "midnightntwrk/compact": [
+      {
+        "tagName": "compactc-v0.31.1",
+        "name": "Compact toolchain 0.31.1 (Compact language 0.23.0)",
+        "publishedAt": "2026-06-25T19:06:21Z",
+        "prerelease": false
+      },
+      {
+        "tagName": "compactc-v0.31.0",
+        "name": "Compact toolchain 0.31.0 (Compact language 0.23.0)",
+        "publishedAt": "2026-04-29T18:11:02Z",
+        "prerelease": false
+      },
+      {
+        "tagName": "compact-v0.5.1",
+        "name": "compact-v0.5.1",
+        "publishedAt": "2026-03-25T16:05:32Z",
+        "prerelease": false
+      },
+      {
+        "tagName": "compactc-v0.30.0",
+        "name": "Compact toolchain 0.30.0 (Compact language 0.22.0)",
+        "publishedAt": "2026-03-17T19:49:17Z",
+        "prerelease": false
+      },
+      {
+        "tagName": "compact-v0.5.0",
+        "name": "compact-v0.5.0",
+        "publishedAt": "2026-03-17T18:04:36Z",
+        "prerelease": false
+      },
+      {
+        "tagName": "compactc-v0.29.0",
+        "name": "Compact toolchain 0.29.0 (Compact language 0.21.0)",
+        "publishedAt": "2026-02-11T16:27:01Z",
+        "prerelease": false
+      },
+      {
+        "tagName": "compactc-v0.28.0",
+        "name": "Compactc v0.28.0",
+        "publishedAt": "2026-01-28T17:28:19Z",
+        "prerelease": false
+      },
+      {
+        "tagName": "compact-v0.4.0",
+        "name": "compact-v0.4.0",
+        "publishedAt": "2026-01-21T15:34:47Z",
+        "prerelease": false
+      },
+      {
+        "tagName": "compact-v0.3.0",
+        "name": "compact-v0.3.0",
+        "publishedAt": "2025-12-05T17:50:59Z",
+        "prerelease": false
+      },
+      {
+        "tagName": "compactc-v0.26.0",
+        "name": "Compactc v0.26.0",
+        "publishedAt": "2025-10-07T19:46:04Z",
+        "prerelease": false
+      }
+    ],
+    "midnightntwrk/midnight-node": [
+      {
+        "tagName": "node-2.0.0-rc.4",
+        "name": "node-2.0.0-rc.4",
+        "publishedAt": "2026-07-09T17:20:41Z",
+        "prerelease": true
+      },
+      {
+        "tagName": "node-1.0.1",
+        "name": "node-1.0.1",
+        "publishedAt": "2026-07-14T14:05:02Z",
+        "prerelease": false
+      },
+      {
+        "tagName": "node-1.0.1-rc.2",
+        "name": "node-1.0.1-rc.2",
+        "publishedAt": "2026-07-07T16:48:22Z",
+        "prerelease": true
+      },
+      {
+        "tagName": "node-2.0.0-rc.3",
+        "name": "node-2.0.0-rc.3",
+        "publishedAt": "2026-06-29T14:23:30Z",
+        "prerelease": true
+      },
+      {
+        "tagName": "node-2.0.0-rc.2",
+        "name": "node-2.0.0-rc.2",
+        "publishedAt": "2026-06-17T21:11:58Z",
+        "prerelease": true
+      },
+      {
+        "tagName": "node-2.0.0-rc.1",
+        "name": "node-2.0.0-rc.1",
+        "publishedAt": "2026-06-17T10:44:07Z",
+        "prerelease": true
+      },
+      {
+        "tagName": "node-2.0.0-alpha.1",
+        "name": "node-2.0.0-alpha.1",
+        "publishedAt": "2026-06-03T20:17:34Z",
+        "prerelease": true
+      },
+      {
+        "tagName": "node-1.0.1-rc.1",
+        "name": "node-1.0.1-rc.1",
+        "publishedAt": "2026-05-29T14:04:24Z",
+        "prerelease": true
+      }
+    ],
+    "midnightntwrk/create-mn-app": [
+      {
+        "tagName": "v0.4.4",
+        "name": "v0.4.4",
+        "publishedAt": "2026-07-16T21:55:52Z",
+        "prerelease": false
+      },
+      {
+        "tagName": "v0.4.3",
+        "name": "v0.4.3",
+        "publishedAt": "2026-07-15T15:18:38Z",
+        "prerelease": false
+      },
+      {
+        "tagName": "v0.4.2",
+        "name": "v0.4.2",
+        "publishedAt": "2026-06-15T16:53:10Z",
+        "prerelease": false
+      },
+      {
+        "tagName": "v0.4.1",
+        "name": "v0.4.1",
+        "publishedAt": "2026-05-20T10:06:32Z",
+        "prerelease": false
+      },
+      {
+        "tagName": "v0.4.0",
+        "name": "v0.4.0",
+        "publishedAt": "2026-05-11T17:05:31Z",
+        "prerelease": false
+      }
+    ],
+    "midnightntwrk/example-counter": [],
+    "midnightntwrk/midnight-docs": []
+  },
+  "fileContents": {
+    "midnightntwrk/midnight-js@v5.0.0-beta.6:packages/midnight-js/package.json": "{\n  \"name\": \"@midnight-ntwrk/midnight-js\",\n  \"version\": \"5.0.0-beta.6\",\n  \"description\": \"Barrel package for Midnight.js core framework\",\n  \"main\": \"dist/index.cjs\",\n  \"module\": \"dist/index.mjs\",\n  \"types\": \"dist/index.d.ts\",\n  \"exports\": {\n    \".\": {\n      \"types\": {\n        \"import\": \"./dist/index.d.mts\",\n        \"require\": \"./dist/index.d.cts\"\n      },\n      \"import\": \"./dist/index.mjs\",\n      \"require\": \"./dist/index.cjs\"\n    },\n    \"./contracts\": {\n      \"types\": {\n        \"import\": \"./dist/contracts.d.mts\",\n        \"require\": \"./dist/contracts.d.cts\"\n      },\n      \"import\": \"./dist/contracts.mjs\",\n      \"require\": \"./dist/contracts.cjs\"\n    },\n    \"./network-id\": {\n      \"types\": {\n        \"import\": \"./dist/network-id.d.mts\",\n        \"require\": \"./dist/network-id.d.cts\"\n      },\n      \"import\": \"./dist/network-id.mjs\",\n      \"require\": \"./dist/network-id.cjs\"\n    },\n    \"./types\": {\n      \"types\": {\n        \"import\": \"./dist/types.d.mts\",\n        \"require\": \"./dist/types.d.cts\"\n      },\n      \"import\": \"./dist/types.mjs\",\n      \"require\": \"./dist/types.cjs\"\n    },\n    \"./utils\": {\n      \"types\": {\n        \"import\": \"./dist/utils.d.mts\",\n        \"require\": \"./dist/utils.d.cts\"\n      },\n      \"import\": \"./dist/utils.mjs\",\n      \"require\": \"./dist/utils.cjs\"\n    },\n    \"./package.json\": \"./package.json\"\n  },\n  \"sideEffects\": false,\n  \"repository\": \"git@github.com:midnight-ntwrk/artifacts\",\n  \"packageManager\": \"yarn@4.14.1\",\n  \"author\": \"IOHK\",\n  \"license\": \"Apache-2.0\",\n  \"scripts\": {\n    \"clean\": \"rm -rf dist tsconfig.build.tsbuildinfo .rollup.cache reports coverage\",\n    \"build\": \"rollup -c rollup.config.mjs\",\n    \"test\": \"vitest run --passWithNoTests\",\n    \"deploy\": \"yarn npm publish --tolerate-republish\"\n  },\n  \"dependencies\": {\n    \"@midnight-ntwrk/midnight-js-contracts\": \"workspace:*\",\n    \"@midnight-ntwrk/midnight-js-network-id\": \"workspace:*\",\n    \"@midnight-ntwrk/midnight-js-protocol\": \"workspace:*\",\n    \"@midnight-ntwrk/midnight-js-types\": \"workspace:*\",\n    \"@midnight-ntwrk/midnight-js-utils\": \"workspace:*\"\n  },\n  \"devDependencies\": {\n    \"@rollup/plugin-typescript\": \"^12.3.0\",\n    \"rollup\": \"^4.60.4\",\n    \"rollup-plugin-dts\": \"^6.4.1\",\n    \"typescript\": \"^6.0.3\",\n    \"vitest\": \"^4.1.7\"\n  },\n  \"files\": [\n    \"dist/\"\n  ],\n  \"engines\": {\n    \"node\": \">=22\"\n  }\n}\n",
+    "midnightntwrk/create-mn-app@v0.4.4:package.json": "{\n  \"name\": \"create-mn-app\",\n  \"version\": \"0.4.4\",\n  \"description\": \"Create Midnight Network applications with zero configuration\",\n  \"main\": \"dist/index.js\",\n  \"bin\": {\n    \"create-mn-app\": \"./bin/create-midnight-app.js\"\n  },\n  \"files\": [\n    \"bin\",\n    \"dist\",\n    \"templates\"\n  ],\n  \"scripts\": {\n    \"build\": \"tsc\",\n    \"dev\": \"tsc --watch\",\n    \"prepublishOnly\": \"npm run clean && npm run build\",\n    \"test\": \"vitest run\",\n    \"test:watch\": \"vitest\",\n    \"test:coverage\": \"vitest run --coverage\",\n    \"test:smoke\": \"npm run build && node dist/test.js\",\n    \"test-local\": \"npm run build && npm link && npx create-mn-app test-app\",\n    \"clean\": \"rm -rf dist test-app\",\n    \"lint\": \"eslint src/\",\n    \"lint:fix\": \"eslint src/ --fix\",\n    \"format\": \"prettier --write \\\"src/**/*.ts\\\"\",\n    \"format:check\": \"prettier --check \\\"src/**/*.ts\\\"\"\n  },\n  \"keywords\": [\n    \"midnight\",\n    \"blockchain\",\n    \"zero-knowledge\",\n    \"privacy\",\n    \"scaffold\",\n    \"cli\",\n    \"create-app\",\n    \"zkp\",\n    \"dapp\",\n    \"web3\",\n    \"smart-contracts\",\n    \"typescript\"\n  ],\n  \"author\": \"Idris Olubisi\",\n  \"contributors\": [\n    \"Midnight Network\"\n  ],\n  \"license\": \"Apache-2.0\",\n  \"dependencies\": {\n    \"chalk\": \"^4.1.2\",\n    \"commander\": \"^15.0.0\",\n    \"cross-spawn\": \"^7.0.3\",\n    \"fastest-levenshtein\": \"^1.0.16\",\n    \"fs-extra\": \"^11.1.1\",\n    \"mustache\": \"^4.2.0\",\n    \"ora\": \"^5.4.1\",\n    \"prompts\": \"^2.4.2\",\n    \"semver\": \"^7.5.4\",\n    \"update-notifier\": \"^7.3.1\",\n    \"validate-npm-package-name\": \"^5.0.0\"\n  },\n  \"devDependencies\": {\n    \"@types/cross-spawn\": \"^6.0.2\",\n    \"@types/fs-extra\": \"^11.0.1\",\n    \"@types/mustache\": \"^4.2.2\",\n    \"@types/node\": \"^20.0.0\",\n    \"@types/prompts\": \"^2.4.9\",\n    \"@types/update-notifier\": \"^6.0.8\",\n    \"@types/validate-npm-package-name\": \"^4.0.2\",\n    \"@typescript-eslint/eslint-plugin\": \"^8.57.0\",\n    \"@typescript-eslint/parser\": \"^8.57.0\",\n    \"@vitest/coverage-v8\": \"^4.0.18\",\n    \"eslint\": \"^10.0.3\",\n    \"eslint-config-prettier\": \"^10.1.8\",\n    \"prettier\": \"^3.8.1\",\n    \"typescript\": \"^5.0.0\",\n    \"vitest\": \"^4.0.18\"\n  },\n  \"engines\": {\n    \"node\": \">=22.0.0\"\n  },\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"https://github.com/midnightntwrk/create-mn-app.git\"\n  },\n  \"homepage\": \"https://github.com/midnightntwrk/create-mn-app#readme\",\n  \"bugs\": {\n    \"url\": \"https://github.com/midnightntwrk/create-mn-app/issues\"\n  }\n}\n",
+    "midnightntwrk/example-counter@main:package.json": "{\n  \"name\": \"example-counter\",\n  \"version\": \"2.1.1\",\n  \"private\": true,\n  \"type\": \"module\",\n  \"workspaces\": [\n    \"counter-cli\",\n    \"contract\"\n  ],\n  \"devDependencies\": {\n    \"@eslint/js\": \"^9.39.2\",\n    \"@types/node\": \"^25.5.0\",\n    \"@types/ws\": \"^8.18.1\",\n    \"@typescript-eslint/eslint-plugin\": \"^8.58.1\",\n    \"@typescript-eslint/parser\": \"^8.58.1\",\n    \"eslint\": \"^10.0.3\",\n    \"eslint-config-prettier\": \"^10.1.8\",\n    \"eslint-plugin-prettier\": \"^5.5.5\",\n    \"testcontainers\": \"^12.0.1\",\n    \"ts-node\": \"^10.9.2\",\n    \"typescript\": \"^6.0.2\",\n    \"vitest\": \"^4.1.0\"\n  },\n  \"dependencies\": {\n    \"@midnight-ntwrk/compact-runtime\": \"0.15.0\",\n    \"@midnight-ntwrk/ledger-v8\": \"^8.0.0\",\n    \"@midnight-ntwrk/midnight-js\": \"^4.0.4\",\n    \"@midnight-ntwrk/midnight-js-http-client-proof-provider\": \"^4.0.4\",\n    \"@midnight-ntwrk/midnight-js-indexer-public-data-provider\": \"^4.0.4\",\n    \"@midnight-ntwrk/midnight-js-level-private-state-provider\": \"^4.0.4\",\n    \"@midnight-ntwrk/midnight-js-node-zk-config-provider\": \"^4.0.4\",\n    \"@midnight-ntwrk/wallet-sdk-address-format\": \"^3.0.0\",\n    \"@midnight-ntwrk/wallet-sdk-dust-wallet\": \"^3.0.0\",\n    \"@midnight-ntwrk/wallet-sdk-facade\": \"^3.0.0\",\n    \"@midnight-ntwrk/wallet-sdk-hd\": \"^3.0.0\",\n    \"@midnight-ntwrk/wallet-sdk-shielded\": \"^2.0.0\",\n    \"@midnight-ntwrk/wallet-sdk-unshielded-wallet\": \"^2.0.0\",\n    \"pino\": \"^10.3.1\",\n    \"pino-pretty\": \"^13.1.3\",\n    \"ws\": \"^8.20.1\"\n  },\n  \"overrides\": {\n    \"smoldot\": \"npm:@aspect-build/empty@0.0.0\"\n  }\n}\n",
+    "midnightntwrk/example-counter@main:contract/src/counter.compact": "// This file is part of midnightntwrk/example-counter.\n// Copyright (C) Midnight Foundation\n// SPDX-License-Identifier: Apache-2.0\n// Licensed under the Apache License, Version 2.0 (the \"License\");\n// You may not use this file except in compliance with the License.\n// You may obtain a copy of the License at\n//\n// http://www.apache.org/licenses/LICENSE-2.0\n//\n// Unless required by applicable law or agreed to in writing, software\n// distributed under the License is distributed on an \"AS IS\" BASIS,\n// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n// See the License for the specific language governing permissions and\n// limitations under the License.\n\npragma language_version >= 0.20;\n\nimport CompactStandardLibrary;\n\n// public state\nexport ledger round: Counter;\n\n// transition function changing public state\nexport circuit increment(): [] {\n  round.increment(1);\n}\n"
+  },
+  "headCommits": {
+    "midnightntwrk/example-counter@main": {
+      "sha": "d7dd4082bf75c9c55eeb7a83f89412d3eb32a564",
+      "committedAt": "2026-06-02T17:33:32Z"
+    }
+  }
+}
