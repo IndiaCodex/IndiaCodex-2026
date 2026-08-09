@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const ai_controller_1 = require("../controllers/ai.controller");
+const auth_1 = require("../middleware/auth");
+const router = (0, express_1.Router)();
+router.use(auth_1.authenticateJWT);
+router.post('/study-planner', ai_controller_1.studyPlanner);
+router.post('/notes', ai_controller_1.generateNotesHandler);
+router.post('/tutor/chat', ai_controller_1.aiTutorChat);
+router.post('/code-review', ai_controller_1.reviewCodeHandler);
+exports.default = router;

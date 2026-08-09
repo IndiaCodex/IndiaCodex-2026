@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const quiz_controller_1 = require("../controllers/quiz.controller");
+const auth_1 = require("../middleware/auth");
+const router = (0, express_1.Router)();
+router.use(auth_1.authenticateJWT);
+router.post('/generate', quiz_controller_1.generateQuizHandler);
+router.post('/attempt', quiz_controller_1.submitQuizAttempt);
+router.get('/leaderboard', quiz_controller_1.getLeaderboard);
+exports.default = router;

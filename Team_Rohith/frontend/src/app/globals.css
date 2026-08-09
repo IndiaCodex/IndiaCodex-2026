@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-black: #0A0A0B;
+  --color-brand-obsidian: #121214;
+  --color-brand-glass: rgba(255, 255, 255, 0.05);
+  
+  --color-brand-primary-light: #8B5CF6; /* Cardano Purple */
+  --color-brand-primary-dark: #3B82F6; /* Cardano Blue */
+  
+  --color-brand-secondary: #06B6D4; /* AI Cyan */
+  
+  --color-brand-success: #10B981;
+  --color-brand-warning: #F59E0B;
+  --color-brand-error: #EF4444;
+
+  --color-text-primary: #F3F4F6;
+  --color-text-secondary: #9CA3AF;
+  --color-text-muted: #6B7280;
+
+  --font-sans: "Inter", sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+}
+
+:root {
+  background-color: var(--color-brand-black);
+  color: var(--color-text-primary);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-sans);
+  background-color: var(--color-brand-black);
+}
+
+/* Glassmorphism utility */
+@utility glass {
+  background-color: var(--color-brand-glass);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}

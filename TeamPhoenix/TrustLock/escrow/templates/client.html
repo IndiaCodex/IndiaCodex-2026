@@ -1,0 +1,114 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Client Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+<body>
+
+<div class="sidebar">
+    <h2>🔒 TrustLock</h2>
+
+    <a href="/dashboard/">Dashboard</a>
+    <a href="/create/">Create Project</a>
+    <a href="/projects/">My Projects</a>
+    <a href="/">Logout</a>
+</div>
+
+<div class="content">
+
+<h1>Client Dashboard</h1>
+
+<div class="cards">
+
+<div class="card">
+<h3>Total Projects</h3>
+<h2>{{ total_projects }}</h2>
+</div>
+
+<div class="card">
+<h3>Locked Funds</h3>
+<h2>₹{{ total_amount }}</h2>
+</div>
+
+<div class="card">
+<h3>Pending</h3>
+<h2>{{ pending }}</h2>
+</div>
+
+</div>
+
+<a href="/create/" class="btn">+ Create Project</a>
+
+<br><br>
+
+<table>
+
+<tr>
+    <th>Project</th>
+    <th>Budget</th>
+    <th>Status</th>
+    <th>Action</th>
+</tr>
+
+{% for p in projects %}
+
+<tr>
+
+    <td>{{ p.title }}</td>
+
+    <td>₹{{ p.budget }}</td>
+
+    <td>
+
+        {% if p.status == "Submitted" %}
+
+            <span style="color:lime;">Preview Submitted</span>
+
+        {% else %}
+
+            {{ p.status }}
+
+        {% endif %}
+
+    </td>
+
+    <td>
+
+        <a class="btn" href="/project/{{p.id}}/">
+            View
+        </a>
+
+        {% if p.status == "Submitted" %}
+
+        <a class="btn" href="/approve/{{p.id}}/">
+            Approve
+        </a>
+
+        <a class="btn-danger" href="/dispute/{{p.id}}/">
+            Dispute
+        </a>
+
+        {% endif %}
+
+    </td>
+
+</tr>
+
+{% empty %}
+
+<tr>
+    <td colspan="4" style="text-align:center;">
+        No Projects Found
+    </td>
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+</body>
+</html>

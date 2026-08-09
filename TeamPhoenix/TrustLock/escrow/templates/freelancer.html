@@ -1,0 +1,83 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Freelancer Dashboard</title>
+
+<link rel="stylesheet"
+href="{% static 'css/dashboard.css' %}">
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<h2>👨‍💻 Freelancer</h2>
+
+<a href="/freelancer/">Dashboard</a>
+
+<a href="/">Logout</a>
+
+</div>
+
+<div class="content">
+
+<h1>Assigned Projects</h1>
+
+<table>
+
+<tr>
+
+<th>Project</th>
+
+<th>Budget</th>
+
+<th>Status</th>
+
+<th>Action</th>
+
+</tr>
+
+{% for p in projects %}
+
+<tr>
+
+<td>{{p.title}}</td>
+
+<td>₹{{p.budget}}</td>
+
+<td>{{p.status}}</td>
+
+<td>
+
+<a class="btn"
+href="/project/{{p.id}}/">
+
+View
+
+</a>
+
+<a class="btn-danger"
+href="/submit/{{p.id}}/">
+
+Upload
+
+</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+</body>
+
+</html>

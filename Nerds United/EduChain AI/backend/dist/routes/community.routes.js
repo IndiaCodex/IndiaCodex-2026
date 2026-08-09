@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const community_controller_1 = require("../controllers/community.controller");
+const auth_1 = require("../middleware/auth");
+const router = (0, express_1.Router)();
+router.use(auth_1.authenticateJWT);
+router.get('/rooms', community_controller_1.getStudyRooms);
+router.post('/rooms', community_controller_1.createStudyRoom);
+router.get('/rooms/:roomId/messages', community_controller_1.getRoomMessages);
+router.post('/messages', community_controller_1.sendMessage);
+exports.default = router;

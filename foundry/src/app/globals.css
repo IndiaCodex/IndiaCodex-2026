@@ -1,0 +1,340 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --color-background: var(--foundry-bg);
+  --color-background-secondary: var(--foundry-bg-secondary);
+  --color-surface: var(--foundry-surface);
+  --color-surface-hover: var(--foundry-surface-hover);
+  --color-surface-active: var(--foundry-surface-active);
+  --color-surface-elevated: var(--foundry-surface-elevated);
+  --color-input: var(--foundry-input);
+  --color-border: var(--foundry-border);
+  --color-border-hover: var(--foundry-border-hover);
+  --color-border-strong: var(--foundry-border-strong);
+  --color-primary: var(--foundry-primary);
+  --color-primary-hover: var(--foundry-primary-hover);
+  --color-primary-foreground: var(--foundry-primary-foreground);
+  --color-primary-muted: var(--foundry-primary-muted);
+  --color-secondary: var(--foundry-secondary);
+  --color-accent: var(--foundry-accent);
+  --color-accent-muted: var(--foundry-accent-muted);
+  --color-success: #0d9668;
+  --color-error: #dc2626;
+  --color-warning: #d97706;
+  --color-info: #2563eb;
+  --color-foreground: var(--foundry-foreground);
+  --color-foreground-muted: var(--foundry-foreground-muted);
+  --color-foreground-dim: var(--foundry-foreground-dim);
+  --color-card: var(--foundry-card);
+  --color-card-hover: var(--foundry-card-hover);
+  --color-card-border: var(--foundry-card-border);
+  --color-card-border-hover: var(--foundry-card-border-hover);
+  --color-sidebar: var(--foundry-sidebar);
+  --color-sidebar-border: var(--foundry-sidebar-border);
+  --color-sidebar-hover: var(--foundry-sidebar-hover);
+  --color-sidebar-active: var(--foundry-sidebar-active);
+  --color-node-waiting: var(--foundry-node-waiting);
+  --color-node-running: var(--foundry-node-running);
+  --color-node-completed: var(--foundry-node-completed);
+  --color-node-failed: var(--foundry-node-failed);
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-heading), var(--font-body), ui-sans-serif, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.625rem;
+  --radius-xl: 0.875rem;
+  --radius-2xl: 1.125rem;
+  --shadow-card: var(--foundry-shadow-card);
+  --shadow-input: var(--foundry-shadow-input);
+}
+
+/* Light — workshop daylight: stone paper, crisp ink, Cardano blue */
+:root {
+  --foundry-bg: #f3f2ee;
+  --foundry-bg-secondary: #e9e8e3;
+  --foundry-surface: #ffffff;
+  --foundry-surface-hover: #f7f6f3;
+  --foundry-surface-active: #efeee9;
+  --foundry-surface-elevated: #ffffff;
+  --foundry-input: #ffffff;
+  --foundry-border: #d5d9e0;
+  --foundry-border-hover: #b9c0cb;
+  --foundry-border-strong: #9aa3b0;
+  --foundry-primary: #0033ad;
+  --foundry-primary-hover: #002992;
+  --foundry-primary-foreground: #ffffff;
+  --foundry-primary-muted: rgba(0, 51, 173, 0.09);
+  --foundry-secondary: #1a4fc3;
+  --foundry-accent: #b45309;
+  --foundry-accent-muted: rgba(180, 83, 9, 0.1);
+  --foundry-foreground: #161a21;
+  --foundry-foreground-muted: #4f5866;
+  --foundry-foreground-dim: #7a8391;
+  --foundry-card: #ffffff;
+  --foundry-card-hover: #faf9f7;
+  --foundry-card-border: #dde1e8;
+  --foundry-card-border-hover: rgba(0, 51, 173, 0.22);
+  --foundry-sidebar: #ffffff;
+  --foundry-sidebar-border: #e4e7ed;
+  --foundry-sidebar-hover: #f3f2ee;
+  --foundry-sidebar-active: rgba(0, 51, 173, 0.08);
+  --foundry-node-waiting: #eef0f4;
+  --foundry-node-running: rgba(0, 51, 173, 0.1);
+  --foundry-node-completed: rgba(13, 150, 104, 0.12);
+  --foundry-node-failed: rgba(220, 38, 38, 0.1);
+  --foundry-shadow-card: 0 1px 2px rgba(22, 26, 33, 0.05), 0 8px 24px rgba(22, 26, 33, 0.06);
+  --foundry-shadow-input: 0 1px 2px rgba(22, 26, 33, 0.04);
+  --foundry-page-gradient: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(0, 51, 173, 0.07), transparent 55%),
+    linear-gradient(180deg, #f8f7f4 0%, #f3f2ee 100%);
+  --foundry-hero-glow: rgba(0, 51, 173, 0.06);
+}
+
+/* Dark — forge floor: cool charcoal, elevated slate, molten accent */
+.dark {
+  --foundry-bg: #12151b;
+  --foundry-bg-secondary: #181c24;
+  --foundry-surface: #1e232c;
+  --foundry-surface-hover: #262c38;
+  --foundry-surface-active: #2e3542;
+  --foundry-surface-elevated: #242a34;
+  --foundry-input: #1a1f27;
+  --foundry-border: #2f3847;
+  --foundry-border-hover: #3f4a5c;
+  --foundry-border-strong: #556070;
+  --foundry-primary: #4b7eff;
+  --foundry-primary-hover: #6b94ff;
+  --foundry-primary-foreground: #ffffff;
+  --foundry-primary-muted: rgba(75, 126, 255, 0.14);
+  --foundry-secondary: #6b94ff;
+  --foundry-accent: #e8914f;
+  --foundry-accent-muted: rgba(232, 145, 79, 0.14);
+  --foundry-foreground: #eceff4;
+  --foundry-foreground-muted: #9aa3b2;
+  --foundry-foreground-dim: #6d7788;
+  --foundry-card: #1a1e26;
+  --foundry-card-hover: #222833;
+  --foundry-card-border: #2f3847;
+  --foundry-card-border-hover: rgba(75, 126, 255, 0.28);
+  --foundry-sidebar: #141820;
+  --foundry-sidebar-border: #252c38;
+  --foundry-sidebar-hover: #1e232c;
+  --foundry-sidebar-active: rgba(75, 126, 255, 0.12);
+  --foundry-node-waiting: rgba(255, 255, 255, 0.05);
+  --foundry-node-running: rgba(75, 126, 255, 0.14);
+  --foundry-node-completed: rgba(13, 150, 104, 0.16);
+  --foundry-node-failed: rgba(220, 38, 38, 0.14);
+  --foundry-shadow-card: 0 4px 24px rgba(0, 0, 0, 0.32);
+  --foundry-shadow-input: 0 0 0 1px rgba(255, 255, 255, 0.04);
+  --foundry-page-gradient: radial-gradient(ellipse 70% 45% at 50% -5%, rgba(75, 126, 255, 0.1), transparent 50%),
+    linear-gradient(180deg, #141820 0%, #12151b 100%);
+  --foundry-hero-glow: rgba(75, 126, 255, 0.08);
+}
+
+html {
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--foundry-bg);
+  color: var(--foundry-foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+/* Page shells */
+.page-gradient {
+  background: var(--foundry-page-gradient);
+}
+
+.panel-card {
+  border: 1px solid var(--foundry-card-border);
+  background: var(--foundry-card);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--foundry-shadow-card);
+}
+
+/* Forge seam — signature left accent on form panels */
+.forge-panel {
+  position: relative;
+  overflow: hidden;
+}
+
+.forge-panel::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--foundry-accent) 0%, var(--foundry-primary) 100%);
+  border-radius: 3px 0 0 3px;
+}
+
+/* Form controls */
+.form-control {
+  display: flex;
+  width: 100%;
+  min-height: 2.75rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--foundry-border);
+  background: var(--foundry-input);
+  padding: 0.625rem 0.875rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--foundry-foreground);
+  box-shadow: var(--foundry-shadow-input);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.form-control::placeholder {
+  color: var(--foundry-foreground-dim);
+}
+
+.form-control:hover:not(:disabled):not(:focus) {
+  border-color: var(--foundry-border-hover);
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--foundry-primary);
+  box-shadow: 0 0 0 3px var(--foundry-primary-muted);
+}
+
+.form-control:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+  background: var(--foundry-surface-hover);
+}
+
+.form-control--error {
+  border-color: var(--color-error);
+}
+
+.form-control--error:focus {
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
+}
+
+.form-label {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--foundry-foreground);
+}
+
+.form-hint {
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--foundry-foreground-dim);
+}
+
+.form-error {
+  font-size: 0.75rem;
+  color: var(--color-error);
+}
+
+/* Scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--foundry-border) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--foundry-border);
+  border-radius: 3px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--foundry-border-hover);
+}
+
+*:focus-visible {
+  outline: 2px solid var(--foundry-primary);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: var(--foundry-primary-muted);
+  color: var(--foundry-foreground);
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes breathe {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-breathe {
+  animation: breathe 3s ease-in-out infinite;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.status-dot--active {
+  background: var(--foundry-primary);
+}
+
+.status-dot--completed {
+  background: var(--color-success);
+}
+
+.status-dot--failed {
+  background: var(--color-error);
+}
+
+.status-dot--pending {
+  background: var(--foundry-border);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

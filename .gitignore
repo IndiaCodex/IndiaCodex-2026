@@ -2,5 +2,8 @@
 codeflow/backend/.env
 codeflow/backend/sdk.tgz
 *.env
+DecentraCoders/node_modules/
+DecentraCoders/.next/
+DecentraCoders/.env.local
 node_modules/
 .env*

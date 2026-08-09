@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const gamification_controller_1 = require("../controllers/gamification.controller");
+const auth_1 = require("../middleware/auth");
+const router = (0, express_1.Router)();
+router.use(auth_1.authenticateJWT);
+router.get('/wallet', gamification_controller_1.getRewardWallet);
+router.get('/achievements', gamification_controller_1.getAchievements);
+router.post('/daily-reward', gamification_controller_1.claimDailyReward);
+exports.default = router;
