@@ -1,0 +1,215 @@
+/**
+ * Landing styles — imported directly (not via Tailwind @import).
+ * Tailwind v4 purges custom rules in globals.css even when classes are used in JSX.
+ */
+
+.foundry-landing {
+  color: var(--foundry-foreground);
+}
+
+/* ---- Typography ---- */
+
+.foundry-landing .foundry-eyebrow {
+  margin: 0 0 1.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--foundry-foreground-dim);
+}
+
+.foundry-landing h1.foundry-hero-title {
+  margin: 0;
+  font-family: var(--font-heading), var(--font-body), system-ui, sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--foundry-foreground);
+}
+
+.foundry-landing h2.foundry-section-title {
+  margin: 0;
+  font-family: var(--font-heading), var(--font-body), system-ui, sans-serif;
+  font-size: 1.875rem;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: var(--foundry-foreground);
+}
+
+.foundry-landing h3.foundry-card-title {
+  margin: 0 0 0.5rem;
+  font-family: var(--font-heading), var(--font-body), system-ui, sans-serif;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--foundry-foreground);
+}
+
+.foundry-landing .foundry-hero-lead {
+  margin: 1.5rem 0 0;
+  max-width: 36rem;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--foundry-foreground-muted);
+}
+
+.foundry-landing .foundry-section-lead {
+  margin: 1rem auto 0;
+  max-width: 40rem;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--foundry-foreground-muted);
+}
+
+/* ---- Layout ---- */
+
+.foundry-landing .foundry-hero {
+  position: relative;
+  display: flex;
+  min-height: calc(100vh - 3.5rem);
+  align-items: center;
+  padding: 4rem 0 5rem;
+}
+
+.foundry-landing .foundry-hero-inner {
+  width: 100%;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.foundry-landing .foundry-hero-grid {
+  display: grid;
+  gap: 3rem;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .foundry-landing .foundry-hero-grid {
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 4rem;
+  }
+
+  .foundry-landing h1.foundry-hero-title {
+    font-size: 3.25rem;
+  }
+
+  .foundry-landing h2.foundry-section-title {
+    font-size: 2.25rem;
+  }
+
+  .foundry-landing .foundry-hero-lead {
+    font-size: 1.125rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .foundry-landing h1.foundry-hero-title {
+    font-size: 3.5rem;
+  }
+}
+
+.foundry-landing .foundry-hero-content {
+  position: relative;
+  padding-left: 1rem;
+  border-left: 3px solid var(--foundry-accent);
+}
+
+.foundry-landing .foundry-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2.5rem;
+}
+
+.foundry-landing .foundry-section {
+  padding: 5rem 0;
+}
+
+.foundry-landing .foundry-section-inner {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.foundry-landing .foundry-section-header {
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.foundry-landing .foundry-feature-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .foundry-landing .foundry-feature-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .foundry-landing .foundry-feature-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.foundry-landing .foundry-feature-card {
+  border: 1px solid var(--foundry-card-border);
+  border-radius: 1rem;
+  background: var(--foundry-card);
+  padding: 1.5rem;
+  box-shadow: var(--foundry-shadow-card);
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.foundry-landing .foundry-feature-card:hover {
+  border-color: var(--foundry-card-border-hover);
+  background: var(--foundry-card-hover);
+}
+
+.foundry-landing .foundry-feature-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin-bottom: 1rem;
+  border-radius: 0.75rem;
+  background: var(--foundry-primary-muted);
+  color: var(--foundry-primary);
+}
+
+.foundry-landing .foundry-steps {
+  max-width: 48rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.foundry-landing .foundry-step-card {
+  border: 1px solid var(--foundry-card-border);
+  border-radius: 1rem;
+  background: var(--foundry-card);
+  padding: 1.5rem;
+  box-shadow: var(--foundry-shadow-card);
+}
+
+.foundry-landing .foundry-step-label {
+  margin-bottom: 0.5rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--foundry-primary);
+}
+
+.foundry-landing .foundry-cta-panel {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+  text-align: center;
+}

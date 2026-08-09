@@ -1,0 +1,12 @@
+{
+  "network": "preprod",
+  "adminVkh": "54466bfa7b31d8f1e93dc7dc23fa6ce8e2897b735cff780a0b744cfd",
+  "oracleVkh": "54466bfa7b31d8f1e93dc7dc23fa6ce8e2897b735cff780a0b744cfd",
+  "tusdmPolicy": "6cd0726ca1e8856aade946807e644807f7127505bd48c6333e090b4b",
+  "tusdmAssetNameHex": "745553444d",
+  "oracleHash": "ab54ba2119fa9ac45d07f8cf14be9293f464c389292287b24e392375",
+  "oracleAddress": "addr_test1wz44fw3pr8af43zaqluv7997j2flgexr3y5j9pajfcujxagdy2s8u",
+  "reputationHash": "a27ee639f7e8253df3861bd376e5258669418f2a76fee568f47f28cc",
+  "firstOraclePriceTxHash": "6c74816d0d94933bc59bc5b38cd4196129927505056bfb39008292dc119d8352",
+  "deployedAt": "2026-07-01T10:00:05.284Z"
+}

@@ -1,0 +1,33 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: medivault-db
+    environment:
+      POSTGRES_USER: medivault
+      POSTGRES_PASSWORD: medivault
+      POSTGRES_DB: medivault
+    ports:
+      - "5433:5432"
+    volumes:
+      - medivault_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U medivault"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  api:
+    build: .
+    container_name: medivault-api
+    env_file: .env
+    environment:
+      # inside the compose network the db host is the service name, not localhost
+      DATABASE_URL: postgresql+asyncpg://medivault:medivault@db:5432/medivault
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  medivault_pgdata:

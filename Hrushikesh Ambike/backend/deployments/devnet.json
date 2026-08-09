@@ -1,0 +1,14 @@
+{
+  "network": "devnet",
+  "borrowerAddr": "addr_test1qryvgass5dsrf2kxl3vgfz76uhp83kv5lagzcp29tcana68ca5aqa6swlq6llfamln09tal7n5kvt4275ckwedpt4v7q48uhex",
+  "borrowerVkh": "c8c47610a36034aac6fc58848bdae5c278d994ff502c05455e3b3ee8",
+  "adminAddr": "addr_test1qpqy3lufef8c3en9nrnzp2svwy5vy9zangvp46dy4qw23clgfxhn3pqv243d6wptud7fuaj5tjqer7wc7m036gx0emsqaqa8te",
+  "adminVkh": "4048ff89ca4f88e66598e620aa0c7128c2145d9a181ae9a4a81ca8e3",
+  "tusdmPolicy": "095caf35ae5af671b2f9fc1fef7c4905f12c4477e48ede44c00f37df",
+  "tusdmAssetNameHex": "745553444d",
+  "oracleHash": "b5148a8799369808066b31725b9d4b6e450629f8b4b72237707a438d",
+  "oracleAddress": "addr_test1wz63fz58nymfszqxdvchykuafdhy2p3flz6twg3hwpay8rgcc2eqj",
+  "reputationHash": "a27ee639f7e8253df3861bd376e5258669418f2a76fee568f47f28cc",
+  "firstOraclePriceTxHash": "3e6bd20c16224701bfb9d7055a48ff60195d030dd5c4b3b546ecce846bc8beaf",
+  "deployedAt": "2026-07-01T09:14:22.663Z"
+}

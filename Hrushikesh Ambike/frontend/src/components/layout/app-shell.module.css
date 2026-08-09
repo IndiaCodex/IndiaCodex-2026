@@ -1,0 +1,110 @@
+.shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  padding: var(--space-md) var(--space-xl);
+  border-bottom: 1px solid var(--color-border);
+  background: oklch(97.3% 0.008 90 / 0.88);
+  backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 30;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.mark {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: var(--radius-md);
+  background: var(--color-accent-bg);
+  border: 1px solid var(--color-accent-border);
+  color: var(--color-accent);
+  font-size: 1.25rem;
+}
+
+.wordmark {
+  margin: 0;
+  font-size: var(--text-md);
+  font-weight: 700;
+  letter-spacing: var(--tracking-wider);
+}
+
+.tagline {
+  margin: 0;
+  font-size: var(--text-2xs);
+  color: var(--color-text-faint);
+  letter-spacing: var(--tracking-normal);
+}
+
+.networkBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  margin-right: auto;
+  margin-left: var(--space-lg);
+  padding: var(--space-3xs) var(--space-sm);
+  border: 1px solid var(--color-border-strong);
+  border-radius: 999px;
+  font-size: var(--text-2xs);
+  color: var(--color-text-dim);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+}
+
+.networkDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-warning);
+}
+
+.walletSlot {
+  flex-shrink: 0;
+}
+
+.main {
+  flex: 1;
+  padding: var(--space-xl);
+  max-width: 88rem;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.footer {
+  padding: var(--space-md) var(--space-xl) var(--space-xl);
+  max-width: 88rem;
+  width: 100%;
+  margin: 0 auto;
+  color: var(--color-text-faint);
+  font-size: var(--text-2xs);
+  border-top: 1px solid var(--color-border);
+}
+
+@media (max-width: 640px) {
+  .header {
+    flex-wrap: wrap;
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .networkBadge {
+    order: 3;
+    margin-left: 0;
+  }
+
+  .main {
+    padding: var(--space-md);
+  }
+}
