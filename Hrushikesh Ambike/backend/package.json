@@ -1,0 +1,25 @@
+{
+  "name": "@ouro/offchain",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./*": "./src/*.ts"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "oracle:repost": "tsx --env-file=.env scripts/repost-oracle-price.ts"
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@meshsdk/core": "^1.9.1",
+    "@meshsdk/provider": "^1.9.0-beta.101"
+  },
+  "devDependencies": {
+    "@types/node": "^26.0.1",
+    "tsx": "^4.22.4",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.9"
+  }
+}

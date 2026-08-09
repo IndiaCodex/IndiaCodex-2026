@@ -1,0 +1,33 @@
+# --- secrets / env ---
+.env
+.env.*
+!*.env.example
+!.env.example
+
+# --- Python (backend) ---
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+*.db
+*.sqlite3
+
+# --- Node (frontend) ---
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+next-env.d.ts
+npm-debug.log*
+
+# --- editors / OS ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# --- misc ---
+*.log
