@@ -1,0 +1,68 @@
+name: Bug report
+description: Something in Forge doesn't work the way it should.
+labels: ["type: bug", "status: triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug. Please include enough detail
+        that someone else can reproduce it — see `CONTRIBUTING.md` for how the
+        monorepo is laid out if you're not sure which package is involved.
+
+  - type: input
+    id: package
+    attributes:
+      label: Which package?
+      description: e.g. `adapter-aiken`, `cli`, `contract-templates` — or "not sure"
+      placeholder: packages/adapter-aiken
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: A clear description of the bug.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect to happen?
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      description: Exact commands run, from a clean `pnpm install && pnpm build` if possible.
+      placeholder: |
+        1. `pnpm install`
+        2. `node packages/cli/dist/bin.js build "..."`
+        3. See error
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant output / stack trace
+      render: shell
+
+  - type: input
+    id: node-version
+    attributes:
+      label: Node.js version
+      placeholder: node --version
+    validations:
+      required: true
+
+  - type: input
+    id: os
+    attributes:
+      label: OS
+      placeholder: e.g. Ubuntu 24.04, macOS 15
+    validations:
+      required: true

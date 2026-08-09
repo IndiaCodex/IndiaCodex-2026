@@ -1,0 +1,31 @@
+{
+  "name": "@forge/cli",
+  "version": "0.0.0",
+  "description": "Forge platform — the `forge` command-line interface.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "bin": {
+    "forge": "./dist/bin.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -b",
+    "clean": "tsc -b --clean"
+  },
+  "dependencies": {
+    "@forge/adapter-ai": "workspace:*",
+    "@forge/adapter-aiken": "workspace:*",
+    "@forge/adapter-codegen-ts": "workspace:*",
+    "@forge/adapter-emulator": "workspace:*",
+    "@forge/adapter-filesystem": "workspace:*",
+    "@forge/adapter-providers": "workspace:*",
+    "@forge/contract-templates": "workspace:*",
+    "@forge/domain": "workspace:*",
+    "@forge/plugin-api": "workspace:*",
+    "@forge/sdk": "workspace:*"
+  }
+}

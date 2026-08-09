@@ -1,0 +1,30 @@
+{
+  "name": "@sentinel/explainability",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Engineering Mode explainability (ADR-0002): deterministic, rule-based, structured explanations derived from an Execution Artifact. No AI, no natural-language generation, no probabilistic reasoning — every field is a pure function of recorded data.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@sentinel/domain": "workspace:*"
+  },
+  "devDependencies": {
+    "@sentinel/testkit": "workspace:*",
+    "@types/node": "^22.19.21",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.10"
+  }
+}

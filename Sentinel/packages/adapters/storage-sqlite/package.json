@@ -1,0 +1,33 @@
+{
+  "name": "@sentinel/storage-sqlite",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SQLite StoragePort adapter (ADR-0003, hackathon MVP default). No SQL leaks outside this package; replaceable with a PostgreSQL adapter without touching domain or application code.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@sentinel/domain": "workspace:*",
+    "better-sqlite3": "^12.11.1"
+  },
+  "devDependencies": {
+    "@sentinel/storage-memory": "workspace:*",
+    "@sentinel/testkit": "workspace:*",
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/node": "^22.19.21",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.10"
+  }
+}

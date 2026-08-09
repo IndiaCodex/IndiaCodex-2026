@@ -1,0 +1,28 @@
+{
+  "name": "@forge/adapter-aiken",
+  "version": "0.0.0",
+  "description": "Forge platform — real Aiken compiler integration: aiken.toml scaffolding, aiken build/check invocation, and CIP-57 blueprint parsing.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -b",
+    "clean": "tsc -b --clean"
+  },
+  "dependencies": {
+    "@aiken-lang/aiken": "^1.1.23",
+    "@forge/application": "workspace:*",
+    "@forge/domain": "workspace:*",
+    "@forge/plugin-api": "workspace:*"
+  }
+}

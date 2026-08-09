@@ -1,0 +1,18 @@
+{
+  "files": [],
+  "references": [
+    { "path": "packages/domain" },
+    { "path": "packages/plugin-api" },
+    { "path": "packages/application" },
+    { "path": "packages/plugin-loader" },
+    { "path": "packages/platform-sdk" },
+    { "path": "packages/adapter-filesystem" },
+    { "path": "packages/adapter-aiken" },
+    { "path": "packages/contract-templates" },
+    { "path": "packages/adapter-codegen-ts" },
+    { "path": "packages/adapter-emulator" },
+    { "path": "packages/adapter-ai" },
+    { "path": "packages/adapter-providers" },
+    { "path": "packages/cli" }
+  ]
+}

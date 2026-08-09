@@ -1,0 +1,31 @@
+{
+  "name": "@sentinel/execution-journal",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Implements ExecutionJournalPort: hash-chained recording (ADR-0006) and, from Step 3.3, deterministic replay.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@sentinel/domain": "workspace:*"
+  },
+  "devDependencies": {
+    "@sentinel/storage-memory": "workspace:*",
+    "@sentinel/testkit": "workspace:*",
+    "@types/node": "^22.19.21",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.10"
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "preamble": {
+    "title": "decentracoders/idea_proof_registry",
+    "description": "IdeaProofRegistry smart contract for LaunchNest",
+    "version": "1.0.0",
+    "plutusVersion": "v3",
+    "compiler": {
+      "name": "Aiken",
+      "version": "v1.1.23+8949565"
+    },
+    "license": "MIT"
+  },
+  "validators": [
+    {
+      "title": "idea_proof_registry.idea_proof_registry.spend",
+      "datum": {
+        "title": "datum",
+        "schema": {
+          "$ref": "#/definitions/types~1Datum"
+        }
+      },
+      "redeemer": {
+        "title": "_redeemer",
+        "schema": {
+          "$ref": "#/definitions/types~1Redeemer"
+        }
+      },
+      "compiledCode": "59013601010029800aba2aba1aab9faab9eaab9dab9a48888896600264646644b30013370e900118031baa0018994c004c02800660146016003370e90002444b30013001300a375400d15980098059baa0068acc004c004c028dd5001466002601a60166ea800a4601c601e0032300e300f300f00148896600330013004371a6eb8c008c038dd5001d28528a0188acc004cdc3a40806e34dd7180118071baa0038acc004cdc3a40706e34dd7180098071baa003899199119801001000912cc00400629422b30013371e6eb8c04c00400e2946266004004602800280790121bac301130123012301230123012301230123012300f375460220186eb8c004c038dd5001c52820188a50403114a0806116402516403116402430073754003164014600e002600e6010002600e00260066ea801e29344d95900101",
+      "hash": "5be9fdc29bfb563b2b78bcac953301a6887d6e7a086d63bbfe031052"
+    },
+    {
+      "title": "idea_proof_registry.idea_proof_registry.else",
+      "redeemer": {
+        "schema": {}
+      },
+      "compiledCode": "59013601010029800aba2aba1aab9faab9eaab9dab9a48888896600264646644b30013370e900118031baa0018994c004c02800660146016003370e90002444b30013001300a375400d15980098059baa0068acc004c004c028dd5001466002601a60166ea800a4601c601e0032300e300f300f00148896600330013004371a6eb8c008c038dd5001d28528a0188acc004cdc3a40806e34dd7180118071baa0038acc004cdc3a40706e34dd7180098071baa003899199119801001000912cc00400629422b30013371e6eb8c04c00400e2946266004004602800280790121bac301130123012301230123012301230123012300f375460220186eb8c004c038dd5001c52820188a50403114a0806116402516403116402430073754003164014600e002600e6010002600e00260066ea801e29344d95900101",
+      "hash": "5be9fdc29bfb563b2b78bcac953301a6887d6e7a086d63bbfe031052"
+    }
+  ],
+  "definitions": {
+    "ByteArray": {
+      "dataType": "bytes"
+    },
+    "Int": {
+      "dataType": "integer"
+    },
+    "types/Datum": {
+      "title": "Datum",
+      "anyOf": [
+        {
+          "title": "Datum",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "title": "idea_id",
+              "$ref": "#/definitions/ByteArray"
+            },
+            {
+              "title": "idea_hash",
+              "$ref": "#/definitions/ByteArray"
+            },
+            {
+              "title": "owner_public_key_hash",
+              "$ref": "#/definitions/ByteArray"
+            },
+            {
+              "title": "submitted_at",
+              "$ref": "#/definitions/Int"
+            },
+            {
+              "title": "app_name",
+              "$ref": "#/definitions/ByteArray"
+            },
+            {
+              "title": "version",
+              "$ref": "#/definitions/ByteArray"
+            }
+          ]
+        }
+      ]
+    },
+    "types/Redeemer": {
+      "title": "Redeemer",
+      "anyOf": [
+        {
+          "title": "Spend",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": []
+        }
+      ]
+    }
+  }
+}

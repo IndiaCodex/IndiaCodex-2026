@@ -1,0 +1,412 @@
+import { useParams, useNavigate } from 'react-router';
+import { useState } from 'react';
+import { DashboardLayout } from '@/components/DashboardLayout';
+import { EventRiskRadar } from '@/components/EventRiskRadar';
+import { EventLocationMap } from '@/components/EventLocationMap';
+import { EventPoster } from '@/components/EventPoster';
+import store from '@/data/store';
+import { createLocalPosterDataUrl, uploadEventPoster } from '@/lib/eventPosterUpload';
+import { eventStatusBadgeClass, getEventDisplayStatus, getEventMode, isCardanoEvent } from '@/lib/eventLifecycle';
+import { Users, QrCode, UserCheck, Award, Handshake, Wallet, ArrowRight, Calendar, MapPin, FileText, Plus, Trash2, ImagePlus, X, Trophy, Blocks, Sparkles } from 'lucide-react';
+import type { EventFormField, EventMode } from '@/types';
+import { truncateMiddle } from '@/lib/cardano';
+
+type EditableField = Omit<EventFormField, 'id' | 'event_id' | 'created_at'>;
+
+export default function EventManage() {
+  const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
+  const event = store.getEventById(id || '');
+  const organizer = store.getCurrentUser();
+  const [posterFile, setPosterFile] = useState<File | null>(null);
+  const [posterPreview, setPosterPreview] = useState('');
+  const [posterSaving, setPosterSaving] = useState(false);
+  const [posterError, setPosterError] = useState('');
+  const [posterSuccess, setPosterSuccess] = useState('');
+  const [eventMode, setEventMode] = useState<EventMode>(getEventMode(event));
+  const [cardanoAddress, setCardanoAddress] = useState(organizer?.cardano_address || '');
+  const [feeAda, setFeeAda] = useState(String(event?.participation_fee_ada ?? 0));
+  const [poolAda, setPoolAda] = useState(String(event?.prize_pool_ada ?? store.getPrizePool(id || '')?.total_amount ?? 0));
+  const [walletMsg, setWalletMsg] = useState('');
+  const [walletErr, setWalletErr] = useState('');
+  const [, setVersion] = useState(0);
+  const [formFields, setFormFields] = useState<EditableField[]>(() => {
+    if (!event) return [];
+    const customFields = store.getCustomEventFormFields(event.id);
+    const fields = customFields.length > 0 ? customFields : store.getEventFormFields(event.id);
+    return fields.map(({ label, field_type, required, options, sort_order }) => ({ label, field_type, required, options, sort_order }));
+  });
+  const [saved, setSaved] = useState(false);
+  if (!event) return <DashboardLayout title="Event"><p className="text-[#5E6256]">Event not found</p></DashboardLayout>;
+
+  const regs = store.getEventRegistrations(event.id);
+  const displayStatus = getEventDisplayStatus(event);
+  const attended = regs.filter(r => r.status === 'attended');
+  const tasks = store.getEventVolunteerTasks(event.id);
+  const interests = store.getEventSponsorInterests(event.id);
+  const budgetItems = store.getEventBudgetItems(event.id);
+  const certs = store.getEventCertificates(event.id);
+
+  const winners = store.getEventWinners(event.id);
+  const quickActions = [
+    { icon: Users, label: 'Registrations', count: regs.length, path: 'registrations', color: 'text-blue-400' },
+    { icon: QrCode, label: 'Attendance', count: attended.length, path: 'attendance', color: 'text-emerald-400' },
+    { icon: UserCheck, label: 'Volunteers', count: tasks.length, path: 'volunteers', color: 'text-purple-400' },
+    { icon: Handshake, label: 'Sponsors', count: interests.length, path: 'sponsors', color: 'text-rose-400' },
+    { icon: Wallet, label: 'Budget', count: budgetItems.length, path: 'budget', color: 'text-amber-400' },
+    { icon: Award, label: 'Certificates', count: certs.length, path: 'certificates', color: 'text-cyan-400' },
+    { icon: Trophy, label: 'Winners & prizes', count: winners.length, path: 'winners', color: 'text-amber-500' },
+  ];
+
+  const addField = () => {
+    setFormFields(prev => [...prev, {
+      label: '',
+      field_type: 'text',
+      required: false,
+      options: [],
+      sort_order: prev.length,
+    }]);
+    setSaved(false);
+  };
+
+  const updateField = (index: number, updates: Partial<EditableField>) => {
+    setFormFields(prev => prev.map((field, fieldIndex) => fieldIndex === index ? { ...field, ...updates } : field));
+    setSaved(false);
+  };
+
+  const deleteField = (index: number) => {
+    setFormFields(prev => prev.filter((_, fieldIndex) => fieldIndex !== index).map((field, sort_order) => ({ ...field, sort_order })));
+    setSaved(false);
+  };
+
+  const moveField = (index: number, direction: -1 | 1) => {
+    const nextIndex = index + direction;
+    if (nextIndex < 0 || nextIndex >= formFields.length) return;
+    const nextFields = [...formFields];
+    const [field] = nextFields.splice(index, 1);
+    nextFields.splice(nextIndex, 0, field);
+    setFormFields(nextFields.map((item, sort_order) => ({ ...item, sort_order })));
+    setSaved(false);
+  };
+
+  const saveForm = () => {
+    const cleanFields = formFields
+      .filter(field => field.label.trim())
+      .map((field, index) => ({ ...field, label: field.label.trim(), sort_order: index }));
+    // saveEventFormFields also dedupes Name/Email/Phone
+    const saved = store.saveEventFormFields(event.id, cleanFields);
+    setFormFields(
+      saved.map(({ label, field_type, required, options, sort_order }) => ({
+        label,
+        field_type,
+        required,
+        options,
+        sort_order,
+      })),
+    );
+    setSaved(true);
+  };
+
+  const handlePosterChange = (file?: File) => {
+    setPosterError('');
+    setPosterSuccess('');
+    if (posterPreview) URL.revokeObjectURL(posterPreview);
+    if (!file) {
+      setPosterFile(null);
+      setPosterPreview('');
+      return;
+    }
+    setPosterFile(file);
+    setPosterPreview(URL.createObjectURL(file));
+  };
+
+  const savePoster = async () => {
+    if (!organizer) {
+      navigate('/login');
+      return;
+    }
+    if (!posterFile) return;
+
+    setPosterSaving(true);
+    setPosterError('');
+    setPosterSuccess('');
+    try {
+      let posterUrl = '';
+      let savedLocally = false;
+      try {
+        posterUrl = await uploadEventPoster(posterFile, organizer.id);
+      } catch {
+        posterUrl = await createLocalPosterDataUrl(posterFile);
+        savedLocally = true;
+      }
+      store.updateEvent(event.id, { poster_url: posterUrl });
+      handlePosterChange();
+      setPosterSuccess(savedLocally ? 'Poster saved for this demo workspace.' : 'Poster uploaded and updated.');
+    } catch (err) {
+      setPosterError(err instanceof Error ? err.message : 'Poster upload failed. Please try again.');
+    } finally {
+      setPosterSaving(false);
+    }
+  };
+
+  const saveCardanoSettings = () => {
+    setWalletErr('');
+    setWalletMsg('');
+    if (!organizer) return;
+    if (eventMode === 'cardano') {
+      const addr = cardanoAddress.trim();
+      if (addr.length < 20) {
+        setWalletErr('Cardano mode needs a receive address (addr_test1…), or switch to Free event.');
+        return;
+      }
+      store.updateProfile(organizer.id, { cardano_address: addr });
+      const fee = Math.max(0, parseFloat(feeAda) || 0);
+      const pool = Math.max(0, parseFloat(poolAda) || 0);
+      store.updateEvent(event.id, {
+        event_mode: 'cardano',
+        participation_fee_ada: fee,
+        prize_pool_ada: pool,
+      });
+      if (pool > 0) store.setPrizePool(event.id, pool, 'ADA', 'Prize pool (ADA)');
+      setWalletMsg('Cardano mode saved. Sponsors can pay ADA after approval; prizes & fees use this wallet.');
+    } else {
+      store.updateEvent(event.id, {
+        event_mode: 'free',
+        participation_fee_ada: 0,
+        prize_pool_ada: 0,
+      });
+      store.setPrizePool(event.id, 0, 'ADA', 'Free event — no prize pool');
+      setWalletMsg('Free event mode saved. No ADA fees, prizes, or on-chain certificate verification.');
+    }
+    setVersion((v) => v + 1);
+  };
+
+  const savedAddr = store.getOrganizerCardanoAddress(event.id) || organizer?.cardano_address;
+  const cardanoMode = isCardanoEvent({ ...event, event_mode: eventMode });
+
+  return (
+    <DashboardLayout title={event.title}>
+      <div className="event-manage-room mb-6">
+        <EventPoster event={event} variant="banner" className="w-full h-40 rounded-xl mb-4" />
+        <div className="flex items-start justify-between">
+          <div>
+            <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#E49B3A]/10 text-[#E49B3A]">{event.category}</span>
+            <p className="text-xs text-[#5E6256] mt-2 flex items-center gap-3">
+              <span className="flex items-center gap-1"><Calendar className="w-3 h-3" /> {event.date}</span>
+              <span className="flex items-center gap-1"><MapPin className="w-3 h-3" /> {event.venue}, {event.city}</span>
+            </p>
+          </div>
+          <span className={`text-[10px] px-2 py-0.5 rounded-full border ${eventStatusBadgeClass(displayStatus)}`}>{displayStatus}</span>
+        </div>
+      </div>
+
+      <div className="event-manage-panel mb-8 rounded-xl border border-[#DDD6FE] bg-[#F5F3FF] p-5">
+        <p className="text-xs font-black uppercase tracking-[0.16em] text-[#7C3AED] mb-3">Event type</p>
+        <div className="grid gap-3 sm:grid-cols-2 mb-4">
+          <button
+            type="button"
+            onClick={() => setEventMode('cardano')}
+            className={`rounded-xl border p-3 text-left ${
+              eventMode === 'cardano' ? 'border-[#7C3AED] bg-white ring-2 ring-[#7C3AED]/25' : 'border-[#E7E1D2] bg-white/70'
+            }`}
+          >
+            <Blocks className="h-5 w-5 text-[#7C3AED] mb-1" />
+            <p className="text-sm font-bold text-[#14150F]">Cardano (ADA)</p>
+            <p className="text-[11px] text-[#5E6256]">Fees, prizes, sponsor ADA, on-chain cert proof</p>
+          </button>
+          <button
+            type="button"
+            onClick={() => setEventMode('free')}
+            className={`rounded-xl border p-3 text-left ${
+              eventMode === 'free' ? 'border-emerald-500 bg-white ring-2 ring-emerald-400/30' : 'border-[#E7E1D2] bg-white/70'
+            }`}
+          >
+            <Sparkles className="h-5 w-5 text-emerald-600 mb-1" />
+            <p className="text-sm font-bold text-[#14150F]">Free event</p>
+            <p className="text-[11px] text-[#5E6256]">No ADA / no prizes · certs not chain-verified</p>
+          </button>
+        </div>
+
+        {cardanoMode ? (
+          <>
+            <div className="flex items-start gap-3 mb-4">
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#EDE9FE] text-[#7C3AED]">
+                <Blocks className="h-5 w-5" />
+              </span>
+              <div>
+                <p className="text-sm font-black text-[#14150F]">Cardano receive address</p>
+                <p className="mt-1 text-xs leading-5 text-[#5E6256]">
+                  Public address only (not a private key). Sponsors & fee payers send ADA here after approval.
+                </p>
+              </div>
+            </div>
+            <div className="grid gap-3 sm:grid-cols-2">
+              <label className="block sm:col-span-2">
+                <span className="mb-1 block text-xs font-semibold text-[#5E6256]">Wallet address (addr_test1…)</span>
+                <input
+                  value={cardanoAddress}
+                  onChange={(e) => setCardanoAddress(e.target.value)}
+                  className="w-full rounded-xl border border-[#DCE8BE] bg-white px-3 py-2.5 font-mono text-xs text-[#14150F]"
+                  placeholder="addr_test1qz…"
+                />
+              </label>
+              <label className="block">
+                <span className="mb-1 block text-xs font-semibold text-[#5E6256]">Participation fee (ADA)</span>
+                <input
+                  type="number"
+                  min={0}
+                  step="0.1"
+                  value={feeAda}
+                  onChange={(e) => setFeeAda(e.target.value)}
+                  className="w-full rounded-xl border border-[#DCE8BE] bg-white px-3 py-2.5 text-sm"
+                />
+              </label>
+              <label className="block">
+                <span className="mb-1 block text-xs font-semibold text-[#5E6256]">Prize pool (ADA)</span>
+                <input
+                  type="number"
+                  min={0}
+                  step="0.1"
+                  value={poolAda}
+                  onChange={(e) => setPoolAda(e.target.value)}
+                  className="w-full rounded-xl border border-[#DCE8BE] bg-white px-3 py-2.5 text-sm"
+                />
+              </label>
+            </div>
+          </>
+        ) : (
+          <div className="rounded-xl border border-emerald-200 bg-emerald-50/80 p-4 text-xs leading-5 text-emerald-900">
+            Free mode: no ADA sponsorship payments, no prize distribution, and certificates stay app-issued
+            without blockchain verification. Registrations, QR, and volunteers still work.
+          </div>
+        )}
+        {walletErr && <p className="mt-2 text-xs font-semibold text-red-600">{walletErr}</p>}
+        {walletMsg && <p className="mt-2 text-xs font-semibold text-emerald-700">{walletMsg}</p>}
+        {cardanoMode && savedAddr && (
+          <p className="mt-2 font-mono text-[10px] text-[#5E6256]">
+            Saved: {truncateMiddle(savedAddr, 14, 10)}
+          </p>
+        )}
+        <button type="button" onClick={saveCardanoSettings} className="gold-btn mt-4 text-sm">
+          Save event type settings
+        </button>
+      </div>
+
+      <div className="mb-8">
+        <EventLocationMap event={event} variant="dark" />
+      </div>
+
+      <div className="event-manage-panel mb-8 rounded-xl p-5">
+        <div className="flex flex-col lg:flex-row gap-5">
+          <div className="lg:w-64 flex-shrink-0">
+            {posterPreview ? (
+              <div className="relative overflow-hidden rounded-xl border border-[#DCE8BE]">
+                <img src={posterPreview} alt="New poster preview" className="h-36 w-full object-cover" />
+                <button type="button" onClick={() => handlePosterChange()} disabled={posterSaving}
+                  className="absolute right-2 top-2 rounded-full bg-[#14150F]/70 p-2 text-white hover:text-[#E49B3A]">
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+            ) : (
+              <EventPoster event={event} className="h-36 w-full rounded-xl" />
+            )}
+          </div>
+          <div className="flex-1">
+            <p className="text-sm font-black text-[#14150F]">Event Poster</p>
+            <p className="text-xs text-[#5E6256] mt-1 mb-4">Replace the event poster shown on public cards and detail pages. JPG, PNG, or WEBP under 5MB.</p>
+            {posterError && <p className="mb-3 text-xs text-red-500">{posterError}</p>}
+            {posterSuccess && <p className="mb-3 text-xs text-emerald-700">{posterSuccess}</p>}
+            <div className="flex flex-wrap gap-3">
+              <label className="ghost-btn text-sm rounded-full cursor-pointer flex items-center gap-2">
+                <ImagePlus className="w-4 h-4" /> Choose Poster
+                <input type="file" accept="image/jpeg,image/png,image/webp" className="hidden" disabled={posterSaving}
+                  onChange={changeEvent => handlePosterChange(changeEvent.target.files?.[0])} />
+              </label>
+              <button onClick={savePoster} disabled={!posterFile || posterSaving} className="gold-btn text-sm disabled:opacity-50">
+                {posterSaving ? 'Uploading...' : 'Save Poster'}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+        {quickActions.map((action) => (
+          <button key={action.path}
+            onClick={() => navigate(`/dashboard/organizer/events/${event.id}/${action.path}`)}
+            className="event-manage-action rounded-lg p-4 text-left transition-all group">
+            <div className="flex items-center justify-between mb-2">
+              <action.icon className={`w-5 h-5 ${action.color}`} />
+              <ArrowRight className="w-4 h-4 text-[#52670F]/35 group-hover:text-[#52670F] transition-colors" />
+            </div>
+            <p className="text-lg font-black text-[#14150F]">{action.count}</p>
+            <p className="text-[10px] font-bold uppercase tracking-wide text-[#5E6256]">{action.label}</p>
+          </button>
+        ))}
+      </div>
+
+      <div className="mt-8">
+        <EventRiskRadar event={event} />
+      </div>
+
+      <div className="event-manage-panel mt-8 rounded-xl p-5">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-5">
+          <div>
+            <div className="flex items-center gap-2">
+              <FileText className="w-5 h-5 text-[#E49B3A]" />
+              <h2 className="text-base font-black text-[#14150F]">Registration Form</h2>
+            </div>
+            <p className="text-xs text-[#5E6256] mt-1">Participants submit this form and wait for organizer approval before tickets are issued.</p>
+          </div>
+          <button onClick={addField} className="ghost-btn text-sm rounded-full flex items-center gap-2">
+            <Plus className="w-4 h-4" /> Add Field
+          </button>
+        </div>
+
+        <div className="space-y-3">
+          {formFields.map((field, index) => (
+            <div key={`${field.label}-${index}`} className="rounded-lg border border-[#DCE8BE] bg-[#FBFFF1] p-3 grid lg:grid-cols-[1.4fr_0.9fr_auto_auto] gap-3">
+              <input
+                value={field.label}
+                onChange={e => updateField(index, { label: e.target.value })}
+                placeholder="Field label"
+                className="bg-white border border-[#DCE8BE] rounded-lg py-2 px-3 text-sm text-[#14150F] placeholder:text-[#8A8D7B] focus:outline-none focus:border-[#D8F066]"
+              />
+              <select
+                value={field.field_type}
+                onChange={e => updateField(index, { field_type: e.target.value as EventFormField['field_type'], options: e.target.value === 'select' ? field.options : [] })}
+                className="bg-white border border-[#DCE8BE] rounded-lg py-2 px-3 text-sm text-[#14150F] focus:outline-none focus:border-[#D8F066]"
+              >
+                {['text', 'textarea', 'number', 'email', 'phone', 'select', 'checkbox'].map(type => (
+                  <option key={type} value={type}>{type}</option>
+                ))}
+              </select>
+              <label className="flex items-center gap-2 text-xs text-[#5E6256]">
+                <input type="checkbox" checked={field.required} onChange={e => updateField(index, { required: e.target.checked })} />
+                Required
+              </label>
+              <div className="flex items-center gap-2">
+                <button onClick={() => moveField(index, -1)} disabled={index === 0} className="text-xs text-[#5E6256] hover:text-[#52670F] disabled:opacity-30">Up</button>
+                <button onClick={() => moveField(index, 1)} disabled={index === formFields.length - 1} className="text-xs text-[#5E6256] hover:text-[#52670F] disabled:opacity-30">Down</button>
+                <button onClick={() => deleteField(index)} className="text-red-500/70 hover:text-red-600"><Trash2 className="w-4 h-4" /></button>
+              </div>
+              {field.field_type === 'select' && (
+                <input
+                  value={field.options.join(', ')}
+                  onChange={e => updateField(index, { options: e.target.value.split(',').map(option => option.trim()).filter(Boolean) })}
+                  placeholder="Options separated by commas"
+                  className="lg:col-span-4 bg-white border border-[#DCE8BE] rounded-lg py-2 px-3 text-sm text-[#14150F] placeholder:text-[#8A8D7B] focus:outline-none focus:border-[#D8F066]"
+                />
+              )}
+            </div>
+          ))}
+        </div>
+
+        <div className="pt-5 flex items-center gap-3">
+          <button onClick={saveForm} className="gold-btn text-sm">Save Form</button>
+          {saved && <span className="text-xs text-emerald-700">Registration form saved.</span>}
+        </div>
+      </div>
+    </DashboardLayout>
+  );
+}
