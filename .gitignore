@@ -2,3 +2,5 @@
 codeflow/backend/.env
 codeflow/backend/sdk.tgz
 *.env
+node_modules/
+.env*

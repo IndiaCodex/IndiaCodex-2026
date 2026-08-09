@@ -1,0 +1,210 @@
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  padding: var(--space-lg);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-panel);
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-md);
+}
+
+.eyebrow {
+  margin: 0 0 var(--space-3xs);
+  font-size: var(--text-2xs);
+  color: var(--color-tier-silver);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+}
+
+.title {
+  font-size: var(--text-lg);
+}
+
+.placeholderTag {
+  flex-shrink: 0;
+  padding: var(--space-3xs) var(--space-xs);
+  border: 1px dashed var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-faint);
+  font-size: var(--text-2xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+}
+
+.liveTag {
+  border-style: solid;
+  border-color: var(--color-positive);
+  color: var(--color-positive);
+}
+
+.tierBadge {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-strong);
+}
+
+/* Mix in oklab, not oklch: near-achromatic tier colors make oklch hue
+   interpolation resolve to hue "none" (rendered as hue 0 — a pink cast). */
+.tier_bronze {
+  background: color-mix(in oklab, var(--color-tier-bronze) 12%, var(--color-bg-inset));
+  border-color: color-mix(in oklab, var(--color-tier-bronze) 40%, transparent);
+}
+
+.tier_silver {
+  background: color-mix(in oklab, var(--color-tier-silver) 10%, var(--color-bg-inset));
+  border-color: color-mix(in oklab, var(--color-tier-silver) 35%, transparent);
+}
+
+.tier_gold {
+  background: var(--color-accent-bg);
+  border-color: var(--color-accent-border);
+}
+
+.tierBadgeLabel {
+  font-size: var(--text-lg);
+  font-weight: 700;
+}
+
+.tierBadgeLtv {
+  font-size: var(--text-xs);
+  color: var(--color-text-dim);
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+  margin: 0;
+}
+
+.metric dt {
+  font-size: var(--text-2xs);
+  color: var(--color-text-faint);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  margin-bottom: var(--space-3xs);
+}
+
+.metric dd {
+  margin: 0;
+  font-size: var(--text-md);
+  font-weight: 600;
+}
+
+.progressBlock {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--color-border);
+}
+
+.progressHeader {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--text-xs);
+  color: var(--color-text-dim);
+}
+
+.progressHeader strong {
+  color: var(--color-text);
+}
+
+.progressTrack {
+  height: 8px;
+  border-radius: 999px;
+  background: var(--color-bg-inset);
+  border: 1px solid var(--color-border-strong);
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--color-tier-silver), var(--color-accent));
+  border-radius: 999px;
+  transition: width var(--duration-slow) var(--ease-out-expo);
+}
+
+.requirementList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3xs);
+  margin-top: var(--space-3xs);
+}
+
+.requirementList li {
+  font-size: var(--text-2xs);
+  color: var(--color-text-faint);
+}
+
+.requirementMet {
+  color: var(--color-positive) !important;
+}
+
+.maxTierNote {
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--color-border);
+  font-size: var(--text-xs);
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.creditLine {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+  padding: var(--space-md);
+  background: var(--color-bg-inset);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.creditLineHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--text-xs);
+  color: var(--color-text-dim);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+}
+
+.creditLineUnlocked {
+  color: var(--color-positive);
+  font-weight: 700;
+}
+
+.creditLineLocked {
+  color: var(--color-text-faint);
+  font-weight: 700;
+}
+
+.creditLineValue {
+  font-size: var(--text-xl);
+  font-weight: 700;
+}
+
+.creditLineFormula {
+  font-size: var(--text-2xs);
+  color: var(--color-text-faint);
+  line-height: var(--leading-snug);
+}
+
+@media (max-width: 560px) {
+  .metrics {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+}
