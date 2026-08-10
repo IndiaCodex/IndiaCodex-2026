@@ -1,0 +1,23 @@
+# --- secrets — NEVER commit (AGENT.md §0.3, §7) ---
+.env
+.env.*
+!.env.example
+
+# --- node ---
+node_modules/
+demo-app/.next/
+demo-app/out/
+demo-app/build/
+*.tsbuildinfo
+next-env.d.ts
+
+# --- aiken build artifacts (plutus.json IS committed — it's the blueprint) ---
+on-chain/build/
+on-chain/.aiken/
+
+# --- misc ---
+.DS_Store
+*.log
+npm-debug.log*
+.vercel
+/scratch/

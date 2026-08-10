@@ -1,0 +1,18 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "words": [
+    "Cardano", "Cardano's", "eUTXO", "UTXO", "UTXOs", "Utxo", "utxo", "Preprod", "preprod",
+    "Blockfrost", "Blockfrost's", "blockfrost", "BLOCKFROST", "Aiken", "aiken", "aikup", "Lucid",
+    "MeshJS", "Koios", "Maestro", "Yaci", "Yaci's", "devnet", "devnets", "topup", "Ogmios", "Kupo",
+    "Dolos", "Demeter", "Mithril", "Leios", "Masumi", "Midnight", "Catalyst", "Cardanoscan",
+    "Cardanopress", "Eternl", "Lace", "plutus", "Plutus", "Plutarch", "OpShin", "UPLC", "CBOR", "CDDL",
+    "datum", "datums", "redeemer", "lovelace", "minfee", "minFee", "minFeeA", "minFeeB", "EWMA",
+    "stdlib", "Zustand", "Tailwind", "Recharts", "loadgen", "sparkline", "Sparkline", "Anastasia",
+    "IntersectMBO", "workstreams", "demoable", "Projectidea", "offchain", "onchain", "CIP", "vkey",
+    "walletSeed", "Vercel", "tsconfig", "esm", "vitest", "tsx", "kapsule", "Signer", "utxos",
+    "Anvil", "Kupo's", "gOuroboros", "UTxORPC", "Ouroboros", "winget", "msvc", "aikup", "blockfrost"
+  ],
+  "ignoreRegExpList": ["addr_test1[a-z0-9]+", "preprod[a-zA-Z0-9]+", "0x[0-9a-fA-F]+"],
+  "ignorePaths": ["node_modules/**", ".next/**", "off-chain/**/dist/**"]
+}
