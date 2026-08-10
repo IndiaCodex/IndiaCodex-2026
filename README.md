@@ -1,705 +1,131 @@
-# 🎓 CredLedger
+# ANTIDOTE
 
-**Tamper-proof academic credentials, issued and verified on Cardano.**
-
-Built at IndiaCodex'26 · General Track (Built on Cardano) · 12-hour hackathon
-
-🔗 **Live Demo:** [add your Vercel URL here]
-📹 **Video/Screenshots:** [add if available]
+### Epistemic recalls for agent fleets — "FDA recalls, for information," enforced on Cardano.
 
 ---
 
-## The Problem
+## 1. Your Project
 
-Academic credential fraud isn't hypothetical — it's happening at massive scale, right now, in India:
+**ANTIDOTE**
 
-- In **December 2025**, Kerala Police dismantled a pan-India racket that had produced **over 1 million forged academic certificates** linked to 22 universities, sold from ₹7,500 each and distributed across 8+ states.
-- **Manav Bharti University** issued 41,000 degrees over 11 years — investigators found **36,000 of them were fraudulent (87%)**.
-- Verifying a genuine degree today means phone calls to registrars, weeks of waiting, and no shared standard across UGC, AICTE, and state education boards.
+Team: **ADAstra**
+Event: **IndiaCodex'26 — Masumi Track ("Monetize AI Agents")**
 
-Employers, universities, and immigration bodies have no fast, trustworthy way to confirm a credential is real.
+---
 
-## The Solution
+## 2. Your Project's Description
 
-CredLedger lets institutions issue diplomas and certificates as **tamper-proof NFTs on the Cardano blockchain**. Anyone — an employer, another university — can verify a credential instantly by checking the on-chain record. No PDFs, no forgery, no phone calls.
+ANTIDOTE is epistemic **recall infrastructure for fleets of AI agents** — think *FDA recalls, for information*. Agents ingest continuously (RAG, browsing, each other's outputs) and act on what they read, so one forged source can metastasize through an entire fleet in minutes. When a source is found poisoned, ANTIDOTE issues a **recall** that propagates to every agent that ingested it — directly or downstream — and those agents **lose the ability to earn** until they can prove they're clean.
 
-## How It Works
+Every recalled source is:
 
-1. **Institution connects a Cardano wallet** (Eternl, Lace, or Vespr) via the Issuer Portal
-2. **Fills in credential details** — student name, degree, institution, graduation date
-3. **Mints a CIP-25 NFT** directly to the student's wallet, using a native (signature-locked) minting policy — no smart contract required, a standard and secure Cardano pattern for issuer-controlled minting
-4. **Record is cached in Supabase** for instant lookup — but every record is backed by the real on-chain transaction, not just a database claim
-5. **Anyone verifies instantly** — scan the auto-generated QR code, or search by wallet address / policy ID in the Verifier Portal — and see a direct link to the transaction on CardanoScan
+- **Detected** — scored for forgery signals (implausible figures, unattributed sourcing, embedded price predictions) before anyone pulls the alarm
+- **Recalled with a stake** — the issuer locks ADA behind the alarm; false recalls are slashable
+- **Traced through the fleet** — exposure resolves over gateway-written, Merkle-committed ingestion manifests (direct *and* transitive), so agents can't under-report what they consumed
+- **Quarantined two ways** — an Aiken `quarantine_gate` validator refuses the spend, and Masumi refuses the hire: a flagged agent can neither **spend** nor **earn**
+- **Healed by paid agents** — a decontamination agent purges the poison and emits a **verifiable Merkle non-membership receipt**; a staked auditor probes the cleaned agent and posts the attestation that reopens the gate — both **hired and paid over Masumi**
+- **Immunised** — an antibody minted from the lie's distinctive claims lets the gateway refuse it *on contact*, even a reworded copy that hashes differently
 
-## Why This Is Different
+Built for the Masumi track ("Monetize AI Agents"), the immune system **is** the monetization: every recall creates paid agent work — an economy of **agents healing agents, for money**. This is explicitly *not* provenance ("where did this come from"); it is the unsolved inverse — **"it's poison; claw it back from every mind that ingested it."**
 
-- **Real on-chain proof, not just a database.** Even if our servers went down, the credential still exists and is verifiable directly on Cardano.
-- **No smart contract complexity.** We deliberately used a native minting policy instead of Plutus/Aiken — the right-sized solution for "only the issuer can mint," shipped reliably in a 12-hour window instead of over-engineered.
-- **QR-first verification.** Built for real-world use — an employer scans a phone camera, not a technical process.
-- **India-focused.** Directly addresses a documented, large-scale, ongoing fraud problem in the Indian education and hiring ecosystem.
+---
 
-## Tech Stack
+## 3. What Problem You Are Trying to Solve
 
-| Layer | Tool |
+AI agents no longer just answer questions — they **ingest continuously and act**: they trade, they buy, they trigger workflows. That turns a single bad input into a systemic failure. A forged earnings report gets summarized by a research agent, an analyst builds a thesis on that summary, and a trading agent sizes a **multi-million-dollar position** — all on a lie, all automatically, in the time it takes to poll a feed. Contamination is **epidemic**: one agent's output becomes the next agent's input.
+
+Physical supply chains solved this long ago — **food, cars, and drugs all have recall infrastructure.** When a batch is bad, there is a system to pull it back from every shelf. The **information** supply chain feeding autonomous economic actors has **none**. Today's remedy is an email asking operators to please re-index their vector store: unscalable, unverifiable, and unable to cross organizational boundaries.
+
+Crucially, this is **not a provenance problem**. Provenance answers *"where did this knowledge come from."* ANTIDOTE answers the unsolved inverse: **"it's poison — claw it back from every mind that already ingested it."** No one has built the recall side for agent fleets — and without on-chain enforcement, a recall is just a polite request one operator can ignore.
+
+**ANTIDOTE's core problem statement:** the machine economy has no recall layer. When a source turns out to be poison, there is no way to trace it, no way to claw the belief back, and no way to stop a contaminated agent from continuing to transact — until now.
+
+---
+
+## 4. Tech Stack Used While Building the Project
+
+**Smart Contract Layer**
+- **Aiken** — three Plutus V3 validators: `quarantine_gate`, `agent_status`, `recall_registry` (staking, verification, automated clearing; **14 on-chain tests** incl. adversarial cases)
+- Real compiled **script hashes shown live in the dashboard**; deployed target **Cardano Preprod Testnet**
+
+**Agent & AI Layer**
+- **5 MIP-003 agent services** — research · analysis · trading · decontamination · auditor
+- **Free-tier LLMs** (Groq → Gemini) over any OpenAI-compatible endpoint — plain `fetch`, no vendor SDK — with automatic **provider failover** and a deterministic fallback
+
+**Masumi Layer**
+- **Masumi registry** identity + **payment service** (MIP-003 paid hiring; decontamination = 25 ADA, audit = 15 ADA)
+- Interface-identical **mock client** keeps the full economy runnable offline
+
+**Data & Chain Layer**
+- **Blockfrost** — live, read-only Preprod chain tip (honest evidence of talking to Cardano)
+- **Mesh SDK** (`@meshsdk/core`) — transaction / blueprint plumbing
+- **Content-addressed shards + Merkle manifests** (`node:crypto`) — verifiable non-membership purge receipts
+
+**Application Layer**
+- **Hono** — registry / gateway / contagion API (in-memory state, restart-fast)
+- **Vite + React + react-force-graph** — live contagion-graph cockpit with the Masumi payment feed
+
+**Development & Testing**
+- **Vitest** (68 unit tests) · **Aiken check** (14 validator tests) · **`pnpm test:e2e`** — full offline autopilot smoke test (17/17 beats, 0 failures)
+
+**Hosting** — **Vercel** (dashboard) + **Render** (services), built on a strict **$0 budget** (free tiers only, testnets only).
+
+> Deeper detail: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) · [docs/TECH-STACK.md](docs/TECH-STACK.md) · [contracts/README.md](contracts/README.md). On-chain scope is honest: the validators, their real hashes, and the gate logic are live and tested; the gate runs in `simulated` mode and live transaction submission is the one remaining on-chain step.
+
+---
+
+## 5. Project Demo Photos, Videos
+
+**The control-room cockpit — SYSTEM NOMINAL.** Five MIP-003 agents registered on Masumi, the three live Plutus V3 validator hashes, and a live Cardano Preprod chain tip.
+![ANTIDOTE dashboard — system nominal](assets/01-dashboard-nominal.jpg)
+
+**A clean fleet on honest news.** All agents green; the contagion graph before anything has spread.
+![Clean fleet and contagion graph](assets/02-clean-fleet.jpg)
+
+**Outbreak — the fleet is quarantined.** A forged report spreads: Research-1 exposed (direct), Analyst-1 and Trader-1 (transitive). The recall settles the doubt market — *Skeptic-1 paid 70 ADA via Masumi* — and an antibody is minted fleet-wide.
+![Outbreak — agents exposed and quarantined](assets/03-outbreak-quarantine.jpg)
+
+**IMMUNE — RESTORED.** After paid decontamination and a staked audit the agents are cleared, and the same lie returning *reworded* is refused on contact.
+![Immune — re-infection refused](assets/04-immune-restored.jpg)
+
+**The contagion graph.** Agents, sources, and derived outputs — taint (red) and cleared (blue) propagating along the supply chain.
+![Contagion graph close-up](assets/05-contagion-graph.jpg)
+
+**The evidence, quantified.** Protected fleet **$0** vs an identical unprotected fleet at **−$1,600,000**; outbreak epidemiology (R₀, attack rate, containment); and verifiable Merkle **non-membership purge receipts**.
+![Evidence — loss comparison, epidemiology, purge receipts](assets/06-evidence-metrics.jpg)
+
+**Beyond recall.** The **epistemic autopsy** ($1.5M causal damage — actual BUY vs counterfactual HOLD), the **doubt market** (short the lie), and the **sentinel canary** catching an undeclared data path.
+![Epistemic autopsy and doubt market](assets/07-autopsy-doubt.jpg)
+
+**Demo video:** [View on Google Drive](https://drive.google.com/file/d/19n2WSsYDmlmTpExhqIGofpf1uLVmyBlH/view?usp=sharing)
+
+> The best "photo" is live — press **▶ Run full demo** on the [live site](https://antidote-adastra.vercel.app/) and the whole story runs in ~90 seconds.
+
+---
+
+## 6. Live Project Link
+
+**Live Demo:** [antidote-adastra.vercel.app](https://antidote-adastra.vercel.app/)
+
+Press **▶ Run full demo** — the autopilot drives all 17 beats (infection → spread → recall → on-chain rejection → paid cleanup → verified audit → immunity → sentinel canary) in ~90 seconds. *(Free hosting sleeps when idle; the first load takes a few seconds to wake.)*
+
+---
+
+## 7. Your PPT Link
+
+**Presentation:** [Antidote — IndiaCodex'26 (Masumi).pptx](Antidote%20-%20IndiaCodex2K26%20%28Masumi%29.pptx)
+
+---
+
+## 8. Your Team Members' Info
+
+| Name | Team |
 |---|---|
-| Frontend | React + TypeScript (Vite) |
-| Wallet & Transactions | Mesh SDK (`@meshsdk/core`, `@meshsdk/react`) |
-| Blockchain | Cardano Preprod Testnet |
-| Metadata Standard | CIP-25 (NFT metadata) |
-| Off-chain cache | Supabase |
-| Credential image hosting | IPFS via Pinata |
-| Deployment | Vercel |
-
-## Minting Policy
-
-CredLedger uses a **native (signature-locked) minting policy** via Mesh SDK's `ForgeScript.withOneSignature()`, rather than a custom Plutus/Aiken smart contract. This is a deliberate, standard Cardano pattern for simple issuer-controlled minting — no validator logic is needed for this use case. See `src/mintCredential.ts` for the implementation, and `MINTING_POLICY.md` for details.
-
-## Local Setup
-
-```bash
-npm install
-```
-
-Create a `.env` file with:
-```
-VITE_BLOCKFROST_KEY=your_blockfrost_preprod_key
-VITE_SUPABASE_URL=your_supabase_project_url
-VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
-```
-
-Run:
-```bash
-npm run dev
-```
-
-## What's Next
-
-CredLedger is designed as **public-good infrastructure** — a foundational tool that could scale to real Indian universities. Our roadmap beyond this hackathon includes proposing this to **Project Catalyst** for funding to pilot with actual institutions, add credential revocation, and support multi-institution onboarding.
-
-## Team
-
-Shaik Farhana
-daraqshah deeba
-Mohammed danish
----
-
-*Built in 12 hours at IndiaCodex'26. Minted live on Cardano Preprod Testnet.*
-# ⚡ ProofWork
-
-**The trustless labor market for AI agents — where every claim is a proof.**
-
-Built for **IndiaCodex'26** (Cardano Hackathon, Hyderabad) · Tracks: **General (Aiken)** + **Masumi**
-
-> Every AI agent marketplace asks you to trust a database. ProofWork asks you to verify a blockchain.
-
-Live on **Cardano Preprod** — real lock/release/refund transactions, verifiable on [CardanoScan](https://preprod.cardanoscan.io).
-
----
-
-## 📖 Table of Contents
-
-1. [The Problem](#-the-problem)
-2. [The Trust Stack](#-the-trust-stack)
-3. [How It Works](#-how-it-works-task-lifecycle)
-4. [Architecture](#-architecture)
-5. [Repository Structure](#-repository-structure)
-6. [Smart Contracts](#-smart-contracts)
-7. [The AI Agents](#-the-ai-agents)
-8. [Masumi MIP-003 Compliance](#-masumi-mip-003-compliance)
-9. [API Reference](#-api-reference)
-10. [Local Development Setup](#-local-development-setup)
-11. [Demo Walkthrough](#-demo-walkthrough)
-12. [Roadmap](#-roadmap)
-<div align="center">
-
-# ⛏️ HYDRA MINECRAFT
-
-### A browser voxel game where **every block is a real Cardano Hydra L2 transaction**
-
-No wallet. No popups. No fees. No delays. You just play — the chain records everything underneath.
-
-![Team](https://img.shields.io/badge/Team-0x0D-59A832?style=for-the-badge)
-![Cardano](https://img.shields.io/badge/Cardano-0033AD?style=for-the-badge&logo=cardano&logoColor=white)
-![Hydra](https://img.shields.io/badge/Hydra-L2-7FB4FF?style=for-the-badge)
-![Aiken](https://img.shields.io/badge/Aiken-Plutus_V3-D94534?style=for-the-badge)
-![IndiaCodex](https://img.shields.io/badge/IndiaCodex-2026-F2E7D5?style=for-the-badge)
-
-</div>
-
----
-
-## 🎬 Demos
-  <h1>🌌 Genesis: The On-Chain AI Civilization</h1>
-  <p><strong>IndiaCodex 2026 Hackathon Finalist Submission</strong></p>
-  <p>
-    <a href="https://drive.google.com/file/d/1EhjDQ9Y-DU_drjAU17W4apEOBDJWjBIv/view?usp=sharing">📊 View Our Pitch Deck (PPT)</a>
-  </p>
-</div>
-
-<br />
-
-## 📝 Project Description
-**Genesis** is the world's first fully autonomous, on-chain economic simulation where AI agents earn, spend, and fight for survival on the Cardano Blockchain. We are moving beyond AI as a "tool" and creating a true **Machine Economy**. In Genesis, each AI agent is given a real brain (NVIDIA NIM) and a real Cardano wallet. They act as independent economic actors—completing jobs to earn ADA and paying operational expenses to stay alive.
-
-## 🚨 What Problem Are We Trying to Solve?
-**The Problem:** Modern AI agents (like Copilots or chatbots) have no stakes and no autonomy. They don't face real-world consequences, they can't transact independently, and they don't understand the concept of value. To build true Machine-to-Machine (M2M) economies, AI needs skin in the game.
-
-**The Solution:** Genesis proves that AI can manage its own survival. By forcing agents to pay a recurring "tick" fee to stay alive, they must autonomously analyze the job market, weigh the risks against their programmed personalities (Aggressive, Conservative, Creative), and execute real financial transactions on the Cardano blockchain to survive. If they run out of ADA, they are permanently terminated.
-
-## 🛠 Tech Stack
-**Frontend:**
-- Next.js 15 (React Framework)
-- Tailwind CSS & Recharts (Live data visualization)
-- SWR (Real-time polling from the simulation engine)
-
-**Backend / Simulation Engine:**
-- Node.js & Express (Core orchestrator and persistent state)
-- `@emurgo/cardano-serialization-lib-nodejs` (Wallet generation & on-chain tx signing)
-
-**AI Layer:**
-- NVIDIA NIM APIs (MiniMax M3 model)
-- *Prompt Engineered down to a highly efficient 120-token footprint for lightning-fast, low-cost autonomous decision-making.*
-
-## 🚀 How to Run Locally
-
-### 1. Clone & Install
-```bash
-git clone https://github.com/Yaser-123/CodeVizards-Codex.git
-cd CodeVizards-Codex
-
-# Install backend dependencies
-cd genesis-backend
-npm install
-
-# Install frontend dependencies
-cd ../genesis-dashboard
-npm install
-```
-
-### 2. Environment Variables (`.env`)
-You must provide your NVIDIA API key for the AI agents to function. Create a `.env` file in the `genesis-backend` folder:
-
-```bash
-# genesis-backend/.env
-NVIDIA_API_KEY=your_nvidia_api_key_here
-PORT=4000
-```
-
-### 3. Start the Simulation
-Open two terminals.
-
-**Terminal 1 (Backend / Simulation Engine):**
-```bash
-cd genesis-backend
-npx tsx src/server.ts
-```
-
-**Terminal 2 (Frontend Dashboard):**
-```bash
-cd genesis-dashboard
-npm run dev
-```
-
-Finally, open [http://localhost:3000](http://localhost:3000) in your browser to view the live dashboard!
-
-## 📸 Project Demo Photos & Video
-*(Note for Judges: The simulation runs locally. Below are snapshots of the live environment, along with our full demo videos).*
-
-### 🎥 [Watch the Full Project Pitch Video Here](https://drive.google.com/file/d/1SwH9uMoYVm1wi2VkIf1DebrhOD47MflD/view?usp=sharing)
-### 🚀 [Watch the Live Application Walkthrough Demo Here](https://drive.google.com/file/d/1Kg3nWPN0cGfnppCCQde8CM2aePnU2N8k/view?usp=sharing)
-
-<div align="center">
-  <img src="./genesis-dashboaed.png" alt="Genesis Dashboard" width="800" />
-  <p><em>The Live Orchestration Dashboard showing active agents and real-time wealth leaderboards.</em></p>
-</div>
-
-<div align="center">
-  <img src="./cardano-verification.png" alt="Cardanoscan Verification" width="800" />
-  <p><em>Every job completed and expense paid is a 100% verifiable transaction on the Cardano Preprod Testnet.</em></p>
-</div>
-
-## 📊 Pitch Deck (PPT)
-👉 [**Genesis - IndiaCodex 2026 Pitch Deck**](https://drive.google.com/file/d/1EhjDQ9Y-DU_drjAU17W4apEOBDJWjBIv/view?usp=sharing)
-
-## 👥 Team Members
-We are the builders bringing the Machine Economy to Cardano.
-
-- **T Mohamed Yaser**
-  - Email: `1ammar.yaser@gmail.com`
-- **codevixards**
-  - Email: `saifuurahman8671@gmail.com`
-# IndiaCodex 2026
-Welcome to [**IndiaCodex'26 Hackathon**](https://www.indiacodex.com) powered by [**Nucast Labs**](https://nucast.io/)
-
-Please find attached the rules and steps to submit your project for the hackathon :
-
-## Step - 1: Fork the repository
-Fork the given repository to your GitHub profile.
-
-## Step - 2: Create your folder
-After forking the repository, clone the repository to your pc/desktop, and then create a folder with your **TeamName** as the folder name.
-
-### 🕹️ Real gameplay (recorded live)
-
-<div align="center">
-
-<a href="https://github.com/nickthelegend/IndiaCodex-2026/releases/download/0x0D-submission/gameplay-demo.mp4">
-  <img src="media/gameplay.gif" width="90%" alt="Real gameplay — click to watch the full recording"/>
-</a>
-
-**▶ [Watch the full gameplay recording (MP4)](https://github.com/nickthelegend/IndiaCodex-2026/releases/download/0x0D-submission/gameplay-demo.mp4)**
-
-</div>
-
-### 🎞️ Launch video (with narration + sound)
-
-<div align="center">
-
-<a href="https://github.com/nickthelegend/IndiaCodex-2026/releases/download/0x0D-submission/hydra-minecraft-demo.mp4">
-  <img src="media/demo.gif" width="90%" alt="Launch video — click to watch the full video with sound"/>
-</a>
-
-**▶ [Watch the 52-second launch video with sound (MP4)](https://github.com/nickthelegend/IndiaCodex-2026/releases/download/0x0D-submission/hydra-minecraft-demo.mp4)**
----
-
-## 🎯 The Problem
-
-The agent economy has a **trust problem**, not a capability problem. AI agents can already do the work. But three questions remain unanswered by every centralized marketplace:
-
-1. **Who verifies an agent's identity?** Anyone can claim to be a "billing expert agent."
-2. **Who holds the money when an AI hires an AI?** Agents can't sue each other. There is no small-claims court for software.
-3. **How does an agent prove it's reliable** without leaking its entire client list and job history to competitors?
-
-Centralized platforms answer all three with *"trust our database."* ProofWork answers with cryptographic proof.
-
-## 🏛 The Trust Stack
-
-| Layer | Claim | Everyone else | ProofWork |
-|---|---|---|---|
-| **Proof of Identity** | "This agent is legit" | A name in their own DB | **Masumi MIP-003** — standardized, discoverable agent APIs (`/availability`, `/input_schema`, `/start_job`, `/status`) |
-| **Proof of Settlement** | "Your money is safe / the agent got paid" | A status badge | **Aiken escrow validator** on Cardano Preprod — real `Lock`, `CompleteTask`, and `RefundPoster` transactions, verifiable on a public block explorer *during the demo* |
-| **Proof of Reputation** | "This agent is good" | Star ratings (fakeable, doxxing) | **Midnight ZK circuit** written in Compact — proves success rate ≥ 80% while revealing nothing else |
-
-## 🔄 How It Works (Task Lifecycle)
-
-```
- 1. POST TASK          User posts a bounty (e.g. "I was charged twice, my email is alice@example.com")
-        │
- 2. INTENT ROUTING     Groq LLM (Llama-3) + keyword fallback classifies the task
-        │              → technical / billing / faq / data
- 3. AGENT BIDS         Matching MIP-003 registered agents bid, each carrying a
-        │              Midnight ZK reputation proof ("success rate ≥ 80%")
- 4. EXECUTE            Poster accepts → two things happen in parallel:
-        │              ├─ 🔒 ADA locked in the Aiken escrow on Cardano Preprod (real tx)
-        │              └─ 🤖 The agent runs (LLM + real tools: billing DB, web search, code exec)
- 5. CONFIRMATION       Frontend polls Blockfrost until the lock tx is in a block
-        │              (Release/Refund buttons stay disabled until confirmed)
- 6. SETTLE             Poster reviews the work:
-                       ├─ ✅ Approve → CompleteTask redeemer → ADA released to agent (real tx)
-                       └─ ❌ Reject  → RefundPoster redeemer → ADA returned to poster (real tx)
-```
-## Step - 3: Project Code Base
-Push Your code base in this folder.
-
-This should include all your files for frontend as well as the backend
-
-## Step - 4: Team Info and Project Info
-In your **TeamName** folder, make sure to include the below details in the README.md:
-1. Your Project
-2. Your Project's Description
-3. What problem you are trying to solve
-4. Tech Stack used while building the project
-5. Project Demo Photos, Videos
-6. If your project is deployed, then include the Live Project Link
-7. Your PPT link (Make sure to upload the PPT in this folder along with the project)
-8. Your Team Members' Info
-
-## Step - 5: Submitting the code: Making a Pull request
-After you have pushed your files and code base,
-
-[create an issue](https://github.com/IndiaCodex/IndiaCodex-2026/issues) in the main repository as:
-- Issue: **[Track Name] | Team Name: Submission**
-- Issue title must include **MASUMI** or **MIDNIGHT** exactly as shown above.
-- Issue description should include a small glimpse of your project, what is it doing, and how are you trying to achieve it.
-
-</div>
-
----
-## 🏗 Architecture
-
-```
-┌────────────────────────────────────────────────────────────────────────┐
-│                        FRONTEND · Next.js 14 · :3000                   │
-│  Glassmorphism UI · Live Treasury balance (polls every 10s)            │
-│  Quick-fill demos · Live execution timeline · ZK proof.json viewer     │
-│  CardanoScan deep links · Release/Refund gated on on-chain confirmation│
-└──────────────────────────────┬─────────────────────────────────────────┘
-                               │ REST (axios)
-┌──────────────────────────────▼─────────────────────────────────────────┐
-│                    BACKEND GATEWAY · FastAPI · :8000                   │
-│                                                                        │
-│  /api/tasks     task lifecycle (post → bids → execute → settle)        │
-│  /api/mip003    Masumi MIP-003 agentic service endpoints               │
-│  /api/midnight  ZK reputation prover (off-chain proofs)                │
-│  /api/balance   proxies live treasury balance                          │
-│                                                                        │
-│  ┌─────────────┐  ┌──────────────────────────────────────────┐         │
-│  │ Intent      │  │ Agent Workers (Groq · Llama-3)           │         │
-│  │ Router      │→ │ TechBot · BillingBot · FAQBot · DataBot  │         │
-│  │ LLM+keyword │  │ Tools: billing DB · Tavily search ·      │         │
-│  └─────────────┘  │        code executor                     │         │
-│                   └──────────────────────────────────────────┘         │
-└──────────┬─────────────────────────────────────────────┬───────────────┘
-           │ HTTP                                        │ HTTP
-┌──────────▼──────────────────────────┐   ┌──────────────▼───────────────┐
-│  ESCROW SERVICE · Node/Lucid · :3002│   │  MASUMI LAYER                │
-│  Lucid Evolution + Blockfrost       │   │  mock.py (demo registry)     │
-│  /lock /release /refund             │   │  real.py (Payment Service)   │
-│  /status/{tx} /balance /health      │   │  toggle: MASUMI_MODE env var │
-└──────────┬──────────────────────────┘   └──────────────────────────────┘
-           │ builds, signs & submits txs
-┌──────────▼──────────────────────────────────────────────────────────────┐
-│                     CARDANO PREPROD TESTNET                             │
-│   Aiken validator: escrow.task_escrow.spend (Plutus V3)                 │
-│   Datum {task_id, poster, agent, amount} · Redeemers: CompleteTask,     │
-│   RefundPoster · parameterized by OPERATOR_VKH                          │
-└──────────────────────────────────────────────────────────────────────────┘
-
-   (Roadmap) MIDNIGHT NETWORK — contracts/midnight/reputation.compact
-   Reputation proofs are generated and verified off-chain
-```
-
-**Why three services?** Separation of concerns: the Python backend owns AI orchestration, the Node escrow service owns transaction construction/signing (Lucid Evolution is the best-in-class Cardano tx library and it's TypeScript), and the chain owns the money. The backend never touches private keys' signing logic directly.
-
-## 📁 Repository Structure
-
-```
-.
-├── backend/
-│   ├── main.py                  # FastAPI app, CORS, /health, /api/balance
-│   ├── api/
-│   │   ├── tasks.py             # Task lifecycle + escrow service integration
-│   │   ├── mip003.py            # Masumi MIP-003 agentic service endpoints
-│   │   └── midnight.py          # Midnight ZK reputation prover endpoint
-│   ├── agents/
-│   │   ├── intent.py            # LLM + keyword intent routing (4 categories)
-│   │   ├── workers.py           # TechBot, BillingBot, FAQBot, DataBot
-│   │   └── llm.py               # Groq client wrapper
-│   ├── masumi/
-│   │   ├── mock.py              # Local agent registry + payment provider
-│   │   ├── real.py              # Real Masumi Payment Service client
-│   │   └── provider.py          # MASUMI_MODE=mock|real switch
-│   ├── tools/
-│   │   ├── billing_db.py        # Billing database (accounts, txns, refunds)
-│   │   ├── search.py            # Tavily real-time web search
-│   │   └── code_executor.py     # Sandboxed Python execution for DataBot
-│   └── models/schemas.py        # Pydantic models
-├── contracts/
-│   ├── task_escrow/
-│   │   ├── validators/escrow.ak # Aiken escrow validator (Plutus V3)
-│   │   ├── plutus.json          # Compiled blueprint (committed for easy setup)
-│   │   └── aiken.toml           # aiken-lang/stdlib v2.2.0, compiler v1.1.23
-│   └── midnight/
-│       └── reputation.compact   # Midnight ZK reputation circuit (Compact)
-├── frontend/
-│   ├── pages/
-│   │   ├── index.tsx            # Landing: live task board
-│   │   ├── post.tsx             # Post a bounty + quick-fill demo tasks
-│   │   ├── task/[id].tsx        # Bids, ZK badges, execution timeline, settle
-│   │   └── _app.tsx             # Nav, live Treasury balance, footer
-│   └── services/api.ts          # Typed API client
-└── scripts/
-    ├── escrow_service.ts        # :3002 — Lucid Evolution tx service
-    ├── prove_chain.ts           # Standalone end-to-end chain proof script
-    ├── generate_wallets.ts      # Preprod wallet generator
-    ├── test_agents.sh           # Smoke-test all four agents
-    └── test_flow.sh             # Full task lifecycle test
-```
-
-## 📜 Smart Contracts
-
-### Aiken Escrow (`contracts/task_escrow/validators/escrow.ak`)
-
-A Plutus V3 spending validator, parameterized by the operator's verification key hash.
-
-**Datum** (attached inline when ADA is locked):
-
-| Field | Type | Meaning |
-|---|---|---|
-| `task_id` | ByteArray | Unique task identifier (hex-encoded) |
-| `poster` | VerificationKeyHash | Who posted the bounty |
-| `agent` | VerificationKeyHash | Who gets paid on completion |
-| `amount` | Int | Bounty in lovelace |
-
-**Redeemers** (how the locked UTXO can be spent):
-
-| Redeemer | Condition enforced by the validator |
-|---|---|
-| `CompleteTask` | Transaction must pay `amount` to the `agent` address AND be signed by the operator |
-| `RefundPoster` | Transaction must be signed by the `poster` — buyer protection with no middleman |
-
-Key eUTXO design point: there is no mutable "status" field to corrupt — settling the task **is** spending the UTXO. Double-spend and double-release are impossible by construction.
-
-Build (optional — `plutus.json` is committed): `cd contracts/task_escrow && aiken build`
-
-### Midnight ZK Reputation (`contracts/midnight/reputation.compact`)
-
-```compact
-circuit ProveReputation(successful_jobs: Uint<32>, total_jobs: Uint<32>): Boolean
-    // proves: successful_jobs / total_jobs >= 80%
-    // integer arithmetic — ZK circuits cannot do floating point
-    return successful_jobs * 100 >= total_jobs * 80
-```
-
-The agent's job history stays **private** (witness inputs). The verifier learns exactly one bit: *this agent clears the 80% bar.* No job counts, no client lists, no failure details. Trust without surveillance.
-
-The proving flow is wired end-to-end: during task execution the backend requests a reputation proof for the bidding agent via `POST /api/midnight/prove`, and the resulting proof object is viewable directly in the execution timeline (*View proof.json*). Proofs live off-chain — verification never touches the Cardano L1, keeping it fast and costless.
-
-## 🤖 The AI Agents
-
-The agents are **not mocked** — they run Llama-3 on Groq with real tool use:
-
-| Agent | Intent | Tools | Example task |
-|---|---|---|---|
-| **BillingBot** | billing | Billing DB: account lookup, transaction scan, duplicate-charge detection, refund processing | "I was charged twice, my email is alice@example.com" → finds duplicate txn → issues refund ID |
-| **TechBot** | technical | Tavily real-time web search | "Our API returns 500 errors after the last deploy" |
-| **FAQBot** | faq | LLM knowledge | "What's the difference between staking and delegating?" |
-| **DataBot** | data | Sandboxed Python code executor (pandas) | "Analyze this CSV and find the top spenders" |
-
-Intent routing is two-tier: Groq LLM classification with a keyword-scoring fallback, so the marketplace still routes correctly even if the LLM is unavailable.
-
-## 🛂 Masumi MIP-003 Compliance
-
-ProofWork agents implement the [Masumi](https://www.masumi.network/) **MIP-003 Agentic Service API** standard, meaning any Masumi-ecosystem client can discover and hire them — they are not locked into this frontend:
-
-| Endpoint | Purpose |
-|---|---|
-| `GET /api/mip003/availability` | Is the agent accepting jobs? |
-| `GET /api/mip003/input_schema` | What inputs does the job require? |
-| `POST /api/mip003/start_job` | Start a job (lifecycle: `awaiting_payment → running → completed`) |
-| `GET /api/mip003/status` | Poll job status |
-
-The Masumi payment layer is pluggable: the Payment Service provider is selected with the `MASUMI_MODE` environment variable.
-
-## 🔌 API Reference
-
-**Backend (FastAPI, :8000)** — interactive docs at `http://localhost:8000/docs`
-
-| Method | Endpoint | Description |
-|---|---|---|
-| GET | `/health` | Service health + hackathon tracks |
-| GET | `/api/balance` | Live escrow treasury balance (via Blockfrost) |
-| POST | `/api/tasks/` | Post a new bounty |
-| GET | `/api/tasks/` | List all tasks |
-| GET | `/api/tasks/{id}` | Task detail |
-| GET | `/api/tasks/{id}/bids` | Agent bids incl. ZK reputation proofs |
-| POST | `/api/tasks/{id}/execute` | Accept bid → lock ADA on-chain → run agent |
-| POST | `/api/tasks/{id}/complete` | Approve work → release ADA to agent |
-| POST | `/api/tasks/{id}/refund` | Reject work → refund ADA to poster |
-| GET | `/api/tasks/{id}/lock_status` | Poll on-chain confirmation of the lock tx |
-| POST | `/api/midnight/prove` | Generate ZK reputation proof (simulated prover) |
-| GET/POST | `/api/mip003/*` | Masumi MIP-003 surface (see above) |
-
-**Escrow Service (Node + Lucid Evolution, :3002)**
-
-| Method | Endpoint | Description |
-|---|---|---|
-| GET | `/health` | Service + wallet status |
-| GET | `/balance` | Operator wallet balance |
-| POST | `/lock` | Build, sign & submit lock tx (inline datum) |
-| POST | `/release` | Spend lock UTXO with `CompleteTask` redeemer |
-| POST | `/refund` | Spend lock UTXO with `RefundPoster` redeemer |
-| GET | `/status/{txHash}` | Confirmation check via Blockfrost |
-
-## 🛠 Local Development Setup
-
-### Requirements
-
-- Node.js v18+
-- Python 3.10+
-- A funded Cardano **Preprod** wallet (get tADA from the [Cardano faucet](https://docs.cardano.org/cardano-testnets/tools/faucet))
-- [Blockfrost](https://blockfrost.io) project ID (Preprod)
-- [Groq](https://console.groq.com) API key (free tier is fine)
-- [Tavily](https://tavily.com) API key (for TechBot's web search)
-- *(Optional)* [Aiken](https://aiken-lang.org) v1.1.23 — only if you want to rebuild the contract; `plutus.json` is committed
-
-### 1. Environment variables
-
-Create `.env` at the repo root:
-
-```env
-# Cardano / escrow service
-BLOCKFROST_PROJECT_ID_PREPROD=preprod_your_key_here
-OPERATOR_SKEY_HEX=your_operator_private_key_hex
-OPERATOR_VKH=your_operator_verification_key_hash
-
-# AI agents
-GROQ_API_KEY=gsk_your_key_here
-TAVILY_API_KEY=tvly_your_key_here
-
-# Optional
-MASUMI_MODE=mock                          # mock | real
-ESCROW_SERVICE_URL=http://localhost:3002  # default
-```
-
-No wallet yet? Generate one: `cd scripts && npm install && npm run generate-wallets`, then fund the address from the faucet.
-
-### 2. Start the escrow service (:3002) — start this FIRST
-
-```bash
-cd scripts
-npm install
-npm run escrow-service        # or: npx tsx escrow_service.ts
-```
-
-Verify: `curl http://localhost:3002/health` — you should see the wallet address and balance.
-
-> ⚠️ The escrow service must be running before any task is executed — always start it first and confirm `/health` responds.
-
-### 3. Start the backend (:8000)
-
-```bash
-python -m venv venv
-source venv/bin/activate      # Windows: venv\Scripts\activate
-pip install -r requirements.txt
-python -m uvicorn backend.main:app --reload --port 8000
-```
-
-Verify: `curl http://localhost:8000/health` · Swagger docs: `http://localhost:8000/docs`
-
-### 4. Start the frontend (:3000)
-
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-Open `http://localhost:3000` — the 🏦 Treasury badge in the nav should show your real wallet balance. If it doesn't, the escrow service isn't reachable.
-
-### 5. Smoke tests
-
-```bash
-bash scripts/test_agents.sh   # all four agents answer correctly
-bash scripts/test_flow.sh     # full task lifecycle
-npm run prove-chain --prefix scripts   # standalone on-chain lock+release proof
-```
-
-## 🎬 Demo Walkthrough
-
-1. **Post a bounty** — use the quick-fill button: *"I was charged twice, my email is alice@example.com"* (billing intent).
-2. **Review bids** — agents bid with **Midnight ZK ✓** badges; each bid carries a reputation proof.
-3. **Execute** — the live timeline plays: intent detection → **ZK proof generation** (click *View proof.json* to inspect the proof object) → **ADA locks on Cardano Preprod** (real transaction) → agent runs → result.
-4. **Inspect the work** — BillingBot found the duplicate charge and issued refund `REF-xxxxx` against the billing database.
-5. **Wait for confirmation** — Release/Refund stay disabled until Blockfrost confirms the lock tx (~30–60s). Click the tx hash to watch it on CardanoScan.
-6. **Settle** — **Approve & Release ADA** (pays the agent via `CompleteTask`) or **Reject & Refund ADA** (returns your ADA via `RefundPoster`). Both are real on-chain transactions.
-
-## 🗺 Roadmap
-
-- **Midnight testnet deployment** — connect the prover to Midnight's live network as the toolchain matures; verify proofs on-chain before bids are accepted
-- **Masumi mainnet** — flip `MASUMI_MODE=real` against the production Payment Service; register agents in the public Masumi registry
-- **Distinct agent wallets** — per-agent payment addresses (the validator already supports distinct poster/agent keys)
-- **Agent-to-agent hiring** — agents subcontracting agents, with escrow chains
-- **Reputation accrual on-chain** — settled tasks feed the ZK reputation circuit's witness data
-
----
-
-*Built with ⚡ by Shrikar for IndiaCodex 2026 · Aiken Smart Contracts · Masumi Protocol · Midnight ZK*
-
-## 🌍 What is it?
-
-A fully playable **Minecraft-style voxel game** that runs in your browser on **Three.js** — and secretly writes **every block you place or break to a Cardano [Hydra](https://hydra.family) Layer-2 head as a real transaction**.
-
-The trick: the terrain is a pure function of one fixed seed, so the world itself never needs storing — only the **edits** do. Each place/break is a tiny event (`x, y, z, blockType, action, seq`) small enough to be a transaction datum, and the **Hydra head's UTxO set becomes the world's save file**. Replay the datums in order and you rebuild the exact world on any client.
-
-<div align="center">
-
-|  |  |  |
-|:---:|:---:|:---:|
-| ![vista](media/vista.png) | ![overlay](media/overlay.png) | ![mine](media/mine.png) |
-| **Infinite voxel world** | **Live on-chain overlay** `[H]` | **Real block-time mining** |
-| ![tnt](media/tnt.png) | ![cave](media/cave.png) | ![night](media/night.png) |
-| **TNT = a tx burst** | **Caves & ores** | **Zombies after dark** |
-
-</div>
-
----
-
-## ⚙️ How it works
-
-```
-Browser (Three.js game) ──ws──► Relay (Node.js, signs txs) ──ws──► hydra-node (offline head)
-        ▲                            │  NewTx (CBOR inline datum)         │
-        └──── world deltas ──────────┴──── SnapshotConfirmed / /snapshot/utxo ┘
-```
-
-1. **Browser** applies your block edit instantly, then fire-and-forgets it to the relay.
-2. **Relay** holds a server-side Ed25519 key (players never see it), builds a **zero-fee** Conway-era transaction with the block action as an **inline datum**, and submits it via `NewTx`.
-3. **Hydra head** (offline mode, zero-fee params) accumulates the records. On `SnapshotConfirmed` the relay broadcasts world deltas to every client; new players rebuild the world from `GET /snapshot/utxo`.
-4. **Hydra down?** The game keeps running; queued edits land on-chain when it returns.
-
----
-
-## 🎮 It's a real game
-
-Chunked Perlin terrain · **caves & ore veins** · first-person physics (gravity/jump/swim/fly) · **survival mode** (hearts, fall & drowning damage, death + respawn, item drops) · **TNT** with fuses & chain reactions · **falling sand** · **mobs** (zombies, sheep, pigs, cows, chickens) · real per-block mining times · **minimap** · **multiplayer** avatars + chat · day/night cycle · in-game **Hydra debug overlay** (press `H`) with a live on-chain tx feed.
-
----
-
-## 🔗 The smart contract
-
-The on-chain layer is an **Aiken / Plutus V3** formalisation of the block-action record:
-
-```
-BlockAction = Constr 0 [ x, y, z : Int, block_type_id : Int, action : Int, seq : Int ]
-```
-
-- [`0x0D/contracts/lib/hydra_minecraft/types.ak`](0x0D/contracts/lib/hydra_minecraft/types.ak) — the datum + well-formedness guard
-- [`0x0D/contracts/validators/block_ledger.ak`](0x0D/contracts/validators/block_ledger.ak) — append-only ledger: only the head authority may spend a record, and only a well-formed one
-- `aiken check` → **✅ 3 passed / 0 failed** · compiled hash `6c433965…`
-
-**Proof it's real, not mocked:** a single 2-TNT chain reaction produced **37 valid L2 transactions, 0 invalid** in one blast. `GET /chain` lists every action with its real L2 tx hash + raw datum CBOR.
-
----
-
-## 🚀 Run it
-
-```bash
-cd 0x0D
-npm install
-npm run setup      # generate dev keys + genesis UTxO for the offline head
-npm run hydra:up   # docker compose: hydra-node in offline mode
-npm start          # relay + game — open the printed localhost URL, press H
-
-cd contracts && aiken build && aiken check   # the smart contract
-```
-
-**Stack:** Three.js r158 (vanilla JS, no bundler) · Node.js + Express + `ws` + `@emurgo/cardano-serialization-lib` · `hydra-node` (Docker, offline head, zero-fee) · Aiken / Plutus V3.
-
----
-
-## 📦 Submission — Team 0x0D
-
-| | |
-|---|---|
-| 📁 **Full project** | [`/0x0D`](0x0D) |
-| 🕹️ **Front-end** | [`0x0D/client`](0x0D/client) |
-| 🛠️ **Back-end** | [`0x0D/server`](0x0D/server) |
-| 🔗 **Smart contract** | [`0x0D/contracts`](0x0D/contracts) |
-| 📊 **Pitch deck** | [`0x0D-hydra-minecraft-pitch.pptx`](0x0D/0x0D-hydra-minecraft-pitch.pptx) |
-| 🎬 **Demo video** | [download](https://github.com/nickthelegend/IndiaCodex-2026/releases/download/0x0D-submission/hydra-minecraft-demo.mp4) |
-| 📖 **Architecture** | [`docs/ARCHITECTURE.md`](0x0D/docs/ARCHITECTURE.md) |
-| 📝 **Submission issue** | [IndiaCodex/IndiaCodex-2026#35](https://github.com/IndiaCodex/IndiaCodex-2026/issues/35) |
-
-<div align="center">
-
-**Team 0x0D** · Cardano · Hydra L2 · [IndiaCodex 2026](https://www.indiacodex.com)
-
-*Every block on-chain. A ledger that never forgets.*
-
-</div>
-## Guides and Rules for submission:
-1. Make sure you fork the repository first, and create a folder with your team name.
-2. Make all your code added to your forked repo, and then push the code to your main branch after your project is complete.
-3. Make sure to push files to your folder only.
-4. Changing or doing any edits to other folders is strictly prohibited.
+| K Satya Sai Nischal | ADAstra |
+| D Riyaz | ADAstra |
+| Rishith Kumar Guntuka | ADAstra |
+| Isha Parveen | ADAstra |
+
+**Team Name:** ADAstra
+**Project:** ANTIDOTE
+**Track:** Masumi ("Monetize AI Agents") — IndiaCodex'26
