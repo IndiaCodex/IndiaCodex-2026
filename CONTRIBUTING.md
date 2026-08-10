@@ -36,4 +36,14 @@ In your **TeamName** folder, make sure to include the below details in the READM
 After you have pushed your files and code base,
 
 [create an issue](https://github.com/IndiaCodex/IndiaCodex-2026/issues) in the main repository as:
-- Issue:
+- Issue: **[Track Name] | Team Name: Submission**
+- Issue title must include **MASUMI** or **MIDNIGHT** exactly as shown above.
+- Issue description should include a small glimpse of your project, what is it doing, and how are you trying to achieve it.
+
+After the issue is assigned, make a [Pull Request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request) from your forked repo to this repo's main branch while mentioning issue no. assigned to it.
+
+## Guides and Rules for submission:
+1. Make sure you fork the repository first, and create a folder with your team name.
+2. Make all your code added to your forked repo, and then push the code to your main branch after your project is complete.
+3. Make sure to push files to your folder only.
+4. Changing or doing any edits to other folders is strictly prohibited.
