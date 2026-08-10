@@ -1,0 +1,121 @@
+{
+  "preamble": {
+    "title": "0x0D/hydra-minecraft",
+    "description": "On-chain block-action record for Hydra Minecraft — the datum every voxel edit is written as, plus an append-only ledger validator.",
+    "version": "1.0.0",
+    "plutusVersion": "v3",
+    "compiler": {
+      "name": "Aiken",
+      "version": "v1.1.21+42babe5"
+    },
+    "license": "MIT"
+  },
+  "validators": [
+    {
+      "title": "block_ledger.block_ledger.spend",
+      "datum": {
+        "title": "datum",
+        "schema": {
+          "$ref": "#/definitions/hydra_minecraft~1types~1BlockAction"
+        }
+      },
+      "redeemer": {
+        "title": "_redeemer",
+        "schema": {
+          "$ref": "#/definitions/block_ledger~1LedgerAction"
+        }
+      },
+      "parameters": [
+        {
+          "title": "authority",
+          "schema": {
+            "$ref": "#/definitions/aiken~1crypto~1VerificationKeyHash"
+          }
+        }
+      ],
+      "compiledCode": "59015d010100229800aba2aba1aab9faab9eaab9dab9a9bae002488888896600264646644b30013370e900118039baa0018994c004c02c00660166018003370e90002444b30013001300b375400d15980098061baa0068acc004c004c02cdd5001456600330012300f301030103010001918079808180818081808000cc038c030dd50012444b30013371290001bad3003300f375400315980099b89375a6006601e6ea8005201a8acc0056600260086eb4c008c03cdd5000c528c4cdc39bad3002300f37540029001201a899b8948000dd698089809180918091809180918079baa0018a50403514a0806a294100d2264660020026eb0c03cc040c040c040c040c040c040c040c040c034dd51807804912cc00400629422b30013371e6eb8c04000402e29462660040046022002806100f452820148b20148b201a8b201418041baa0018b200c300800130083009001300800130043754011149a26cac80101",
+      "hash": "6c433965620c56a32b7aa7046adaabd4ee18c528fe9631d4b5002b64"
+    },
+    {
+      "title": "block_ledger.block_ledger.else",
+      "redeemer": {
+        "schema": {}
+      },
+      "parameters": [
+        {
+          "title": "authority",
+          "schema": {
+            "$ref": "#/definitions/aiken~1crypto~1VerificationKeyHash"
+          }
+        }
+      ],
+      "compiledCode": "59015d010100229800aba2aba1aab9faab9eaab9dab9a9bae002488888896600264646644b30013370e900118039baa0018994c004c02c00660166018003370e90002444b30013001300b375400d15980098061baa0068acc004c004c02cdd5001456600330012300f301030103010001918079808180818081808000cc038c030dd50012444b30013371290001bad3003300f375400315980099b89375a6006601e6ea8005201a8acc0056600260086eb4c008c03cdd5000c528c4cdc39bad3002300f37540029001201a899b8948000dd698089809180918091809180918079baa0018a50403514a0806a294100d2264660020026eb0c03cc040c040c040c040c040c040c040c040c034dd51807804912cc00400629422b30013371e6eb8c04000402e29462660040046022002806100f452820148b20148b201a8b201418041baa0018b200c300800130083009001300800130043754011149a26cac80101",
+      "hash": "6c433965620c56a32b7aa7046adaabd4ee18c528fe9631d4b5002b64"
+    }
+  ],
+  "definitions": {
+    "Int": {
+      "dataType": "integer"
+    },
+    "aiken/crypto/VerificationKeyHash": {
+      "title": "VerificationKeyHash",
+      "dataType": "bytes"
+    },
+    "block_ledger/LedgerAction": {
+      "title": "LedgerAction",
+      "description": "Redeemer for spending a record UTxO.",
+      "anyOf": [
+        {
+          "title": "Consolidate",
+          "description": "authority reclaims/consolidates a record's lovelace (append-only upkeep)",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": []
+        }
+      ]
+    },
+    "hydra_minecraft/types/BlockAction": {
+      "title": "BlockAction",
+      "description": "A single voxel edit, recorded on-chain.",
+      "anyOf": [
+        {
+          "title": "BlockAction",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "title": "x",
+              "description": "world X coordinate",
+              "$ref": "#/definitions/Int"
+            },
+            {
+              "title": "y",
+              "description": "world Y coordinate (height)",
+              "$ref": "#/definitions/Int"
+            },
+            {
+              "title": "z",
+              "description": "world Z coordinate",
+              "$ref": "#/definitions/Int"
+            },
+            {
+              "title": "block_type_id",
+              "description": "block id: 0 grass · 1 dirt · 2 stone · 3 sand · 4 wood · 5 leaves\n 6 glass · 7 brick · 8 water · 9 TNT · 10 coal · 11 iron · 12 gold · 13 diamond",
+              "$ref": "#/definitions/Int"
+            },
+            {
+              "title": "action",
+              "description": "0 = place, 1 = break",
+              "$ref": "#/definitions/Int"
+            },
+            {
+              "title": "seq",
+              "description": "monotonically increasing sequence number for deterministic replay",
+              "$ref": "#/definitions/Int"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
